@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { DOMAINS } from '../content.config';
+
+const projets = await getCollection('projets');
+
+const skills = new Map<string, typeof projets>();
+for (const p of projets) {
+  for (const s of p.data.skills) {
+    if (!skills.has(s)) skills.set(s, []);
+    skills.get(s)!.push(p);
+  }
+}
+const rows = [...skills.entries()].sort(
+  (a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0], 'fr'),
+);
+---
+
+<Base title="Compétences" description="Matrice des compétences acquises et des projets qui les démontrent.">
+  <h1 class="text-3xl font-bold tracking-tight">Compétences</h1>
+  <p class="mt-2 text-slate-600 max-w-3xl">
+    Chaque compétence est reliée aux projets qui la mettent en œuvre. Cette matrice est générée
+    automatiquement depuis les fiches projets : elle ne peut pas mentir.
+  </p>
+
+  <div class="mt-8 overflow-x-auto">
+    <table class="w-full text-sm border-collapse">
+      <caption class="sr-only">Compétences et projets associés</caption>
+      <thead>
+        <tr class="border-b border-slate-300 text-left">
+          <th scope="col" class="py-2 pr-4">
+            Compétence
+          </th>
+          <th scope="col" class="py-2 pr-4 text-right">
+            Projets
+          </th>
+          <th scope="col" class="py-2">
+            Démontrée par
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map(([skill, list]) => (
+          <tr class="border-b border-slate-100 align-top">
+            <th scope="row" class="py-2 pr-4 font-medium">
+              {skill}
+            </th>
+            <td class="py-2 pr-4 text-right tabular-nums">{list.length}</td>
+            <td class="py-2">
+              <ul class="flex flex-wrap gap-x-3 gap-y-1">
+                {list.map((p) => (
+                  <li>
+                    <a href={`/projets/${p.id}/`} class="underline underline-offset-4 hover:text-slate-600">
+                      {DOMAINS[p.data.domain].short} {String(p.data.number).padStart(2, '0')}
+                    </a>
+                    {p.data.status === 'termine' && (
+                      <span aria-label="terminé" title="terminé">
+                        {' '}
+                        ●
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  {rows.length === 0 && (
+    <p class="mt-6 text-slate-500">
+      Aucune compétence renseignée pour l'instant : ajoutez des <code>skills</code> dans les fiches projets.
+    </p>
+  )}
+</Base>

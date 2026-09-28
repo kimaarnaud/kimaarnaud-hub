@@ -1,0 +1,17 @@
+---
+interface Props {
+  status: 'planifie' | 'en-cours' | 'termine';
+}
+const { status } = Astro.props;
+const map = {
+  planifie: { label: 'Planifié', cls: 'bg-slate-100 text-slate-600', symbol: '○' },
+  'en-cours': { label: 'En cours', cls: 'bg-amber-100 text-amber-800', symbol: '◐' },
+  termine: { label: 'Terminé', cls: 'bg-emerald-100 text-emerald-800', symbol: '●' },
+} as const;
+const s = map[status];
+---
+
+<span class={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${s.cls}`}>
+  <span aria-hidden="true">{s.symbol}</span>
+  {s.label}
+</span>

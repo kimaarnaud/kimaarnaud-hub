@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+
+const catalogues = [
+  {
+    slug: '20-projets-logiciels',
+    title: '20 projets de développement logiciel',
+    desc: 'Applications web et mobile, stack justifiée, fonctionnalités, phases et documentation.',
+  },
+  {
+    slug: '20-projets-reseaux-systemes-securite',
+    title: '20 projets réseaux, systèmes et sécurité',
+    desc: 'Du lab virtuel au SOC : notions, outils, étapes, preuves et plateforme LabHub.',
+  },
+  {
+    slug: '20-projets-telecoms',
+    title: '20 projets télécoms',
+    desc: 'Signal, IP/MPLS, VoIP, FTTH, 4G/5G, LoRaWAN, satellite, NFV : mesures et TelcoLab Hub.',
+  },
+  {
+    slug: '20-projets-ia',
+    title: "20 projets d'intelligence artificielle",
+    desc: 'Du ML écrit à la main au produit IA gouverné : expériences, évaluation, MLOps et AI Lab Hub.',
+  },
+];
+---
+
+<Base
+  title="Catalogues"
+  description="Les quatre catalogues de projets qui structurent ce portfolio, consultables en ligne ou en PDF."
+>
+  <h1 class="text-3xl font-bold tracking-tight">Catalogues de projets</h1>
+  <p class="mt-2 text-slate-600 max-w-3xl">
+    Chaque catalogue décrit 20 projets progressifs : objectif, notions à apprendre, outils, ressources,
+    étapes, documentation et mise en valeur. Ce sont les feuilles de route de tout ce que vous voyez sur ce
+    site.
+  </p>
+  <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+    {catalogues.map((c) => (
+      <li class="rounded-lg border border-slate-200 p-5 flex flex-col gap-2">
+        <h2 class="font-semibold">{c.title}</h2>
+        <p class="text-sm text-slate-600">{c.desc}</p>
+        <div class="mt-auto flex gap-4 pt-2 text-sm">
+          <a href={`/docs/${c.slug}.html`} class="underline underline-offset-4">
+            Version interactive
+          </a>
+          <a href={`/docs/${c.slug}.pdf`} class="underline underline-offset-4">
+            PDF
+          </a>
+        </div>
+      </li>
+    ))}
+  </ul>
+</Base>

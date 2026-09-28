@@ -1,0 +1,3339 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Devin artifact kit" />
+    <title>20 projets logiciels diversifiés : stack, fonctionnalités, compétences et phases</title>
+    <style>
+/* Devin artifact kit — self-contained styles for standalone HTML artifacts.
+   Tokens are translated from the Devin product design system. Light is the
+   default; dark is applied from `prefers-color-scheme` unless a host theme
+   signal (`?theme=`, `data-theme`, or a `devin:theme` message) says otherwise. */
+
+:root {
+  color-scheme: light;
+
+  --bg-page: 252 252 252;
+  --bg-wash: 248 248 248;
+  --bg-elevated: 255 255 255;
+  --tint-tertiary: 0 0 0 / 0.04;
+  --tint-secondary: 0 0 0 / 0.06;
+  --tint-primary: 0 0 0 / 0.08;
+  --text-primary: 25 25 25;
+  --text-secondary: 25 25 25 / 0.64;
+  --text-tertiary: 25 25 25 / 0.4;
+  --text-accent: 49 124 255;
+  --bg-accent: 49 124 255;
+  --border-secondary: 0 0 0 / 0.08;
+  --border-primary: 0 0 0 / 0.1;
+  --text-green: 0 165 88;
+  --text-orange: 245 142 58;
+  --text-red: 245 59 58;
+  --text-blue: 51 125 244;
+  --text-purple: 149 108 222;
+  --shadow-l1: 0 1px 2px rgb(0 0 0 / 0.06);
+  --shadow-l2: 0 4px 12px rgb(0 0 0 / 0.08);
+
+  --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", "Roboto Mono", ui-monospace, monospace;
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-lg: 10px;
+  --unit: 4px;
+  --max-width: 1120px;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg-page: 20 20 20;
+  --bg-wash: 25 25 25;
+  --bg-elevated: 31 31 31;
+  --tint-tertiary: 255 255 255 / 0.03;
+  --tint-secondary: 255 255 255 / 0.05;
+  --tint-primary: 255 255 255 / 0.08;
+  --text-primary: 255 255 255 / 0.9;
+  --text-secondary: 255 255 255 / 0.52;
+  --text-tertiary: 255 255 255 / 0.4;
+  --text-accent: 73 176 255;
+  --bg-accent: 68 137 255;
+  --border-secondary: 255 255 255 / 0.04;
+  --border-primary: 255 255 255 / 0.08;
+  --text-green: 0 236 126;
+  --text-orange: 245 142 58;
+  --text-red: 255 108 107;
+  --text-blue: 92 154 255;
+  --text-purple: 178 145 240;
+  --shadow-l1: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-l2: 0 4px 12px rgb(0 0 0 / 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+
+    --bg-page: 20 20 20;
+    --bg-wash: 25 25 25;
+    --bg-elevated: 31 31 31;
+    --tint-tertiary: 255 255 255 / 0.03;
+    --tint-secondary: 255 255 255 / 0.05;
+    --tint-primary: 255 255 255 / 0.08;
+    --text-primary: 255 255 255 / 0.9;
+    --text-secondary: 255 255 255 / 0.52;
+    --text-tertiary: 255 255 255 / 0.4;
+    --text-accent: 73 176 255;
+    --bg-accent: 68 137 255;
+    --border-secondary: 255 255 255 / 0.04;
+    --border-primary: 255 255 255 / 0.08;
+    --text-green: 0 236 126;
+    --text-orange: 245 142 58;
+    --text-red: 255 108 107;
+    --text-blue: 92 154 255;
+    --text-purple: 178 145 240;
+    --shadow-l1: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-l2: 0 4px 12px rgb(0 0 0 / 0.5);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: rgb(var(--bg-page));
+  color: rgb(var(--text-primary));
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(button, a, input, select, summary, [tabindex]):focus-visible {
+  outline: 1px solid rgb(var(--bg-accent));
+  outline-offset: 1px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- layout ---------- */
+
+.a-shell {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: calc(var(--unit) * 8) calc(var(--unit) * 6) calc(var(--unit) * 16);
+}
+
+.a-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: calc(var(--unit) * 3);
+  padding-bottom: calc(var(--unit) * 4);
+  border-bottom: 1px solid rgb(var(--border-primary));
+}
+
+.a-header__title {
+  margin: 0;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.a-header__subtitle {
+  margin: calc(var(--unit) * 1) 0 0;
+  color: rgb(var(--text-secondary));
+  font-size: 13px;
+  line-height: 18px;
+  max-width: 68ch;
+}
+
+.a-section {
+  margin-top: calc(var(--unit) * 9);
+}
+
+.a-section__title {
+  margin: 0 0 calc(var(--unit) * 1);
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+.a-section__note,
+.a-prose {
+  margin: 0 0 calc(var(--unit) * 4);
+  color: rgb(var(--text-secondary));
+  font-size: 13px;
+  line-height: 20px;
+  max-width: 72ch;
+}
+
+.a-grid {
+  display: grid;
+  gap: calc(var(--unit) * 3);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.a-grid--halves {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* ---------- surfaces ---------- */
+
+.a-panel {
+  background: rgb(var(--bg-elevated));
+  border: 1px solid rgb(var(--border-secondary));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-l1);
+  padding: calc(var(--unit) * 4);
+}
+
+.a-panel__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc(var(--unit) * 2);
+  margin-bottom: calc(var(--unit) * 3);
+}
+
+.a-panel__title {
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+}
+
+.a-label {
+  color: rgb(var(--text-tertiary));
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: none;
+}
+
+/* ---------- metrics ---------- */
+
+.a-metric {
+  background: rgb(var(--tint-tertiary));
+  border: 1px solid rgb(var(--border-secondary));
+  border-radius: var(--radius);
+  padding: calc(var(--unit) * 3);
+}
+
+.a-metric__label {
+  color: rgb(var(--text-secondary));
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.a-metric__value {
+  margin-top: calc(var(--unit) * 1);
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.a-metric__delta {
+  margin-top: calc(var(--unit) * 1);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  color: rgb(var(--text-secondary));
+}
+
+.a-metric__delta[data-trend="up"] {
+  color: rgb(var(--text-green));
+}
+
+.a-metric__delta[data-trend="down"] {
+  color: rgb(var(--text-red));
+}
+
+/* ---------- status ---------- */
+
+.a-status {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--unit) * 1.5);
+  font-size: 12px;
+  line-height: 16px;
+  color: rgb(var(--text-secondary));
+  white-space: nowrap;
+}
+
+.a-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.a-status[data-state="done"] {
+  color: rgb(var(--text-green));
+}
+
+.a-status[data-state="active"] {
+  color: rgb(var(--text-blue));
+}
+
+.a-status[data-state="at-risk"] {
+  color: rgb(var(--text-orange));
+}
+
+.a-status[data-state="blocked"] {
+  color: rgb(var(--text-red));
+}
+
+.a-status[data-state="planned"] {
+  color: rgb(var(--text-tertiary));
+}
+
+/* ---------- tables ---------- */
+
+.a-table-scroll {
+  overflow-x: auto;
+  border: 1px solid rgb(var(--border-secondary));
+  border-radius: var(--radius);
+  background: rgb(var(--bg-elevated));
+}
+
+.a-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.a-table th,
+.a-table td {
+  text-align: left;
+  padding: calc(var(--unit) * 2) calc(var(--unit) * 3);
+  border-bottom: 1px solid rgb(var(--border-secondary));
+  vertical-align: top;
+}
+
+.a-table thead th {
+  position: sticky;
+  top: 0;
+  background: rgb(var(--bg-wash));
+  color: rgb(var(--text-secondary));
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  z-index: 1;
+}
+
+.a-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.a-table tbody tr:hover td {
+  background: rgb(var(--tint-tertiary));
+}
+
+.a-table td[data-numeric],
+.a-table th[data-numeric] {
+  text-align: right;
+  font-family: var(--font-mono);
+}
+
+/* ---------- charts (inline SVG + CSS bars) ---------- */
+
+.a-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.a-chart__grid line {
+  stroke: rgb(var(--border-primary));
+  stroke-dasharray: 2 3;
+}
+
+.a-chart__axis text {
+  fill: rgb(var(--text-tertiary));
+  font-size: 10px;
+  font-family: var(--font-mono);
+}
+
+.a-chart__series {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.a-chart__point {
+  stroke: rgb(var(--bg-elevated));
+  stroke-width: 1.5;
+}
+
+.a-bars {
+  display: grid;
+  gap: calc(var(--unit) * 2);
+  margin: 0;
+}
+
+.a-bars__row {
+  display: grid;
+  grid-template-columns: minmax(88px, 22%) 1fr auto;
+  align-items: center;
+  gap: calc(var(--unit) * 2);
+  font-size: 13px;
+}
+
+.a-bars__track {
+  height: 8px;
+  border-radius: 999px;
+  background: rgb(var(--tint-secondary));
+  overflow: hidden;
+}
+
+.a-bars__fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: rgb(var(--bg-accent));
+}
+
+.a-bars__value {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgb(var(--text-secondary));
+}
+
+.a-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--unit) * 3);
+  margin: calc(var(--unit) * 3) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+  color: rgb(var(--text-secondary));
+}
+
+.a-legend li {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--unit) * 1.5);
+}
+
+.a-legend__swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex: none;
+}
+
+/* Series colors stay stable across themes so legends keep meaning. */
+.a-series-1 {
+  --series: 49 124 255;
+}
+.a-series-2 {
+  --series: 0 165 88;
+}
+.a-series-3 {
+  --series: 149 108 222;
+}
+.a-series-4 {
+  --series: 245 142 58;
+}
+
+.a-chart__series.a-series-1,
+.a-chart__series.a-series-2,
+.a-chart__series.a-series-3,
+.a-chart__series.a-series-4 {
+  stroke: rgb(var(--series));
+}
+
+.a-chart__point.a-series-1,
+.a-chart__point.a-series-2,
+.a-chart__point.a-series-3,
+.a-chart__point.a-series-4 {
+  fill: rgb(var(--series));
+}
+
+.a-series-1 .a-legend__swatch,
+.a-series-2 .a-legend__swatch,
+.a-series-3 .a-legend__swatch,
+.a-series-4 .a-legend__swatch {
+  background: rgb(var(--series));
+}
+
+.a-chart__bar.a-series-1,
+.a-chart__bar.a-series-2,
+.a-chart__bar.a-series-3,
+.a-chart__bar.a-series-4 {
+  fill: rgb(var(--series));
+}
+
+/* Dimming the rest of the plot reads as "this is the value you asked for"
+   without moving anything, which keeps the highlight legible under
+   reduced motion. */
+.a-chart__bar,
+.a-chart__point,
+.a-chart__series {
+  transition: opacity 120ms ease;
+}
+
+.a-chart__plot:has([data-a-active]) .a-chart__bar:not([data-a-active]) {
+  opacity: 0.45;
+}
+
+.a-chart__point[data-a-active] {
+  r: 4.25;
+}
+
+.a-chart__crosshair {
+  stroke: rgb(var(--border-primary));
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+.a-chart__band {
+  fill: transparent;
+  /* Vertical scrolling must still work when a finger lands on the plot. */
+  touch-action: pan-y;
+}
+
+.a-chart__band[data-a-active] {
+  fill: rgb(var(--tint-secondary));
+}
+
+.a-chart__band:focus-visible {
+  outline: 1px solid rgb(var(--bg-accent));
+  outline-offset: -2px;
+}
+
+.a-chart {
+  touch-action: pan-y;
+}
+
+/* Shown in place of the plot when a filter leaves the source table empty. */
+.a-chart__empty {
+  margin: 0 0 calc(var(--unit) * 3);
+  padding: calc(var(--unit) * 6) 0;
+  border: 1px dashed rgb(var(--border-secondary));
+  border-radius: var(--radius);
+  color: rgb(var(--text-secondary));
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ---------- tooltip ---------- */
+
+.a-tip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  min-width: 120px;
+  max-width: 260px;
+  padding: calc(var(--unit) * 2) calc(var(--unit) * 2.5);
+  border: 1px solid rgb(var(--border-secondary));
+  border-radius: var(--radius);
+  background: rgb(var(--bg-elevated));
+  box-shadow: var(--shadow-l2);
+  color: rgb(var(--text-primary));
+  font-size: 12px;
+  line-height: 16px;
+  pointer-events: none;
+}
+
+.a-tip__title {
+  margin-bottom: var(--unit);
+  font-weight: 600;
+  color: rgb(var(--text-primary));
+}
+
+.a-tip__text {
+  color: rgb(var(--text-secondary));
+}
+
+.a-tip__row {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--unit) * 1.5);
+  white-space: nowrap;
+}
+
+.a-tip__swatch {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 2px;
+  background: rgb(var(--series, var(--bg-accent)));
+}
+
+.a-tip__name {
+  color: rgb(var(--text-secondary));
+}
+
+.a-tip__value {
+  margin-left: auto;
+  padding-left: calc(var(--unit) * 2);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- controls: tabs, filters, toggles ---------- */
+
+.a-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--unit) * 2);
+  margin-bottom: calc(var(--unit) * 4);
+}
+
+.a-tabs {
+  display: flex;
+  gap: calc(var(--unit) * 1);
+  padding: 2px;
+  background: rgb(var(--tint-tertiary));
+  border: 1px solid rgb(var(--border-secondary));
+  border-radius: var(--radius);
+}
+
+.a-btn {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgb(var(--text-secondary));
+  font: inherit;
+  font-size: 13px;
+  padding: calc(var(--unit) * 1) calc(var(--unit) * 2.5);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.a-btn:hover {
+  background: rgb(var(--tint-secondary));
+  color: rgb(var(--text-primary));
+}
+
+.a-btn[aria-selected="true"],
+.a-btn[aria-pressed="true"] {
+  background: rgb(var(--bg-elevated));
+  border-color: rgb(var(--border-primary));
+  color: rgb(var(--text-primary));
+  box-shadow: var(--shadow-l1);
+}
+
+.a-btn--outline {
+  border-color: rgb(var(--border-primary));
+  background: rgb(var(--bg-elevated));
+}
+
+.a-btn--icon {
+  display: inline-grid;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  place-items: center;
+}
+
+.a-theme-icon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.a-theme-icon--moon {
+  display: none;
+}
+
+:root[data-theme="dark"] .a-theme-icon--sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .a-theme-icon--moon {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .a-theme-icon--sun {
+    display: none;
+  }
+
+  :root:not([data-theme]) .a-theme-icon--moon {
+    display: block;
+  }
+}
+
+.a-select {
+  appearance: none;
+  font: inherit;
+  font-size: 13px;
+  color: rgb(var(--text-primary));
+  background: rgb(var(--bg-elevated));
+  border: 1px solid rgb(var(--border-primary));
+  border-radius: var(--radius-sm);
+  padding: calc(var(--unit) * 1) calc(var(--unit) * 2);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- diagram ---------- */
+
+.a-diagram {
+  position: relative;
+  background: rgb(var(--bg-wash));
+  border: 1px solid rgb(var(--border-secondary));
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.a-diagram__canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+  cursor: grab;
+}
+
+.a-diagram__canvas:active {
+  cursor: grabbing;
+}
+
+.a-group rect {
+  fill: rgb(var(--tint-tertiary));
+  stroke: rgb(var(--border-primary));
+  stroke-dasharray: 4 4;
+  rx: 10;
+}
+
+.a-group text {
+  fill: rgb(var(--text-tertiary));
+  font-size: 10px;
+  font-family: var(--font-mono);
+}
+
+.a-node rect {
+  fill: rgb(var(--bg-elevated));
+  stroke: rgb(var(--border-primary));
+  rx: 8;
+}
+
+.a-node__title {
+  fill: rgb(var(--text-primary));
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.a-node__sub {
+  fill: rgb(var(--text-secondary));
+  font-size: 10px;
+  font-family: var(--font-mono);
+}
+
+.a-node {
+  cursor: pointer;
+}
+
+.a-node:hover rect,
+.a-node:focus-visible rect {
+  stroke: rgb(var(--bg-accent));
+}
+
+.a-node[aria-current="true"] rect {
+  stroke: rgb(var(--bg-accent));
+  stroke-width: 2;
+}
+
+.a-edge {
+  fill: none;
+  stroke: rgb(var(--text-tertiary));
+  stroke-width: 1.25;
+}
+
+.a-edge--dim {
+  stroke: rgb(var(--border-primary));
+}
+
+.a-edge__label {
+  fill: rgb(var(--text-tertiary));
+  font-size: 10px;
+  font-family: var(--font-mono);
+}
+
+.a-inspector {
+  border-top: 1px solid rgb(var(--border-secondary));
+  background: rgb(var(--bg-elevated));
+  padding: calc(var(--unit) * 3) calc(var(--unit) * 4);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.a-inspector__title {
+  margin: 0 0 calc(var(--unit) * 1);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ---------- plan / process ---------- */
+
+.a-phase {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: calc(var(--unit) * 3);
+  padding: calc(var(--unit) * 4) 0;
+  border-bottom: 1px solid rgb(var(--border-secondary));
+}
+
+.a-phase:last-child {
+  border-bottom: none;
+}
+
+.a-phase__index {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgb(var(--text-tertiary));
+  padding-top: 2px;
+}
+
+.a-phase__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: calc(var(--unit) * 2);
+  justify-content: space-between;
+}
+
+.a-phase__title {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.a-meta-list {
+  display: grid;
+  gap: calc(var(--unit) * 1);
+  margin: calc(var(--unit) * 2) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  color: rgb(var(--text-secondary));
+}
+
+.a-meta-list li,
+.a-meta-list > div {
+  display: grid;
+  grid-template-columns: minmax(96px, 15%) 1fr;
+  gap: calc(var(--unit) * 2);
+}
+
+.a-meta-list dt,
+.a-meta-list .a-meta-list__key {
+  color: rgb(var(--text-tertiary));
+  font-size: 12px;
+}
+
+.a-meta-list dd {
+  margin: 0;
+}
+
+.a-timeline {
+  display: grid;
+  gap: calc(var(--unit) * 1);
+  margin: 0;
+  font-size: 12px;
+}
+
+.a-timeline__row {
+  display: grid;
+  grid-template-columns: minmax(120px, 20%) 1fr;
+  align-items: center;
+  gap: calc(var(--unit) * 2);
+}
+
+.a-timeline__track {
+  position: relative;
+  height: 10px;
+  background: rgb(var(--tint-tertiary));
+  border-radius: var(--radius-sm);
+}
+
+.a-timeline__span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: var(--radius-sm);
+  background: rgb(var(--bg-accent) / 0.75);
+}
+
+.a-timeline__span[data-state="at-risk"] {
+  background: rgb(var(--text-orange) / 0.75);
+}
+
+.a-timeline__span[data-state="done"] {
+  background: rgb(var(--text-green) / 0.7);
+}
+
+.a-timeline__scale {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  color: rgb(var(--text-tertiary));
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.a-callout {
+  border: 1px solid rgb(var(--border-secondary));
+  border-left: 2px solid rgb(var(--text-orange));
+  border-radius: var(--radius-sm);
+  background: rgb(var(--tint-tertiary));
+  padding: calc(var(--unit) * 3);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.a-callout--decision {
+  border-left-color: rgb(var(--bg-accent));
+}
+
+.a-callout--risk {
+  border-left-color: rgb(var(--text-red));
+}
+
+.a-callout__title {
+  margin: 0 0 calc(var(--unit) * 1);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+details.a-disclosure {
+  border-top: 1px solid rgb(var(--border-secondary));
+  padding: calc(var(--unit) * 2) 0;
+}
+
+details.a-disclosure > summary {
+  cursor: pointer;
+  font-size: 13px;
+  color: rgb(var(--text-secondary));
+  list-style: none;
+}
+
+details.a-disclosure > summary::marker,
+details.a-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.a-disclosure > summary::before {
+  content: "+ ";
+  font-family: var(--font-mono);
+}
+
+details.a-disclosure[open] > summary::before {
+  content: "− ";
+}
+
+/* ---------- empty and error states ---------- */
+
+.a-empty,
+.a-error {
+  border: 1px dashed rgb(var(--border-primary));
+  border-radius: var(--radius);
+  padding: calc(var(--unit) * 6);
+  text-align: center;
+  color: rgb(var(--text-secondary));
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.a-error {
+  border-style: solid;
+  border-color: rgb(var(--text-red) / 0.4);
+  color: rgb(var(--text-primary));
+  text-align: left;
+}
+
+.a-error__title {
+  margin: 0 0 calc(var(--unit) * 1);
+  font-size: 13px;
+  font-weight: 600;
+  color: rgb(var(--text-red));
+}
+
+.a-footnote {
+  margin-top: calc(var(--unit) * 10);
+  padding-top: calc(var(--unit) * 4);
+  border-top: 1px solid rgb(var(--border-secondary));
+  color: rgb(var(--text-tertiary));
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.a-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 640px) {
+  .a-shell {
+    padding: calc(var(--unit) * 5) calc(var(--unit) * 4)
+      calc(var(--unit) * 12);
+  }
+
+  .a-header__title {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .a-bars__row,
+  .a-timeline__row,
+  .a-meta-list li,
+  .a-meta-list > div {
+    grid-template-columns: 1fr;
+    gap: calc(var(--unit) * 1);
+  }
+
+  .a-phase {
+    grid-template-columns: 1fr;
+  }
+
+  .a-phase__index {
+    padding-top: 0;
+  }
+
+  .a-toolbar {
+    align-items: stretch;
+  }
+
+  .a-tabs {
+    overflow-x: auto;
+  }
+}
+
+/* ---------- motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- print / export ---------- */
+
+@media print {
+  :root[data-theme],
+  :root:not([data-theme]) {
+    color-scheme: light only;
+    --bg-page: 252 252 252;
+    --bg-wash: 248 248 248;
+    --bg-elevated: 255 255 255;
+    --tint-tertiary: 0 0 0 / 0.04;
+    --tint-secondary: 0 0 0 / 0.06;
+    --tint-primary: 0 0 0 / 0.08;
+    --text-primary: 25 25 25;
+    --text-secondary: 25 25 25 / 0.64;
+    --text-tertiary: 25 25 25 / 0.4;
+    --text-accent: 49 124 255;
+    --bg-accent: 49 124 255;
+    --border-secondary: 0 0 0 / 0.08;
+    --border-primary: 0 0 0 / 0.1;
+    --text-green: 0 165 88;
+    --text-orange: 245 142 58;
+    --text-red: 245 59 58;
+    --text-blue: 51 125 244;
+    --text-purple: 149 108 222;
+    --shadow-l1: none;
+    --shadow-l2: none;
+  }
+
+  body {
+    background: #fff;
+    color: #111;
+  }
+
+  .a-no-print,
+  .a-toolbar,
+  .a-diagram__hint {
+    display: none !important;
+  }
+
+  .a-panel,
+  .a-table-scroll,
+  .a-diagram {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .a-section {
+    break-inside: avoid;
+    margin-top: 24px;
+  }
+
+  [hidden].a-print-reveal {
+    display: revert !important;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <main class="a-shell">
+      <header class="a-header">
+        <div>
+          <h1 class="a-header__title">20 projets logiciels diversifiés : stack, fonctionnalités, compétences et phases</h1>
+          <p class="a-header__subtitle">Catalogue de 20 projets web et mobile complexes, chacun avec sa stack justifiée, ses fonctionnalités, les compétences acquises et un plan de développement par phases documentées.</p>
+        </div>
+        <button
+          type="button"
+          class="a-btn a-btn--icon a-no-print"
+          data-a-theme-toggle
+          aria-label="Switch to dark mode"
+          title="Switch to dark mode"
+        >
+          <svg
+            class="a-theme-icon a-theme-icon--moon"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+          >
+            <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" />
+          </svg>
+          <svg
+            class="a-theme-icon a-theme-icon--sun"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+        </button>
+      </header>
+
+      <section
+        class="a-section a-error"
+        data-a-error
+        role="alert"
+        aria-live="polite"
+        hidden
+      >
+        <p class="a-error__title">Something in this artifact failed to run</p>
+        <p>
+          The content below is still readable, but an interactive control may
+          not respond.
+          <span data-a-error-detail></span>
+        </p>
+      </section>
+
+<section class="a-section" id="intro">
+  <h2 class="a-section__title">Comment lire ce catalogue</h2>
+  <p class="a-prose">Ce document propose 20 projets logiciels complexes et volontairement diversifiés (web, mobile, temps réel, IoT, IA, données, jeu). Chaque projet est décrit individuellement : objectif et exigences, stack technique justifiée (pourquoi ce langage, pourquoi ce framework), fonctionnalités à implémenter, compétences acquises et mises en valeur sur un CV, puis phases de développement avec les documents à produire à chaque phase. Les documents de phase s'assemblent à la fin pour former la documentation générale du projet et servir de base au guide utilisateur.</p>
+  <div class="a-grid a-grid--halves">
+    <div class="a-metric"><div class="a-metric__label">Projets</div><div class="a-metric__value">20</div><div class="a-metric__delta">12 web · 8 mobile ou hybrides</div></div>
+    <div class="a-metric"><div class="a-metric__label">Langages couverts</div><div class="a-metric__value">12</div><div class="a-metric__delta">TypeScript, Python, Java, Kotlin, Swift, Dart, Go, Rust, C#, PHP, Ruby, Elixir</div></div>
+  </div>
+  <div class="a-callout a-callout--decision">
+    <strong>Ordre conseillé.</strong> Les projets sont classés par difficulté croissante approximative à l'intérieur de trois niveaux : <em>Intermédiaire</em> (1 à 6), <em>Avancé</em> (7 à 14), <em>Expert</em> (15 à 20). Commencez par un projet dont vous maîtrisez déjà au moins un élément de la stack, puis alternez les langages pour élargir votre profil.
+  </div>
+</section>
+
+<section class="a-section" id="methode">
+  <h2 class="a-section__title">Méthodologie commune : 7 phases, 7 documents</h2>
+  <p class="a-prose">Tous les projets suivent le même cycle. Chaque phase se termine par un document versionné dans le dépôt (dossier <code>docs/</code>). La concaténation de ces documents constitue la documentation générale ; les documents des phases 2, 6 et 7 alimentent directement le guide utilisateur.</p>
+  <div class="a-table-scroll">
+    <table class="a-table">
+      <caption>Phases de développement et document livré à chaque phase</caption>
+      <thead><tr><th scope="col">Phase</th><th scope="col">Activités</th><th scope="col">Document produit</th><th scope="col">Contribue au guide utilisateur ?</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">0. Cadrage</th><td>Problème, cibles, périmètre, contraintes, indicateurs de succès, risques.</td><td><code>docs/00-cahier-des-charges.md</code></td><td>Non (contexte)</td></tr>
+        <tr><th scope="row">1. Analyse</th><td>Personas, user stories, règles métier, diagramme de cas d'utilisation, MoSCoW.</td><td><code>docs/01-specifications-fonctionnelles.md</code></td><td>Oui : liste des fonctionnalités et parcours</td></tr>
+        <tr><th scope="row">2. Conception</th><td>Architecture (C4), modèle de données, contrat d'API (OpenAPI / GraphQL / proto), maquettes (Figma), choix techniques argumentés (ADR).</td><td><code>docs/02-architecture.md</code>, <code>docs/adr/</code>, <code>api/openapi.yaml</code></td><td>Oui : maquettes et vocabulaire</td></tr>
+        <tr><th scope="row">3. Mise en place</th><td>Dépôt mono ou multi, CI (lint, tests, build), Docker Compose, gestion des secrets, conventions de commit, environnements.</td><td><code>README.md</code>, <code>docs/03-guide-developpeur.md</code></td><td>Non</td></tr>
+        <tr><th scope="row">4. Développement itératif</th><td>Sprints de 1 à 2 semaines ; chaque fonctionnalité = branche, tests, revue, note de version.</td><td><code>CHANGELOG.md</code>, <code>docs/04-journal-de-sprints.md</code></td><td>Oui : notes de version</td></tr>
+        <tr><th scope="row">5. Qualité et sécurité</th><td>Tests unitaires, intégration, E2E, charge, audit OWASP, accessibilité, performance.</td><td><code>docs/05-strategie-de-tests.md</code>, rapport de tests</td><td>Non</td></tr>
+        <tr><th scope="row">6. Déploiement et exploitation</th><td>Infra as code, pipeline de release, monitoring, sauvegardes, plan de reprise, publication stores.</td><td><code>docs/06-guide-deploiement.md</code>, <code>docs/06-runbook.md</code></td><td>Oui : installation, FAQ, dépannage</td></tr>
+        <tr><th scope="row">7. Documentation finale</th><td>Assemblage, captures d'écran, parcours pas à pas, glossaire, FAQ, vidéo de démonstration.</td><td><code>docs/07-documentation-generale.md</code>, <code>docs/guide-utilisateur.md</code></td><td>Oui : c'est le guide lui-même</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <details class="a-disclosure">
+    <summary>Structure type du guide utilisateur (à réutiliser pour chaque projet)</summary>
+    <ol class="a-prose">
+      <li>Présentation : à quoi sert l'application, pour qui, prérequis (navigateur, version d'OS).</li>
+      <li>Premiers pas : création de compte, connexion, configuration initiale (captures d'écran issues de la phase 6).</li>
+      <li>Fonctionnalités par rôle : un chapitre par persona (phase 1), un parcours pas à pas par user story majeure.</li>
+      <li>Référence : écrans, champs, messages d'erreur, raccourcis, limites connues.</li>
+      <li>FAQ et dépannage : issus du runbook et des tickets de la phase 4.</li>
+      <li>Glossaire et notes de version.</li>
+    </ol>
+  </details>
+</section>
+
+<section class="a-section" id="matrice">
+  <h2 class="a-section__title">Vue d'ensemble : quel langage pour quel type de projet</h2>
+  <div class="a-table-scroll">
+    <table class="a-table">
+      <caption>Les 20 projets, leur type, leur stack principale et le niveau visé</caption>
+      <thead><tr><th scope="col">N°</th><th scope="col">Projet</th><th scope="col">Type</th><th scope="col">Langages et frameworks</th><th scope="col">Niveau</th></tr></thead>
+      <tbody>
+        <tr><td>01</td><td>Gestion scolaire (notes, absences, bulletins)</td><td>Web</td><td>PHP · Laravel · Vue.js · MySQL</td><td>Intermédiaire</td></tr>
+        <tr><td>02</td><td>Marketplace immobilière géolocalisée</td><td>Web</td><td>Ruby · Rails · Hotwire · PostGIS · Elasticsearch</td><td>Intermédiaire</td></tr>
+        <tr><td>03</td><td>SaaS de facturation et gestion PME multi-tenant</td><td>Web</td><td>Python · Django · DRF · React · Celery</td><td>Intermédiaire</td></tr>
+        <tr><td>04</td><td>Application agricole hors ligne (agritech)</td><td>Mobile Android</td><td>Kotlin · Jetpack Compose · Room · FastAPI</td><td>Intermédiaire</td></tr>
+        <tr><td>05</td><td>Finances personnelles avec catégorisation IA</td><td>Mobile iOS</td><td>Swift · SwiftUI · Core Data · FastAPI · scikit-learn</td><td>Intermédiaire</td></tr>
+        <tr><td>06</td><td>Billetterie événementielle avec QR anti-fraude</td><td>Web + mobile</td><td>Go · gRPC · React · Flutter</td><td>Intermédiaire</td></tr>
+        <tr><td>07</td><td>E-commerce multi-vendeurs</td><td>Web</td><td>TypeScript · Next.js · NestJS · PostgreSQL · Stripe</td><td>Avancé</td></tr>
+        <tr><td>08</td><td>Portefeuille et paiement mobile (fintech)</td><td>Mobile + backend</td><td>Kotlin · Java · Spring Boot · PostgreSQL</td><td>Avancé</td></tr>
+        <tr><td>09</td><td>Télémédecine (rendez-vous, visio, dossier patient)</td><td>Mobile multiplateforme</td><td>Dart · Flutter · Django · WebRTC</td><td>Avancé</td></tr>
+        <tr><td>10</td><td>Livraison de repas (client, livreur, restaurant)</td><td>Mobile + web</td><td>Flutter · Go · PostGIS · Redis</td><td>Avancé</td></tr>
+        <tr><td>11</td><td>Kanban collaboratif temps réel et hors ligne</td><td>Web</td><td>C# · ASP.NET Core · SignalR · Angular</td><td>Avancé</td></tr>
+        <tr><td>12</td><td>Portail e-gouvernement (démarches, files, paiements)</td><td>Web</td><td>Java · Spring Boot · Angular · Keycloak</td><td>Avancé</td></tr>
+        <tr><td>13</td><td>Tableau de bord BI avec pipelines de données</td><td>Web + data</td><td>Python · Airflow · FastAPI · ClickHouse · React</td><td>Avancé</td></tr>
+        <tr><td>14</td><td>Streaming vidéo (upload, transcodage, HLS)</td><td>Web</td><td>TypeScript · Next.js · Node.js · FFmpeg · BullMQ</td><td>Avancé</td></tr>
+        <tr><td>15</td><td>Réseau social et messagerie temps réel</td><td>Mobile + backend</td><td>Elixir · Phoenix · React Native</td><td>Expert</td></tr>
+        <tr><td>16</td><td>Domotique IoT temps réel</td><td>IoT + web + mobile</td><td>Rust · Actix · MQTT · TimescaleDB · Svelte · Kotlin</td><td>Expert</td></tr>
+        <tr><td>17</td><td>Covoiturage / VTC avec suivi GPS</td><td>Mobile multiplateforme</td><td>Kotlin Multiplatform · Node.js · Socket.IO · Redis Geo</td><td>Expert</td></tr>
+        <tr><td>18</td><td>Réservation voyage en microservices</td><td>Web distribué</td><td>Java · Spring Cloud · Kafka · Kubernetes · React</td><td>Expert</td></tr>
+        <tr><td>19</td><td>Jeu mobile multijoueur temps réel</td><td>Jeu mobile</td><td>C# · Unity · Go · WebSocket · Redis</td><td>Expert</td></tr>
+        <tr><td>20</td><td>Assistant IA de service client (RAG)</td><td>Web + IA</td><td>Python · FastAPI · LangChain · pgvector · React</td><td>Expert</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <details class="a-disclosure">
+    <summary>Règles générales d'adéquation langage / type de projet</summary>
+    <ul class="a-prose">
+      <li><strong>TypeScript (Next.js, NestJS, Angular, React Native)</strong> : un seul langage du navigateur au serveur, immense écosystème, idéal pour les produits web riches et les équipes full-stack.</li>
+      <li><strong>Python (Django, FastAPI)</strong> : productivité, data et IA ; Django pour le « batteries incluses » (admin, ORM, auth), FastAPI pour des API asynchrones et typées.</li>
+      <li><strong>Java / Kotlin (Spring Boot)</strong> : robustesse, transactions, écosystème bancaire et institutionnel, microservices matures.</li>
+      <li><strong>Kotlin (Android, KMP), Swift (iOS)</strong> : accès natif complet au matériel (GPS, biométrie, HealthKit, arrière-plan) et performances maximales.</li>
+      <li><strong>Dart / Flutter</strong> : une base de code pour Android, iOS et web avec UI très personnalisée ; parfait quand plusieurs apps partagent une identité visuelle.</li>
+      <li><strong>Go</strong> : services réseau concurrents, binaires simples à déployer, latence faible (billetterie, dispatch, WebSocket).</li>
+      <li><strong>Rust</strong> : sécurité mémoire et performance pour l'IoT, l'embarqué et les brokers à forte charge.</li>
+      <li><strong>Elixir / Phoenix</strong> : millions de connexions persistantes, tolérance aux pannes (BEAM) : messagerie, présence, temps réel massif.</li>
+      <li><strong>C# (.NET, Unity)</strong> : entreprise (ASP.NET Core, SignalR) et jeu (Unity) avec un même langage.</li>
+      <li><strong>PHP (Laravel), Ruby (Rails)</strong> : frameworks « opinionated » qui font livrer un back-office complet très vite ; hébergement peu coûteux.</li>
+    </ul>
+  </details>
+</section>
+
+<section class="a-section" id="p01">
+  <h2 class="a-section__title">01 · Système de gestion scolaire</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Application web multi-rôles</dd></div>
+    <div><dt>Domaine</dt><dd>Éducation</dd></div>
+    <div><dt>Niveau</dt><dd>Intermédiaire</dd></div>
+    <div><dt>Durée indicative</dt><dd>6 à 8 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Digitaliser la vie d'un établissement : inscriptions, emplois du temps, saisie des notes, absences, calcul de moyennes et génération de bulletins PDF, communication parents-école. Exigences : quatre rôles (administration, enseignant, élève, parent), calcul de moyennes paramétrable par coefficient, export PDF fidèle, fonctionnement sur connexion faible, RGPD (données de mineurs).</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 01</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Backend</td><td>PHP 8 · Laravel 11</td><td>Framework complet (Eloquent ORM, auth, files d'attente, politiques d'autorisation, génération PDF via DomPDF) qui permet de livrer un back-office CRUD riche très rapidement ; hébergement mutualisé bon marché, adapté aux écoles.</td></tr>
+      <tr><td>Frontend</td><td>Vue.js 3 + Inertia.js</td><td>Inertia relie Laravel et Vue sans écrire d'API REST séparée : on garde la simplicité d'une app monolithique avec l'ergonomie d'une SPA (saisie de notes en grille, filtres instantanés).</td></tr>
+      <tr><td>Base de données</td><td>MySQL 8</td><td>Modèle relationnel classique (classes, matières, élèves, notes), transactions simples, très répandu chez les hébergeurs PHP.</td></tr>
+      <tr><td>Outils</td><td>Laravel Excel, Laravel Scheduler, Mailgun</td><td>Import massif d'élèves, tâches planifiées (rappels d'absences), e-mails transactionnels.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Gestion des années scolaires, classes, matières, coefficients et enseignants.</li>
+    <li>Inscription des élèves avec import Excel et génération de matricules.</li>
+    <li>Emploi du temps hebdomadaire avec détection de conflits de salle / enseignant.</li>
+    <li>Saisie des notes en grille, calcul des moyennes, rangs et appréciations.</li>
+    <li>Gestion des absences et retards avec notification SMS / e-mail aux parents.</li>
+    <li>Génération de bulletins PDF par lot et archivage.</li>
+    <li>Espace parent : consultation des notes, absences, messagerie interne.</li>
+    <li>Tableau de bord administratif (taux de réussite, effectifs, paiements de scolarité).</li>
+    <li>Journal d'audit des modifications de notes.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Modélisation relationnelle et migrations Laravel ; requêtes Eloquent optimisées (N+1).</li>
+    <li>Autorisation fine (Policies, Gates) et gestion multi-rôles.</li>
+    <li>Génération de documents PDF et exports Excel.</li>
+    <li>Architecture monolithe moderne (Inertia) et composants Vue réutilisables.</li>
+    <li>Tests PHPUnit / Pest, factories et seeders ; conformité RGPD.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 01</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Interviews d'un enseignant et d'un administrateur ; user stories par rôle ; règles de calcul des moyennes.</td><td>Cahier des charges, spécifications fonctionnelles</td></tr>
+      <tr><td>2</td><td>MCD/MLD (20 tables), maquettes des grilles de saisie, choix Inertia (ADR-001).</td><td>Architecture, ADR, dictionnaire de données</td></tr>
+      <tr><td>3</td><td>Laravel Sail (Docker), GitHub Actions (Pint, Pest), seeders réalistes.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : structure école et rôles · Sprint 2 : notes et moyennes · Sprint 3 : absences et notifications · Sprint 4 : bulletins PDF et espace parent.</td><td>Journal de sprints, changelog</td></tr>
+      <tr><td>5</td><td>Tests de calcul de moyennes (cas limites), tests de politiques, tests E2E Dusk.</td><td>Stratégie de tests</td></tr>
+      <tr><td>6</td><td>Déploiement Forge ou VPS + Nginx, sauvegardes MySQL quotidiennes.</td><td>Guide de déploiement, runbook</td></tr>
+      <tr><td>7</td><td>Guide utilisateur en 4 chapitres (un par rôle), vidéo de saisie de notes.</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p02">
+  <h2 class="a-section__title">02 · Marketplace immobilière géolocalisée</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Application web</dd></div>
+    <div><dt>Domaine</dt><dd>Immobilier</dd></div>
+    <div><dt>Niveau</dt><dd>Intermédiaire</dd></div>
+    <div><dt>Durée indicative</dt><dd>6 à 8 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Plateforme de petites annonces immobilières (vente, location) avec recherche sur carte, filtres avancés, messagerie acheteur-agent et gestion des visites. Exigences : recherche par polygone dessiné sur la carte, résultats en moins de 300 ms, upload de photos optimisées, SEO (pages d'annonces indexables), modération des annonces.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 02</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Backend</td><td>Ruby 3 · Rails 7</td><td>Convention plutôt que configuration : Active Record, Active Storage (photos), Action Mailer, Devise pour l'auth. Rails reste l'un des moyens les plus rapides de construire une marketplace complète et rendue côté serveur (bon pour le SEO).</td></tr>
+      <tr><td>Frontend</td><td>Hotwire (Turbo + Stimulus) · Leaflet</td><td>Interactivité (filtres, pagination, favoris) sans SPA lourde ; Leaflet pour la carte et le dessin de zones.</td></tr>
+      <tr><td>Données</td><td>PostgreSQL + PostGIS</td><td>Requêtes géospatiales natives (ST_Within, ST_DWithin) pour la recherche par zone et par rayon.</td></tr>
+      <tr><td>Recherche</td><td>Elasticsearch (ou Meilisearch)</td><td>Recherche plein texte, facettes (prix, surface, pièces) et tri par pertinence, plus rapide que SQL pour les filtres combinés.</td></tr>
+      <tr><td>Traitement</td><td>Sidekiq + Redis, libvips</td><td>Redimensionnement d'images et indexation en arrière-plan.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Comptes particuliers et agences, abonnements et annonces mises en avant.</li>
+    <li>Dépôt d'annonce en plusieurs étapes avec géocodage automatique de l'adresse.</li>
+    <li>Recherche par carte (zone dessinée, rayon), filtres à facettes, tri, sauvegarde de recherche avec alertes e-mail.</li>
+    <li>Galerie photos optimisée, visite virtuelle (lien 360°), estimation de prix au m² par quartier.</li>
+    <li>Messagerie interne et prise de rendez-vous de visite avec calendrier.</li>
+    <li>Favoris, comparateur d'annonces, historique de prix.</li>
+    <li>Back-office de modération, signalements, statistiques d'audience.</li>
+    <li>Pages SEO (sitemap, données structurées schema.org, URLs lisibles).</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Requêtes géospatiales PostGIS et intégration cartographique.</li>
+    <li>Moteur de recherche à facettes et synchronisation d'index.</li>
+    <li>Rails moderne (Hotwire, Active Storage, Action Cable pour la messagerie).</li>
+    <li>Traitement asynchrone (Sidekiq) et optimisation d'images.</li>
+    <li>SEO technique, RSpec, Capybara, performance (cache fragments, index).</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 02</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Benchmark de 3 sites concurrents, personas acheteur / agent / modérateur, priorisation MoSCoW.</td><td>Cahier des charges, spécifications</td></tr>
+      <tr><td>2</td><td>Modèle de données avec colonnes géographiques, schéma d'index Elasticsearch, maquettes carte + liste.</td><td>Architecture, ADR (Hotwire vs React), dictionnaire de données</td></tr>
+      <tr><td>3</td><td>Docker Compose (Postgres/PostGIS, ES, Redis), RuboCop, RSpec, CI.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : auth et annonces · Sprint 2 : carte et recherche · Sprint 3 : messagerie et visites · Sprint 4 : modération, SEO, alertes.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Tests de requêtes géo, tests de charge de la recherche (k6), audit Lighthouse.</td><td>Stratégie et rapport de tests</td></tr>
+      <tr><td>6</td><td>Déploiement Kamal ou Render, CDN images, sauvegardes.</td><td>Guide de déploiement, runbook</td></tr>
+      <tr><td>7</td><td>Guide « déposer une annonce », « rechercher sur la carte », « modérer ».</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p03">
+  <h2 class="a-section__title">03 · SaaS de facturation et gestion PME multi-tenant</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Application web SaaS</dd></div>
+    <div><dt>Domaine</dt><dd>Gestion d'entreprise / comptabilité</dd></div>
+    <div><dt>Niveau</dt><dd>Intermédiaire à avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>8 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Permettre à des PME de gérer clients, devis, factures, stocks et relances dans un espace isolé par entreprise (tenant). Exigences : isolation stricte des données, numérotation légale des factures (séquentielle, sans trou), TVA multi-taux, PDF conformes, export comptable, plans d'abonnement et facturation du SaaS lui-même.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 03</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Backend</td><td>Python 3.12 · Django 5 · Django REST Framework</td><td>ORM mature avec transactions, admin intégré pour le support, système d'auth et de permissions robuste ; DRF pour une API propre consommée par le frontend et par des intégrations tierces.</td></tr>
+      <tr><td>Multi-tenant</td><td>django-tenants ou colonne <code>tenant_id</code> + Row Level Security PostgreSQL</td><td>Deux stratégies à comparer et documenter ; la RLS garantit l'isolation même en cas de bug applicatif.</td></tr>
+      <tr><td>Frontend</td><td>React 18 · TypeScript · TanStack Query · React Hook Form</td><td>Formulaires complexes (lignes de facture dynamiques), cache de données, typage des DTO générés depuis OpenAPI.</td></tr>
+      <tr><td>Asynchrone</td><td>Celery + Redis</td><td>Génération de PDF, envoi de relances, exports lourds, tâches planifiées (Celery Beat).</td></tr>
+      <tr><td>Paiement</td><td>Stripe Billing</td><td>Abonnements du SaaS, webhooks, portail client.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Onboarding d'entreprise, invitation d'utilisateurs, rôles (gérant, comptable, commercial).</li>
+    <li>Catalogue produits / services, gestion de stock avec mouvements et alertes de seuil.</li>
+    <li>Devis convertibles en factures, avoirs, acomptes, factures récurrentes.</li>
+    <li>Numérotation séquentielle verrouillée, TVA multi-taux, devises, mentions légales.</li>
+    <li>PDF personnalisables (logo, couleurs), envoi par e-mail avec suivi d'ouverture.</li>
+    <li>Relances automatiques, échéancier, rapprochement des paiements.</li>
+    <li>Tableaux de bord (CA, impayés, top clients), export comptable CSV / FEC.</li>
+    <li>API publique avec clés par tenant et webhooks sortants.</li>
+    <li>Abonnements Stripe, quotas par plan, page de facturation du SaaS.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Architecture multi-tenant et sécurité au niveau base de données (RLS).</li>
+    <li>Intégrité transactionnelle (verrous, <code>select_for_update</code>) pour la numérotation.</li>
+    <li>Conception d'API REST versionnée, documentation OpenAPI, SDK généré.</li>
+    <li>Traitement asynchrone et planifié avec Celery.</li>
+    <li>Intégration Stripe (webhooks idempotents), tests pytest, factories, couverture.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 03</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Règles de facturation légales du pays cible, personas, parcours devis → facture → paiement.</td><td>Cahier des charges, spécifications, règles métier</td></tr>
+      <tr><td>2</td><td>ADR multi-tenant (schéma par tenant vs RLS), modèle de données comptable, contrat OpenAPI, maquettes.</td><td>Architecture, ADR, OpenAPI</td></tr>
+      <tr><td>3</td><td>Docker Compose, pre-commit (ruff, mypy), pytest, CI, génération du client TypeScript.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : tenants et auth · Sprint 2 : clients, produits, devis · Sprint 3 : factures, PDF, numérotation · Sprint 4 : relances, dashboards · Sprint 5 : Stripe et API publique.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Tests d'isolation inter-tenant, tests de concurrence sur la numérotation, audit OWASP.</td><td>Stratégie de tests, rapport de sécurité</td></tr>
+      <tr><td>6</td><td>Déploiement sur VPS ou Fly.io, Sentry, sauvegardes chiffrées, procédure de restauration testée.</td><td>Guide de déploiement, runbook</td></tr>
+      <tr><td>7</td><td>Guide par rôle, FAQ facturation, documentation API pour intégrateurs.</td><td>Documentation générale, guide utilisateur, portail API</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p04">
+  <h2 class="a-section__title">04 · Application agricole hors ligne (agritech)</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Application mobile Android native + API</dd></div>
+    <div><dt>Domaine</dt><dd>Agriculture, zones à faible connectivité</dd></div>
+    <div><dt>Niveau</dt><dd>Intermédiaire</dd></div>
+    <div><dt>Durée indicative</dt><dd>6 à 8 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Outil de suivi d'exploitation pour petits producteurs : parcelles, cultures, intrants, récoltes, prix du marché et conseils, utilisable sans réseau puis synchronisé. Exigences : fonctionnement 100 % hors ligne, synchronisation fiable avec résolution de conflits, faible consommation de données, interface multilingue avec icônes et audio pour publics peu alphabétisés, appareils d'entrée de gamme.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 04</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Mobile</td><td>Kotlin · Jetpack Compose · Room · WorkManager · DataStore</td><td>Android domine le marché cible ; Room offre une base SQLite typée pour le hors ligne, WorkManager garantit la synchronisation différée même après redémarrage ; Compose accélère les UI adaptatives.</td></tr>
+      <tr><td>Architecture</td><td>MVVM + Clean Architecture · Hilt · Coroutines/Flow</td><td>Séparation UI / domaine / données, injection de dépendances, flux réactifs de la base vers l'écran.</td></tr>
+      <tr><td>Backend</td><td>Python · FastAPI · SQLAlchemy · PostgreSQL</td><td>API asynchrone légère, validation Pydantic, documentation automatique ; Python facilite l'ajout ultérieur de modèles de prédiction de rendement.</td></tr>
+      <tr><td>Synchronisation</td><td>Protocole delta (horodatage / version par ligne), UUID côté client</td><td>Évite les collisions d'identifiants et permet une fusion par « dernière écriture gagne » ou par champ.</td></tr>
+      <tr><td>Services</td><td>API météo publique, SMS gateway</td><td>Alertes météo et prix par SMS pour les utilisateurs sans smartphone connecté.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Cartographie de parcelles par marche GPS (polygone), calcul de surface.</li>
+    <li>Calendrier cultural par culture, rappels de tâches (semis, traitement, récolte).</li>
+    <li>Journal des intrants et dépenses, récoltes et ventes ; marge par parcelle.</li>
+    <li>Prix du marché par produit et localité, saisie collaborative, graphiques.</li>
+    <li>Fiches conseils (texte, image, audio) téléchargées en cache.</li>
+    <li>Synchronisation en arrière-plan avec file d'attente et indicateur d'état.</li>
+    <li>Multilingue (français + langues locales), mode sombre, gros boutons.</li>
+    <li>Back-office web minimal (FastAPI + templates) pour publier conseils et prix.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Conception offline-first, synchronisation et gestion des conflits.</li>
+    <li>Android moderne : Compose, Room, WorkManager, Hilt, Flow.</li>
+    <li>Géolocalisation et calculs géométriques sur mobile.</li>
+    <li>API FastAPI typée, tests Pytest, migrations Alembic.</li>
+    <li>Accessibilité et design inclusif, optimisation pour appareils modestes.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 04</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Enquête terrain (5 producteurs), contraintes réseau, personas, parcours hors ligne.</td><td>Cahier des charges, spécifications</td></tr>
+      <tr><td>2</td><td>Schéma Room et PostgreSQL alignés, protocole de sync (ADR), maquettes basse fidélité testées sur papier.</td><td>Architecture, ADR sync, OpenAPI</td></tr>
+      <tr><td>3</td><td>Projet Android modulaire, ktlint/detekt, tests instrumentés, CI GitHub Actions ; backend Docker.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : parcelles et cultures locales · Sprint 2 : journal et rappels · Sprint 3 : sync et backend · Sprint 4 : prix, conseils, SMS.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Tests de sync avec coupures réseau simulées, tests sur appareils bas de gamme, profilage batterie.</td><td>Stratégie de tests</td></tr>
+      <tr><td>6</td><td>Publication Play Store (interne → ouverte), backend sur VPS, monitoring.</td><td>Guide de déploiement, fiche Play Store</td></tr>
+      <tr><td>7</td><td>Guide illustré et audio, affiche « premiers pas » imprimable.</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p05">
+  <h2 class="a-section__title">05 · Finances personnelles avec catégorisation intelligente</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Application mobile iOS native + API</dd></div>
+    <div><dt>Domaine</dt><dd>Finance personnelle / IA</dd></div>
+    <div><dt>Niveau</dt><dd>Intermédiaire à avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>7 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Aider l'utilisateur à suivre ses dépenses, fixer des budgets et atteindre des objectifs d'épargne, avec catégorisation automatique des transactions par apprentissage automatique. Exigences : import de relevés CSV / OFX et saisie manuelle, données chiffrées, fonctionnement hors ligne, widgets et notifications, respect des guidelines Apple.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 05</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Mobile</td><td>Swift 5.10 · SwiftUI · Swift Charts · Core Data / SwiftData · WidgetKit</td><td>Expérience native (Face ID, widgets, Siri Shortcuts), graphiques natifs performants, persistance locale chiffrée ; SwiftUI réduit fortement le code d'interface.</td></tr>
+      <tr><td>Architecture</td><td>MVVM + The Composable Architecture (optionnel) · async/await</td><td>État prévisible et testable, concurrence structurée.</td></tr>
+      <tr><td>Backend / ML</td><td>Python · FastAPI · scikit-learn · pandas</td><td>Entraînement d'un classifieur de libellés (TF-IDF + régression logistique) et service de prédiction ; export du modèle en Core ML pour l'inférence sur l'appareil.</td></tr>
+      <tr><td>Données</td><td>PostgreSQL, CloudKit (option sync)</td><td>Sauvegarde et synchronisation multi-appareils.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Comptes multiples, saisie rapide de transactions, transactions récurrentes.</li>
+    <li>Import CSV / OFX avec détection de doublons.</li>
+    <li>Catégorisation automatique avec correction manuelle qui réentraîne le modèle.</li>
+    <li>Budgets mensuels par catégorie, alertes de dépassement, objectifs d'épargne.</li>
+    <li>Graphiques (tendances, répartition, comparaison de mois) et rapports PDF.</li>
+    <li>Widgets écran d'accueil, verrouillage biométrique, export de données.</li>
+    <li>Mode multi-devises et taux de change mis en cache.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Développement iOS natif complet et publication App Store.</li>
+    <li>Persistance locale, chiffrement, sécurité mobile (Keychain).</li>
+    <li>Cycle de vie d'un modèle ML : données, entraînement, évaluation, déploiement sur mobile (Core ML).</li>
+    <li>API FastAPI et pipeline de réentraînement.</li>
+    <li>Tests XCTest / UI tests, TestFlight, accessibilité VoiceOver.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 05</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Personas (étudiant, salarié), user stories, liste de catégories, contraintes de confidentialité.</td><td>Cahier des charges, spécifications</td></tr>
+      <tr><td>2</td><td>Modèle de données, schéma du pipeline ML, ADR « inférence locale vs serveur », maquettes SwiftUI.</td><td>Architecture, ADR, fiche modèle ML</td></tr>
+      <tr><td>3</td><td>Projet Xcode modulaire (SPM), SwiftLint, fastlane, CI ; environnement Python (uv/poetry).</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : comptes et transactions · Sprint 2 : import et budgets · Sprint 3 : ML et Core ML · Sprint 4 : graphiques, widgets, sécurité.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Tests unitaires du parseur OFX, évaluation du modèle (précision, matrice de confusion), tests UI.</td><td>Stratégie de tests, rapport d'évaluation ML</td></tr>
+      <tr><td>6</td><td>TestFlight, App Store Connect, politique de confidentialité, backend déployé.</td><td>Guide de déploiement</td></tr>
+      <tr><td>7</td><td>Guide utilisateur avec captures, FAQ « pourquoi cette catégorie ? ».</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p06">
+  <h2 class="a-section__title">06 · Billetterie événementielle avec QR codes anti-fraude</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Web (vente, back-office) + mobile (contrôle d'accès)</dd></div>
+    <div><dt>Domaine</dt><dd>Événementiel</dd></div>
+    <div><dt>Niveau</dt><dd>Intermédiaire à avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>7 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Vendre des billets en ligne pour des concerts et conférences et contrôler les entrées par scan. Exigences : pas de survente lors de pics (10 000 acheteurs simultanés), billets infalsifiables (signature cryptographique), scan hors ligne au portique, remboursement et transfert de billet, statistiques en direct.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 06</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Backend</td><td>Go 1.22 · gRPC + gRPC-Gateway (REST) · sqlc</td><td>Concurrence native (goroutines) et faible latence pour absorber les pics ; binaire unique facile à déployer ; gRPC pour l'app de scan, REST généré pour le web.</td></tr>
+      <tr><td>Inventaire</td><td>Redis (scripts Lua atomiques) + PostgreSQL</td><td>Décrément atomique du stock en mémoire avec réservation temporaire, persistance et réconciliation en base.</td></tr>
+      <tr><td>Web</td><td>React · Vite · TypeScript</td><td>Front de vente et back-office organisateur.</td></tr>
+      <tr><td>App de scan</td><td>Flutter (Android + iOS)</td><td>Une base de code pour les deux plateformes, accès caméra, base locale SQLite pour le scan hors ligne.</td></tr>
+      <tr><td>Sécurité</td><td>Billets signés (Ed25519 / JWT), clé publique embarquée dans l'app</td><td>Vérification hors ligne sans appel serveur ; détection de doublons synchronisée ensuite.</td></tr>
+      <tr><td>Paiement</td><td>Stripe / Mobile Money API</td><td>Paiement carte et mobile money selon le marché.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Création d'événements, catégories de billets, quotas, codes promo, plan de salle simplifié.</li>
+    <li>File d'attente virtuelle et réservation temporaire de 10 minutes.</li>
+    <li>Paiement, e-billet PDF et wallet (Apple / Google Wallet), envoi par e-mail / SMS.</li>
+    <li>Transfert nominatif et remboursement partiel selon la politique de l'événement.</li>
+    <li>Application de scan : validation hors ligne, comptage des entrées, alertes de doublon, multi-portiques.</li>
+    <li>Tableau de bord organisateur en temps réel (ventes, entrées, revenus).</li>
+    <li>Exports, reversements aux organisateurs, journal d'audit.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Programmation concurrente en Go, gestion de la contention et idempotence.</li>
+    <li>Conception de protocoles gRPC / Protobuf et génération de code.</li>
+    <li>Cryptographie appliquée (signatures, rotation de clés).</li>
+    <li>Flutter : caméra, stockage local, synchronisation.</li>
+    <li>Tests de charge (k6, Vegeta), observabilité (Prometheus, Grafana).</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 06</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Scénarios de fraude, objectifs de charge, personas acheteur / organisateur / contrôleur.</td><td>Cahier des charges, spécifications, modèle de menaces</td></tr>
+      <tr><td>2</td><td>Fichiers .proto, algorithme de réservation (ADR Redis Lua), format du billet signé, maquettes.</td><td>Architecture, ADR, contrat gRPC</td></tr>
+      <tr><td>3</td><td>Monorepo (Go, React, Flutter), buf, golangci-lint, CI multi-plateformes.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : événements et catalogue · Sprint 2 : inventaire et paiement · Sprint 3 : billets signés et app de scan · Sprint 4 : dashboards, transferts, remboursements.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Test de charge « 10 000 acheteurs / 100 billets », tests de scan hors ligne, revue de sécurité.</td><td>Rapport de charge, stratégie de tests</td></tr>
+      <tr><td>6</td><td>Déploiement conteneurisé (Docker + Traefik ou Kubernetes), publication de l'app de scan.</td><td>Guide de déploiement, runbook « jour J »</td></tr>
+      <tr><td>7</td><td>Guides organisateur et contrôleur, FAQ acheteur.</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+<section class="a-section" id="p07">
+  <h2 class="a-section__title">07 · Plateforme e-commerce multi-vendeurs</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Application web (boutique, espace vendeur, admin)</dd></div>
+    <div><dt>Domaine</dt><dd>Commerce en ligne</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>10 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Marketplace où plusieurs vendeurs publient des produits, gèrent stocks et commandes, et où la plateforme encaisse puis reverse les paiements. Exigences : catalogue avec variantes (taille, couleur), recherche rapide, panier persistant, paiement sécurisé avec répartition (Stripe Connect), SEO et performance (Core Web Vitals), notifications de commande, avis vérifiés.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 07</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Frontend</td><td>TypeScript · Next.js 14 (App Router) · Tailwind CSS · shadcn/ui</td><td>Rendu serveur et statique pour le SEO des pages produit, streaming, images optimisées ; TypeScript partagé avec le backend (types des DTO).</td></tr>
+      <tr><td>Backend</td><td>NestJS · Prisma · PostgreSQL</td><td>Architecture modulaire (modules, providers, guards) inspirée d'Angular, injection de dépendances, validation par décorateurs ; Prisma pour un accès typé aux données.</td></tr>
+      <tr><td>Recherche et cache</td><td>Meilisearch · Redis</td><td>Recherche tolérante aux fautes et facettes ; cache de sessions, paniers et rate limiting.</td></tr>
+      <tr><td>Paiement</td><td>Stripe Connect</td><td>Encaissement, commission de la plateforme et reversement automatique aux vendeurs.</td></tr>
+      <tr><td>Messagerie</td><td>BullMQ, Resend / SendGrid</td><td>E-mails transactionnels, traitement asynchrone des commandes, webhooks.</td></tr>
+      <tr><td>Stockage</td><td>S3 compatible (MinIO en local)</td><td>Images produits avec URL pré-signées.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Inscription vendeur avec validation KYC Stripe, boutique personnalisée.</li>
+    <li>Produits avec variantes, attributs, stock par variante, import CSV.</li>
+    <li>Recherche instantanée, filtres à facettes, pages catégories et collections.</li>
+    <li>Panier persistant (invité et connecté), codes promo, frais de port par zone.</li>
+    <li>Checkout Stripe avec 3D Secure, répartition multi-vendeurs, factures.</li>
+    <li>Suivi de commande, statuts, étiquettes d'expédition, retours.</li>
+    <li>Avis vérifiés, questions / réponses, wishlist.</li>
+    <li>Espace vendeur : commandes, statistiques, reversements ; admin : modération, commissions, litiges.</li>
+    <li>Internationalisation (langue, devise) et pages SEO (sitemap, données structurées).</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Full-stack TypeScript de bout en bout, monorepo (Turborepo) et partage de types.</li>
+    <li>Rendu serveur, ISR, optimisation des performances web.</li>
+    <li>Architecture modulaire NestJS, Prisma, transactions et migrations.</li>
+    <li>Paiements complexes (Connect, webhooks idempotents, litiges).</li>
+    <li>Tests Jest, Playwright E2E, observabilité (OpenTelemetry).</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 07</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Étude de modèles de commission, personas acheteur / vendeur / admin, parcours d'achat.</td><td>Cahier des charges, spécifications</td></tr>
+      <tr><td>2</td><td>Modèle produit / variante / stock, machine à états des commandes, ADR Next.js + NestJS, contrat OpenAPI, maquettes.</td><td>Architecture, ADR, OpenAPI</td></tr>
+      <tr><td>3</td><td>Turborepo, ESLint / Prettier, Docker Compose (Postgres, Redis, Meilisearch, MinIO), CI.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : auth et catalogue · Sprint 2 : recherche et panier · Sprint 3 : checkout Stripe Connect · Sprint 4 : commandes et expéditions · Sprint 5 : espace vendeur et admin · Sprint 6 : avis, i18n, SEO.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>E2E Playwright du parcours d'achat, tests de webhooks, Lighthouse CI, audit OWASP.</td><td>Stratégie de tests</td></tr>
+      <tr><td>6</td><td>Vercel (front) + Fly.io / Railway (API) ou Kubernetes, CDN, sauvegardes.</td><td>Guide de déploiement, runbook</td></tr>
+      <tr><td>7</td><td>Guides acheteur, vendeur, administrateur ; centre d'aide.</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p08">
+  <h2 class="a-section__title">08 · Portefeuille et paiement mobile (fintech)</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Application mobile Android + backend bancaire</dd></div>
+    <div><dt>Domaine</dt><dd>Finance / paiements</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>10 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Portefeuille électronique : dépôt, retrait, transfert entre utilisateurs, paiement marchand par QR, historique et plafonds. Exigences : comptabilité en partie double (aucun argent créé ou perdu), idempotence des transactions, KYC par niveaux, authentification forte (PIN + biométrie + OTP), chiffrement, traçabilité complète, disponibilité élevée.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 08</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Backend</td><td>Java 21 · Spring Boot 3 · Spring Security · Spring Data JPA</td><td>Référence du secteur bancaire : transactions ACID, gestion fine des isolations, écosystème de sécurité (OAuth2, JWT), maturité, forte employabilité.</td></tr>
+      <tr><td>Base de données</td><td>PostgreSQL</td><td>Contraintes fortes, verrous, <code>SERIALIZABLE</code> pour le grand livre ; tables d'écritures immuables.</td></tr>
+      <tr><td>Mobile</td><td>Kotlin · Jetpack Compose · Biometric API · CameraX (QR)</td><td>Accès natif à la biométrie, au stockage sécurisé (Keystore) et à la caméra ; détection de root et attestation Play Integrity.</td></tr>
+      <tr><td>Messagerie</td><td>RabbitMQ ou Kafka</td><td>Notifications, journal d'audit et intégration avec agrégateurs externes de façon asynchrone.</td></tr>
+      <tr><td>Sécurité</td><td>Keycloak, Vault, TLS pinning</td><td>Gestion des identités, des secrets et protection contre l'interception.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Inscription par numéro de téléphone, OTP, KYC (pièce d'identité, selfie) par niveaux avec plafonds associés.</li>
+    <li>Dépôt / retrait via agents ou agrégateur mobile money simulé.</li>
+    <li>Transfert P2P instantané, demande de paiement, paiement marchand par QR dynamique.</li>
+    <li>Grand livre en partie double, soldes calculés, réconciliation quotidienne.</li>
+    <li>Historique filtrable, reçus PDF, export.</li>
+    <li>Sécurité : PIN, biométrie, détection d'appareil inconnu, blocage, limites anti-fraude (règles + score).</li>
+    <li>Back-office : supervision des transactions, gestion des agents, gel de compte, reporting réglementaire.</li>
+    <li>Notifications push (FCM) et SMS.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Modélisation comptable (ledger) et garanties transactionnelles.</li>
+    <li>Spring Security avancé, OAuth2, gestion des secrets, durcissement d'API.</li>
+    <li>Sécurité mobile (Keystore, attestation, obfuscation).</li>
+    <li>Architecture événementielle et idempotence.</li>
+    <li>Tests d'intégration Testcontainers, JUnit 5, tests de propriété sur le ledger.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 08</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Cadre réglementaire (KYC/AML), plafonds, personas client / agent / marchand / superviseur.</td><td>Cahier des charges, spécifications, matrice de conformité</td></tr>
+      <tr><td>2</td><td>Modèle de ledger (comptes, écritures, journaux), machines à états, modèle de menaces STRIDE, OpenAPI, maquettes.</td><td>Architecture, ADR, modèle de menaces</td></tr>
+      <tr><td>3</td><td>Gradle multi-modules, Testcontainers, SonarQube, CI, environnement sandbox.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : identité et KYC · Sprint 2 : ledger et transferts · Sprint 3 : app mobile (onboarding, transferts) · Sprint 4 : QR marchand et notifications · Sprint 5 : anti-fraude et back-office.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Tests de concurrence (double dépense), tests d'intrusion, revue de code sécurité, tests de charge.</td><td>Stratégie de tests, rapport de pentest</td></tr>
+      <tr><td>6</td><td>Kubernetes ou VM durcies, secrets Vault, sauvegardes PITR, plan de reprise, procédure d'incident.</td><td>Guide de déploiement, runbook, PRA</td></tr>
+      <tr><td>7</td><td>Guides client, agent, marchand et superviseur ; politique de sécurité publiée.</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p09">
+  <h2 class="a-section__title">09 · Télémédecine : rendez-vous, visio et dossier patient</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Mobile multiplateforme + web praticien</dd></div>
+    <div><dt>Domaine</dt><dd>Santé</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>10 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Mettre en relation patients et médecins : prise de rendez-vous, consultation vidéo, ordonnance électronique, dossier médical partagé. Exigences : confidentialité des données de santé (chiffrement au repos et en transit, journalisation des accès), vidéo fonctionnelle sur réseau mobile faible, disponibilité des créneaux en temps réel, accessibilité.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 09</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Mobile</td><td>Dart · Flutter · Riverpod · flutter_webrtc</td><td>Une seule base pour Android et iOS, UI cohérente, bonne intégration WebRTC ; Flutter Web permet aussi une version navigateur pour le médecin.</td></tr>
+      <tr><td>Backend</td><td>Python · Django · Django REST Framework · Django Channels</td><td>Django apporte auth, admin et ORM ; Channels gère la signalisation WebRTC et les notifications WebSocket ; Python facilite les futurs modules d'aide au diagnostic.</td></tr>
+      <tr><td>Vidéo</td><td>WebRTC + serveur TURN (coturn) ou LiveKit</td><td>Vidéo pair-à-pair chiffrée ; TURN pour traverser les NAT ; LiveKit si consultations à plusieurs.</td></tr>
+      <tr><td>Données</td><td>PostgreSQL chiffré, S3 chiffré (documents), Redis</td><td>Dossiers, ordonnances, pièces jointes ; files et présence.</td></tr>
+      <tr><td>Interopérabilité</td><td>HL7 FHIR (ressources Patient, Appointment, Observation)</td><td>Standard international pour échanger avec d'autres systèmes de santé.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Annuaire de praticiens par spécialité, disponibilité, tarif ; agenda avec créneaux et rappels.</li>
+    <li>Prise de rendez-vous, paiement de la consultation, salle d'attente virtuelle.</li>
+    <li>Consultation vidéo / audio avec chat, partage de documents, adaptation à la bande passante.</li>
+    <li>Dossier patient : antécédents, allergies, constantes, documents, historique des consultations.</li>
+    <li>Ordonnance électronique signée en PDF, envoi à la pharmacie.</li>
+    <li>Messagerie sécurisée asynchrone patient-médecin.</li>
+    <li>Consentements, journal des accès au dossier, export des données (droit d'accès).</li>
+    <li>Back-office : validation des diplômes, statistiques, facturation des praticiens.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>WebRTC (signalisation, ICE, TURN) et temps réel avec Django Channels.</li>
+    <li>Flutter avancé : gestion d'état, navigation, permissions, notifications.</li>
+    <li>Sécurité et conformité des données de santé, chiffrement, audit.</li>
+    <li>Interopérabilité FHIR et conception d'API métier.</li>
+    <li>Tests Flutter (widget, integration), pytest, tests de qualité vidéo.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 09</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Cadre légal (secret médical, hébergement des données de santé), personas patient / médecin / secrétaire, parcours de consultation.</td><td>Cahier des charges, spécifications, analyse d'impact (AIPD)</td></tr>
+      <tr><td>2</td><td>Modèle FHIR simplifié, flux de signalisation, ADR WebRTC (P2P vs SFU), maquettes accessibles.</td><td>Architecture, ADR, OpenAPI, diagrammes de séquence</td></tr>
+      <tr><td>3</td><td>Monorepo Flutter + Django, Docker Compose avec coturn, CI (analyse, tests), flavors dev/staging.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : comptes et annuaire · Sprint 2 : agenda et rendez-vous · Sprint 3 : visio · Sprint 4 : dossier et ordonnances · Sprint 5 : messagerie, consentements, back-office.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Tests vidéo sur réseau dégradé (throttling), tests de permissions, pentest, tests d'accessibilité.</td><td>Stratégie de tests, rapport de sécurité</td></tr>
+      <tr><td>6</td><td>Hébergement certifié santé si disponible, TURN dédié, sauvegardes chiffrées, publication stores avec catégorie médicale.</td><td>Guide de déploiement, runbook</td></tr>
+      <tr><td>7</td><td>Guide patient (prendre rendez-vous, se connecter à la visio), guide praticien, charte de confidentialité.</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p10">
+  <h2 class="a-section__title">10 · Livraison de repas : client, livreur, restaurant</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>3 applications mobiles + back-office web</dd></div>
+    <div><dt>Domaine</dt><dd>Logistique / restauration</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>10 à 12 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Écosystème complet de commande et livraison : le client commande, le restaurant prépare, le livreur est attribué automatiquement et suivi en temps réel. Exigences : attribution du livreur le plus pertinent en moins de 5 secondes, suivi GPS toutes les 3 secondes, estimation du temps de livraison, calcul des frais par distance, gestion des annulations et des litiges.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 10</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Mobile</td><td>Dart · Flutter (3 apps partageant un package commun) · Google Maps / Mapbox SDK · BLoC</td><td>Trois applications avec la même identité visuelle et beaucoup de logique commune (auth, cartes, notifications) : Flutter et un package partagé évitent de tripler le code.</td></tr>
+      <tr><td>Backend</td><td>Go · Gin ou Fiber · WebSocket (gorilla) </td><td>Latence faible pour les mises à jour de position et le dispatch ; excellente concurrence ; déploiement simple.</td></tr>
+      <tr><td>Géodonnées</td><td>PostgreSQL + PostGIS · Redis GEO</td><td>Redis GEO pour trouver instantanément les livreurs proches ; PostGIS pour les zones de livraison et l'historique.</td></tr>
+      <tr><td>Itinéraires</td><td>OSRM auto-hébergé ou API Mapbox Directions</td><td>Calcul de distance / durée et estimation de livraison.</td></tr>
+      <tr><td>Événements</td><td>NATS ou Kafka, FCM</td><td>Flux d'événements de commande et notifications push.</td></tr>
+      <tr><td>Web</td><td>React (back-office admin) </td><td>Supervision de la flotte et des restaurants.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>App client : restaurants proches, menus avec options, panier, paiement, suivi en direct, notation.</li>
+    <li>App restaurant : réception sonore des commandes, temps de préparation, gestion du menu et des ruptures.</li>
+    <li>App livreur : mise en ligne, acceptation de courses, navigation, preuve de livraison (photo / code), revenus.</li>
+    <li>Moteur de dispatch (distance, note, charge) avec réattribution automatique en cas de refus.</li>
+    <li>Tarification dynamique par distance et heure, codes promo, pourboires.</li>
+    <li>Chat client-livreur, appels masqués.</li>
+    <li>Back-office : carte de la flotte en direct, litiges, remboursements, statistiques.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Architecture multi-applications avec code partagé Flutter.</li>
+    <li>Temps réel à grande échelle (WebSocket, Redis GEO, événements).</li>
+    <li>Algorithmes de dispatch et de tarification, calcul d'itinéraires.</li>
+    <li>Géolocalisation en arrière-plan et optimisation batterie.</li>
+    <li>Go idiomatique, tests de charge, observabilité distribuée.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 10</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Personas des trois acteurs, cycle de vie d'une commande, règles de tarification et d'annulation.</td><td>Cahier des charges, spécifications, diagramme d'états</td></tr>
+      <tr><td>2</td><td>Architecture événementielle, algorithme de dispatch (ADR), schéma PostGIS, contrats API et WebSocket, maquettes des 3 apps.</td><td>Architecture, ADR, OpenAPI / AsyncAPI</td></tr>
+      <tr><td>3</td><td>Monorepo Melos (Flutter) + Go modules, Docker Compose (Postgres, Redis, NATS, OSRM), CI.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : catalogue et commande · Sprint 2 : app restaurant · Sprint 3 : dispatch et app livreur · Sprint 4 : suivi temps réel · Sprint 5 : paiement, chat, back-office.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Simulateur de livreurs pour tests de charge, tests de dispatch, tests d'intégration bout en bout.</td><td>Stratégie de tests</td></tr>
+      <tr><td>6</td><td>Kubernetes ou Nomad, autoscaling, Grafana, publication des 3 apps.</td><td>Guide de déploiement, runbook</td></tr>
+      <tr><td>7</td><td>Trois guides utilisateurs distincts + guide administrateur.</td><td>Documentation générale, guides utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p11">
+  <h2 class="a-section__title">11 · Kanban collaboratif temps réel et hors ligne</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Application web (PWA)</dd></div>
+    <div><dt>Domaine</dt><dd>Productivité / gestion de projet</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>8 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Outil type Trello / Jira léger : tableaux, colonnes, cartes, commentaires, pièces jointes, avec collaboration simultanée (curseurs, modifications visibles instantanément) et fonctionnement hors ligne. Exigences : latence perçue nulle (optimistic UI), fusion sans conflit des modifications concurrentes, historique et annulation, permissions par espace de travail, PWA installable.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 11</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Backend</td><td>C# · ASP.NET Core 8 · SignalR · Entity Framework Core</td><td>SignalR fournit une abstraction temps réel robuste (WebSocket avec repli), groupes et reconnexion ; .NET est performant et très présent en entreprise.</td></tr>
+      <tr><td>Frontend</td><td>TypeScript · Angular 17 · NgRx · Angular CDK (drag and drop) · Yjs</td><td>Angular structure fortement les grandes applications ; NgRx pour un état prévisible ; Yjs (CRDT) pour fusionner les modifications concurrentes sans conflit, même hors ligne.</td></tr>
+      <tr><td>Données</td><td>SQL Server ou PostgreSQL · Redis (backplane SignalR)</td><td>Persistance relationnelle et diffusion entre instances.</td></tr>
+      <tr><td>Hors ligne</td><td>Service Worker (Angular PWA) · IndexedDB</td><td>Cache des tableaux et file d'opérations en attente.</td></tr>
+      <tr><td>Auth</td><td>ASP.NET Identity + OpenID Connect (Google, Microsoft)</td><td>Connexion d'entreprise.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Espaces de travail, tableaux, colonnes, cartes avec glisser-déposer fluide.</li>
+    <li>Cartes riches : description Markdown, checklists, étiquettes, échéances, assignés, pièces jointes.</li>
+    <li>Présence (avatars, curseurs), édition simultanée, notifications de mentions.</li>
+    <li>Mode hors ligne avec synchronisation et résolution automatique (CRDT).</li>
+    <li>Historique d'activité, annuler / rétablir, recherche globale.</li>
+    <li>Automatisations simples (règles « quand… alors… »), rapports de flux (cumulative flow).</li>
+    <li>Permissions (propriétaire, membre, invité), invitations, export JSON / CSV.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Collaboration temps réel : SignalR, CRDT, optimistic UI.</li>
+    <li>Angular avancé, gestion d'état NgRx, PWA et Service Workers.</li>
+    <li>ASP.NET Core : middleware, EF Core, authentification OIDC.</li>
+    <li>Conception de systèmes distribués côté client (offline-first).</li>
+    <li>Tests xUnit, Jasmine / Karma, Cypress.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 11</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Analyse de Trello / Linear, personas chef de projet / développeur, user stories de collaboration.</td><td>Cahier des charges, spécifications</td></tr>
+      <tr><td>2</td><td>Modèle de données, protocole d'événements SignalR, ADR CRDT (Yjs) vs OT, maquettes.</td><td>Architecture, ADR, contrat d'événements</td></tr>
+      <tr><td>3</td><td>Solution .NET + workspace Angular, Docker Compose, analyzers, ESLint, CI.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : tableaux et cartes · Sprint 2 : temps réel et présence · Sprint 3 : hors ligne et CRDT · Sprint 4 : permissions, historique, automatisations.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Tests de convergence CRDT (scénarios de conflits), tests de reconnexion, E2E Cypress.</td><td>Stratégie de tests</td></tr>
+      <tr><td>6</td><td>Azure App Service ou conteneurs, Redis backplane, Application Insights.</td><td>Guide de déploiement, runbook</td></tr>
+      <tr><td>7</td><td>Guide utilisateur avec GIF animés des interactions, FAQ hors ligne.</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p12">
+  <h2 class="a-section__title">12 · Portail e-gouvernement : démarches, files d'attente, paiements</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Application web institutionnelle</dd></div>
+    <div><dt>Domaine</dt><dd>Services publics</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>10 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Guichet unique pour des démarches administratives (acte de naissance, permis, licences) : dépôt de dossier en ligne, suivi, rendez-vous, paiement des frais, délivrance de documents signés. Exigences : identité numérique unique, workflows de validation multi-services configurables, accessibilité (RGAA / WCAG AA), traçabilité, haute disponibilité, interopérabilité avec des systèmes existants.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 12</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Backend</td><td>Java 21 · Spring Boot · Spring Batch · Flowable (moteur BPMN)</td><td>Stabilité et support long terme recherchés par les administrations ; un moteur BPMN permet de modéliser les circuits de validation sans coder chaque démarche.</td></tr>
+      <tr><td>Identité</td><td>Keycloak (OIDC, SAML)</td><td>SSO, fédération avec des annuaires existants, MFA, gestion des rôles centralisée.</td></tr>
+      <tr><td>Frontend</td><td>TypeScript · Angular · design system accessible</td><td>Formulaires complexes et dynamiques (Reactive Forms), i18n intégrée, structure adaptée aux grandes équipes.</td></tr>
+      <tr><td>Données</td><td>PostgreSQL · MinIO (pièces justificatives) · Elasticsearch (recherche de dossiers)</td><td>Fiabilité et recherche.</td></tr>
+      <tr><td>Documents</td><td>Signature électronique (PAdES) · QR de vérification</td><td>Actes délivrés vérifiables en ligne.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Compte citoyen unique, vérification d'identité, profil et documents réutilisables.</li>
+    <li>Catalogue de démarches avec formulaires dynamiques générés depuis un schéma JSON.</li>
+    <li>Dépôt de dossier, pièces justificatives, accusé de réception, suivi par étapes.</li>
+    <li>Workflow BPMN d'instruction par les agents (assignation, demande de complément, validation, rejet motivé).</li>
+    <li>Prise de rendez-vous et gestion de file d'attente en guichet (ticket, écran d'appel).</li>
+    <li>Paiement des frais en ligne et quittance.</li>
+    <li>Génération d'actes PDF signés avec QR code de vérification publique.</li>
+    <li>Notifications e-mail / SMS, tableaux de bord de performance par service, données ouvertes.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Modélisation de processus métier (BPMN) et moteur de workflow.</li>
+    <li>Gestion d'identité d'entreprise (Keycloak, OIDC, SAML, MFA).</li>
+    <li>Formulaires dynamiques et accessibilité web au niveau AA.</li>
+    <li>Signature électronique et vérification de documents.</li>
+    <li>Architecture Spring robuste, traitements batch, tests d'intégration.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 12</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Cartographie de 3 démarches réelles, acteurs (citoyen, agent, chef de service), exigences d'accessibilité et de traçabilité.</td><td>Cahier des charges, spécifications, diagrammes BPMN</td></tr>
+      <tr><td>2</td><td>Architecture (Keycloak, Flowable, Angular), schéma des formulaires JSON, modèle de données, maquettes accessibles.</td><td>Architecture, ADR, OpenAPI</td></tr>
+      <tr><td>3</td><td>Maven multi-modules, Keycloak en Docker avec realm exporté, CI, tests d'accessibilité automatisés (axe).</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : identité et catalogue · Sprint 2 : formulaires et dépôt · Sprint 3 : workflow agent · Sprint 4 : rendez-vous et paiement · Sprint 5 : actes signés, tableaux de bord.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Audit RGAA manuel, tests de workflow, tests de charge, pentest.</td><td>Stratégie de tests, rapport d'accessibilité</td></tr>
+      <tr><td>6</td><td>Haute disponibilité (2 nœuds + PostgreSQL répliqué), supervision, plan de continuité.</td><td>Guide de déploiement, runbook, PCA</td></tr>
+      <tr><td>7</td><td>Guide citoyen (avec version simplifiée), guide agent, guide administrateur de démarches.</td><td>Documentation générale, guides utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p13">
+  <h2 class="a-section__title">13 · Tableau de bord BI avec pipelines de données</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Web + ingénierie des données</dd></div>
+    <div><dt>Domaine</dt><dd>Analyse de données / décisionnel</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>8 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Plateforme qui ingère des données hétérogènes (ventes CSV, API météo, base d'une application, logs), les nettoie, les agrège et les expose dans des tableaux de bord interactifs avec alertes. Exigences : pipelines planifiés et rejouables, qualité des données contrôlée, requêtes analytiques en moins d'une seconde sur 100 millions de lignes, constructeur de tableaux de bord sans code, partage et export.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 13</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Orchestration</td><td>Python · Apache Airflow (ou Dagster) · pandas / Polars · dbt</td><td>Python est le langage de la donnée ; Airflow planifie et surveille les DAG ; dbt versionne les transformations SQL et leurs tests.</td></tr>
+      <tr><td>Entrepôt</td><td>ClickHouse (ou DuckDB pour démarrer)</td><td>Base orientée colonnes : agrégations ultra-rapides sur de gros volumes, compression, SQL standard.</td></tr>
+      <tr><td>API</td><td>FastAPI · SQLAlchemy · Redis (cache de requêtes)</td><td>Expose les requêtes analytiques paramétrées et le catalogue de métriques.</td></tr>
+      <tr><td>Frontend</td><td>TypeScript · React · Recharts / Apache ECharts · react-grid-layout</td><td>Constructeur de tableaux de bord par glisser-déposer et graphiques performants.</td></tr>
+      <tr><td>Qualité</td><td>Great Expectations · alertes Slack / e-mail</td><td>Validation des données et alerting.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Connecteurs : fichiers (CSV, Excel), bases SQL, API REST, dépôt S3 ; ingestion incrémentale.</li>
+    <li>Pipelines Airflow avec reprise sur erreur, backfill, lignage des données.</li>
+    <li>Modèle en couches (brut, nettoyé, métriques) avec tests dbt.</li>
+    <li>Catalogue de métriques (définition unique, propriétaire, fraîcheur).</li>
+    <li>Constructeur de tableaux de bord : graphiques, filtres croisés, drill-down, tableaux croisés.</li>
+    <li>Alertes sur seuils et anomalies (détection statistique simple).</li>
+    <li>Partage par lien, planification d'envoi PDF, export CSV, permissions par ligne.</li>
+    <li>Page d'administration : état des pipelines, coûts, journaux.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Ingénierie des données : ELT, orchestration, idempotence, backfill.</li>
+    <li>Modélisation analytique (étoile, métriques), SQL avancé, bases colonnes.</li>
+    <li>Qualité et observabilité des données.</li>
+    <li>Visualisation de données efficace et UX de tableaux de bord.</li>
+    <li>Tests de pipelines, dbt tests, pytest, Docker.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 13</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Choix de 3 sources réelles ou ouvertes, questions métier à répondre, personas analyste / manager.</td><td>Cahier des charges, spécifications, catalogue des questions</td></tr>
+      <tr><td>2</td><td>Architecture des couches, modèle en étoile, ADR ClickHouse vs PostgreSQL, maquettes de tableaux de bord.</td><td>Architecture, ADR, dictionnaire des métriques</td></tr>
+      <tr><td>3</td><td>Docker Compose (Airflow, ClickHouse, Redis), projet dbt, CI avec tests dbt et pytest.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : ingestion et couche brute · Sprint 2 : transformations et métriques · Sprint 3 : API et graphiques · Sprint 4 : constructeur, alertes, partage.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Tests de qualité des données, tests de performance des requêtes, validation croisée des chiffres avec la source.</td><td>Stratégie de tests, rapport de validation</td></tr>
+      <tr><td>6</td><td>Déploiement sur VM ou Kubernetes, planification, sauvegarde de l'entrepôt.</td><td>Guide de déploiement, runbook des pipelines</td></tr>
+      <tr><td>7</td><td>Guide analyste (créer un tableau de bord), guide manager (lire et partager), documentation des métriques.</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p14">
+  <h2 class="a-section__title">14 · Plateforme de streaming vidéo</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Application web</dd></div>
+    <div><dt>Domaine</dt><dd>Médias</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>9 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Service type YouTube simplifié : upload de vidéos, transcodage en plusieurs qualités, lecture adaptative, chaînes, abonnements, commentaires, recommandations. Exigences : upload résumable de fichiers de plusieurs Go, lecture sans coupure avec adaptation à la bande passante, protection des contenus privés (URL signées), sous-titres, modération.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 14</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Frontend</td><td>TypeScript · Next.js · hls.js · Video.js</td><td>Pages vidéo indexables, lecteur HLS adaptatif dans le navigateur.</td></tr>
+      <tr><td>API</td><td>Node.js · Fastify · Prisma · PostgreSQL</td><td>I/O non bloquantes adaptées aux uploads et au streaming ; Fastify est rapide et typé.</td></tr>
+      <tr><td>Traitement</td><td>BullMQ (Redis) · FFmpeg · workers Node dédiés</td><td>Files de transcodage avec priorités, reprise et progression ; FFmpeg produit les renditions HLS (240p à 1080p), vignettes et sous-titres.</td></tr>
+      <tr><td>Stockage / diffusion</td><td>S3 compatible · CDN · URL signées</td><td>Stockage objet des segments, diffusion en périphérie, contrôle d'accès.</td></tr>
+      <tr><td>Upload</td><td>tus (protocole d'upload résumable)</td><td>Reprise après coupure pour les gros fichiers.</td></tr>
+      <tr><td>Recherche / reco</td><td>Meilisearch · calcul de recommandations par co-visionnage</td><td>Recherche et suggestions.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Upload résumable avec progression, file de transcodage et notification de disponibilité.</li>
+    <li>Lecture HLS adaptative, reprise de lecture, vitesse, sous-titres, chapitres, miniatures de survol.</li>
+    <li>Chaînes, abonnements, playlists, historique, « à regarder plus tard ».</li>
+    <li>Commentaires imbriqués, likes, signalements, modération.</li>
+    <li>Visibilité (public, non listé, privé) avec URL signées et expirantes.</li>
+    <li>Statistiques créateur (vues, durée moyenne, rétention).</li>
+    <li>Recherche et recommandations, page d'accueil personnalisée.</li>
+    <li>Diffusion en direct (option) via RTMP → HLS.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Traitement média (FFmpeg, HLS, codecs) et pipelines de jobs.</li>
+    <li>Stockage objet, CDN, URL signées, coûts de bande passante.</li>
+    <li>Uploads volumineux et protocoles résumables.</li>
+    <li>Node.js performant (streams, backpressure) et workers.</li>
+    <li>Analytics d'usage et systèmes de recommandation simples.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 14</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Personas créateur / spectateur / modérateur, objectifs de qualité de lecture, budget de stockage.</td><td>Cahier des charges, spécifications</td></tr>
+      <tr><td>2</td><td>Pipeline de transcodage, échelle de renditions, modèle de données, ADR HLS vs DASH, maquettes.</td><td>Architecture, ADR, OpenAPI</td></tr>
+      <tr><td>3</td><td>Monorepo, Docker Compose (Postgres, Redis, MinIO, tusd), CI, jeu de vidéos de test.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : upload et transcodage · Sprint 2 : lecteur et pages vidéo · Sprint 3 : chaînes et social · Sprint 4 : privé, statistiques, recherche · Sprint 5 : reco, direct.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Tests de lecture sur réseaux simulés, tests de workers (échecs, reprises), coût par vidéo mesuré.</td><td>Stratégie de tests</td></tr>
+      <tr><td>6</td><td>Déploiement avec workers autoscalés, CDN, politique de rétention.</td><td>Guide de déploiement, runbook</td></tr>
+      <tr><td>7</td><td>Guide créateur (publier, analyser), guide spectateur, règles de la communauté.</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+<section class="a-section" id="p15">
+  <h2 class="a-section__title">15 · Réseau social et messagerie temps réel</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Mobile multiplateforme + backend massivement concurrent</dd></div>
+    <div><dt>Domaine</dt><dd>Social / communication</dd></div>
+    <div><dt>Niveau</dt><dd>Expert</dd></div>
+    <div><dt>Durée indicative</dt><dd>12 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Application sociale avec profils, fil d'actualité, stories éphémères, messagerie instantanée individuelle et de groupe (texte, images, vocaux), présence et accusés de lecture. Exigences : 100 000 connexions simultanées visées, livraison des messages garantie et ordonnée, chiffrement de bout en bout des messages privés, fil d'actualité personnalisé, modération et blocage.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 15</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Backend</td><td>Elixir · Phoenix · Phoenix Channels · Presence · Ecto</td><td>La machine virtuelle BEAM gère des millions de processus légers isolés : idéal pour des connexions WebSocket persistantes, la présence distribuée et la tolérance aux pannes (supervision). Phoenix Channels et Presence résolvent nativement des problèmes que d'autres stacks doivent réinventer.</td></tr>
+      <tr><td>Mobile</td><td>TypeScript · React Native (Expo) · Zustand · React Query · WatermelonDB</td><td>Une base pour iOS et Android avec accès natif via modules ; WatermelonDB pour un stockage local rapide des conversations ; grande communauté.</td></tr>
+      <tr><td>Données</td><td>PostgreSQL · Redis · S3 (médias)</td><td>Persistance, caches de fils, stockage des médias.</td></tr>
+      <tr><td>Chiffrement</td><td>Protocole Signal (libsignal) ou X3DH + Double Ratchet simplifié</td><td>Confidentialité de bout en bout des messages privés.</td></tr>
+      <tr><td>Notifications</td><td>APNs / FCM via Pigeon</td><td>Push fiables.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Profils, abonnements, publications (texte, images, vidéo courte), stories 24 h, réactions, commentaires.</li>
+    <li>Fil d'actualité classé (récence + affinité) avec pagination infinie et cache local.</li>
+    <li>Messagerie 1:1 et de groupe : saisie en cours, présence, accusés de lecture, réponses, messages vocaux, suppression.</li>
+    <li>Chiffrement de bout en bout des conversations privées, vérification de clés.</li>
+    <li>Recherche d'utilisateurs et de hashtags, suggestions d'amis.</li>
+    <li>Signalement, blocage, filtres de contenu, outils de modération.</li>
+    <li>Notifications push groupées et paramétrables, mode hors ligne (lecture, envoi différé).</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Programmation fonctionnelle et concurrente (Elixir, OTP, supervision).</li>
+    <li>Systèmes temps réel à grande échelle : Channels, PubSub distribué, Presence.</li>
+    <li>Cryptographie de bout en bout et gestion des clés.</li>
+    <li>React Native avancé : listes performantes, médias, stockage local, push.</li>
+    <li>Conception de fils d'actualité (fan-out, cache), tests ExUnit et Detox.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 15</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Positionnement, personas, règles de communauté, exigences de confidentialité et de charge.</td><td>Cahier des charges, spécifications, modèle de menaces</td></tr>
+      <tr><td>2</td><td>Topologie des Channels, protocole de messages (versionné), stratégie de fil (push vs pull), ADR E2EE, maquettes.</td><td>Architecture, ADR, spécification du protocole</td></tr>
+      <tr><td>3</td><td>Projet Phoenix + app Expo, Docker Compose, Credo, ExUnit, CI, EAS Build.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : comptes et profils · Sprint 2 : publications et fil · Sprint 3 : messagerie temps réel · Sprint 4 : E2EE et médias · Sprint 5 : groupes, stories · Sprint 6 : modération, push, hors ligne.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Test de charge WebSocket (Tsung / k6), tests de livraison ordonnée, audit cryptographique, tests Detox.</td><td>Rapport de charge, stratégie de tests</td></tr>
+      <tr><td>6</td><td>Cluster Elixir (libcluster) sur Fly.io ou Kubernetes, releases, observabilité (Telemetry, Grafana), publication stores.</td><td>Guide de déploiement, runbook</td></tr>
+      <tr><td>7</td><td>Guide utilisateur, page « sécurité et confidentialité », FAQ modération.</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p16">
+  <h2 class="a-section__title">16 · Domotique IoT temps réel</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>IoT (capteurs) + backend + web + mobile</dd></div>
+    <div><dt>Domaine</dt><dd>Maison connectée / énergie</dd></div>
+    <div><dt>Niveau</dt><dd>Expert</dd></div>
+    <div><dt>Durée indicative</dt><dd>10 à 12 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Plateforme qui collecte les données de capteurs (température, énergie, présence), pilote des actionneurs (relais, éclairage) et exécute des scénarios d'automatisation, avec tableau de bord web et application mobile. Exigences : ingestion de 10 000 messages/s, historique à haute résolution, règles évaluées en moins de 100 ms, fonctionnement local sans cloud (passerelle), sécurité des appareils (certificats), mises à jour à distance.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 16</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Backend / passerelle</td><td>Rust · Actix Web · Tokio · rumqttc</td><td>Performance et sécurité mémoire pour un service qui tourne 24/7 sur une passerelle modeste (Raspberry Pi) ; concurrence asynchrone efficace pour ingérer des milliers de messages MQTT.</td></tr>
+      <tr><td>Messagerie</td><td>MQTT (Mosquitto ou EMQX) avec TLS et certificats par appareil</td><td>Standard IoT léger, publish/subscribe, QoS, sessions persistantes.</td></tr>
+      <tr><td>Séries temporelles</td><td>TimescaleDB (extension PostgreSQL)</td><td>Compression, agrégats continus et requêtes temporelles tout en gardant SQL et PostgreSQL.</td></tr>
+      <tr><td>Firmware</td><td>C++ (ESP32, PlatformIO) ou Rust embarqué</td><td>Capteurs réels ou simulateur logiciel ; OTA.</td></tr>
+      <tr><td>Web</td><td>TypeScript · SvelteKit · WebSocket · Chart.js</td><td>Tableau de bord léger et réactif, idéal pour l'affichage de flux en direct.</td></tr>
+      <tr><td>Mobile</td><td>Kotlin · Jetpack Compose (Android) · widgets</td><td>Contrôle rapide, notifications, géorepérage pour les scénarios « je rentre / je pars ».</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Appairage sécurisé des appareils, provisionnement de certificats, inventaire et état de santé.</li>
+    <li>Ingestion MQTT, validation des payloads, stockage haute résolution et agrégats (minute, heure, jour).</li>
+    <li>Tableau de bord temps réel par pièce, historiques, consommation d'énergie et coût.</li>
+    <li>Moteur de règles (conditions, horaires, géorepérage) avec éditeur visuel et journal d'exécution.</li>
+    <li>Pilotage manuel des actionneurs, scènes, planification.</li>
+    <li>Alertes (fuite, température, dépassement) par push et e-mail.</li>
+    <li>Mode local hors internet ; synchronisation optionnelle vers le cloud.</li>
+    <li>Mises à jour firmware OTA et gestion des versions.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Rust asynchrone (Tokio), gestion des erreurs, performance.</li>
+    <li>Protocoles IoT (MQTT, TLS mutuel), sécurité des appareils, OTA.</li>
+    <li>Bases de séries temporelles, agrégats continus, rétention.</li>
+    <li>Moteurs de règles et systèmes réactifs.</li>
+    <li>Programmation embarquée de base, SvelteKit, Android.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 16</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Cas d'usage (énergie, sécurité, confort), inventaire des capteurs, contraintes locales / hors ligne.</td><td>Cahier des charges, spécifications</td></tr>
+      <tr><td>2</td><td>Topologie MQTT (topics, QoS), schéma des payloads (JSON Schema), modèle TimescaleDB, DSL des règles (ADR), maquettes.</td><td>Architecture, ADR, spécification des topics</td></tr>
+      <tr><td>3</td><td>Cargo workspace, Docker Compose (Mosquitto, TimescaleDB), simulateur d'appareils, CI (clippy, tests), PlatformIO.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : ingestion et stockage · Sprint 2 : tableau de bord · Sprint 3 : actionneurs et scènes · Sprint 4 : moteur de règles · Sprint 5 : sécurité des appareils, OTA · Sprint 6 : mobile.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Test d'ingestion 10 000 msg/s, tests de latence des règles, tests de coupure réseau, revue sécurité TLS.</td><td>Rapport de performance, stratégie de tests</td></tr>
+      <tr><td>6</td><td>Image de passerelle (Raspberry Pi) reproductible, sauvegardes, supervision Grafana.</td><td>Guide de déploiement, runbook</td></tr>
+      <tr><td>7</td><td>Guide d'installation matérielle, guide utilisateur (règles, scènes), guide de dépannage.</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p17">
+  <h2 class="a-section__title">17 · Covoiturage / VTC avec suivi GPS</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Mobile multiplateforme (passager, conducteur) + backend temps réel</dd></div>
+    <div><dt>Domaine</dt><dd>Mobilité</dd></div>
+    <div><dt>Niveau</dt><dd>Expert</dd></div>
+    <div><dt>Durée indicative</dt><dd>12 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Application de mise en relation passager-conducteur : estimation de prix, recherche du conducteur proche, suivi de la course, paiement, notation, plus un mode covoiturage planifié (trajets publiés à l'avance). Exigences : mise en relation en moins de 10 secondes, positions rafraîchies chaque seconde pendant la course, tarification par distance et durée réelles, fonctionnement en zone de couverture faible, sécurité (partage de trajet, bouton d'urgence).</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 17</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Mobile</td><td>Kotlin Multiplatform (logique partagée) · Jetpack Compose (Android) · SwiftUI (iOS) · SDK cartes natifs</td><td>Partage du domaine, du réseau et du cache entre plateformes tout en gardant des interfaces 100 % natives et un accès complet au GPS en arrière-plan, critique pour ce type d'application.</td></tr>
+      <tr><td>Backend</td><td>Node.js · TypeScript · NestJS · Socket.IO</td><td>Excellente gestion de nombreuses connexions WebSocket, écosystème riche pour cartes et paiements ; NestJS structure les modules (courses, tarification, paiement).</td></tr>
+      <tr><td>Géodonnées</td><td>Redis GEO (positions en direct) · PostgreSQL + PostGIS (historique, zones) · H3 (indexation hexagonale pour la demande)</td><td>Recherche de proximité instantanée, analyses spatiales, tarification dynamique par zone.</td></tr>
+      <tr><td>Itinéraires</td><td>OSRM / Valhalla ou Mapbox Directions · map matching</td><td>Estimation, navigation et recalcul du kilométrage réel.</td></tr>
+      <tr><td>Paiement / autres</td><td>Stripe, mobile money · FCM / APNs · Twilio (appels masqués)</td><td>Encaissement, notifications, communication sécurisée.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Inscription conducteur avec vérification des documents, véhicule, disponibilité.</li>
+    <li>Estimation du prix et du temps d'arrivée, options (économique, confort, partagé).</li>
+    <li>Mise en relation par proximité et score, acceptation avec délai, réattribution.</li>
+    <li>Suivi temps réel de l'approche et de la course, navigation conducteur, partage de trajet à un proche.</li>
+    <li>Tarification dynamique (demande par zone H3), calcul final sur distance réelle, reçus.</li>
+    <li>Covoiturage planifié : publication de trajets, réservation de places, correspondance d'itinéraires.</li>
+    <li>Notation mutuelle, historique, portefeuille conducteur et reversements.</li>
+    <li>Sécurité : bouton d'urgence, enregistrement du trajet, détection d'arrêt anormal.</li>
+    <li>Back-office : supervision de la flotte, zones, tarifs, litiges.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Kotlin Multiplatform et interopérabilité Swift, géolocalisation en arrière-plan sur deux OS.</li>
+    <li>Systèmes géospatiaux temps réel (Redis GEO, H3, map matching).</li>
+    <li>Algorithmes de mise en relation et de tarification dynamique.</li>
+    <li>WebSocket à grande échelle, reconnexion, files de messages.</li>
+    <li>Tests avec simulateur de flotte, tests sur appareils réels, publication double store.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 17</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Personas passager / conducteur / opérateur, cycle de vie d'une course, règles de tarification et d'annulation, exigences de sécurité.</td><td>Cahier des charges, spécifications, diagramme d'états</td></tr>
+      <tr><td>2</td><td>Architecture modules NestJS, protocole Socket.IO versionné, ADR KMP, ADR Redis GEO + H3, maquettes.</td><td>Architecture, ADR, AsyncAPI / OpenAPI</td></tr>
+      <tr><td>3</td><td>Projet KMP + apps natives, backend NestJS, Docker Compose (Postgres/PostGIS, Redis, OSRM), CI multi-OS.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : comptes et cartes · Sprint 2 : estimation et demande · Sprint 3 : mise en relation et suivi · Sprint 4 : course, paiement, notation · Sprint 5 : covoiturage planifié · Sprint 6 : sécurité, back-office.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Simulateur de 1 000 conducteurs, tests de latence, tests GPS en conditions réelles, audit sécurité.</td><td>Stratégie de tests, rapport de charge</td></tr>
+      <tr><td>6</td><td>Kubernetes avec Socket.IO adapter Redis, autoscaling, publication App Store / Play Store.</td><td>Guide de déploiement, runbook</td></tr>
+      <tr><td>7</td><td>Guides passager et conducteur, charte de sécurité, guide opérateur.</td><td>Documentation générale, guides utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p18">
+  <h2 class="a-section__title">18 · Réservation de voyages en microservices</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Application web distribuée</dd></div>
+    <div><dt>Domaine</dt><dd>Voyage / hôtellerie / transport</dd></div>
+    <div><dt>Niveau</dt><dd>Expert</dd></div>
+    <div><dt>Durée indicative</dt><dd>12 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Plateforme de réservation combinant hôtels, vols (simulés via fournisseurs fictifs) et activités, avec panier multi-produits et paiement unique. Exigences : réservation atomique de plusieurs services chez des fournisseurs distincts (saga avec compensation), disponibilité 99,9 %, recherche agrégée en moins de 2 secondes, résilience aux pannes d'un fournisseur, observabilité complète.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 18</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Services</td><td>Java 21 · Spring Boot · Spring Cloud (Gateway, Config, Resilience4j) · un service par domaine (recherche, hôtel, vol, réservation, paiement, notification)</td><td>Écosystème microservices le plus mature : découverte, configuration centralisée, circuit breakers, retries. Chaque service a sa propre base de données.</td></tr>
+      <tr><td>Messagerie</td><td>Apache Kafka · pattern Saga (orchestration) · Outbox</td><td>Coordination des réservations multi-fournisseurs avec compensation en cas d'échec ; livraison fiable des événements.</td></tr>
+      <tr><td>Données</td><td>PostgreSQL par service · Redis (cache de disponibilité) · Elasticsearch (recherche)</td><td>Isolation, performance de recherche.</td></tr>
+      <tr><td>Frontend</td><td>TypeScript · React · Next.js</td><td>Parcours de recherche et de réservation, SEO des pages destination.</td></tr>
+      <tr><td>Infrastructure</td><td>Docker · Kubernetes (k3s en local) · Helm · GitHub Actions · Terraform</td><td>Déploiement déclaratif, montée en charge par service.</td></tr>
+      <tr><td>Observabilité</td><td>OpenTelemetry · Jaeger · Prometheus · Grafana · Loki</td><td>Traces distribuées indispensables pour déboguer une saga.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Recherche unifiée (destination, dates, voyageurs) agrégeant plusieurs services en parallèle avec délais d'attente.</li>
+    <li>Fiches hôtel / vol / activité, disponibilité et prix en temps réel, cache intelligent.</li>
+    <li>Panier multi-produits, réservation atomique par saga avec compensation automatique.</li>
+    <li>Paiement unique, gestion des échecs partiels et remboursements.</li>
+    <li>Espace client : réservations, modifications, annulations selon conditions, documents (vouchers PDF).</li>
+    <li>Notifications e-mail / SMS, rappels avant le départ.</li>
+    <li>Espace fournisseur : gestion de l'inventaire, tarifs, règles d'annulation.</li>
+    <li>Tableau de bord d'exploitation : santé des services, sagas en cours, alertes.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Architecture microservices, découpage par domaine (DDD), API Gateway.</li>
+    <li>Transactions distribuées (Saga, Outbox), Kafka, idempotence.</li>
+    <li>Résilience (circuit breaker, retry, bulkhead, timeouts).</li>
+    <li>Kubernetes, Helm, Terraform, CI/CD par service.</li>
+    <li>Observabilité distribuée, tests de contrat (Pact), tests de chaos.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 18</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Personas voyageur / fournisseur / opérateur, parcours de réservation, exigences de disponibilité, fournisseurs fictifs à simuler.</td><td>Cahier des charges, spécifications</td></tr>
+      <tr><td>2</td><td>Event storming, carte des contextes (DDD), diagramme de la saga, contrats d'événements (AsyncAPI) et d'API, ADR orchestration vs chorégraphie.</td><td>Architecture, ADR, catalogue d'événements</td></tr>
+      <tr><td>3</td><td>Dépôt par service ou monorepo, Docker Compose puis k3s, Helm charts, CI par service, environnement local complet.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : gateway et recherche · Sprint 2 : services hôtel et vol · Sprint 3 : saga de réservation · Sprint 4 : paiement et compensation · Sprint 5 : espace client et fournisseur · Sprint 6 : observabilité et résilience.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Tests de contrat, tests de chaos (arrêt d'un service), tests de charge, vérification de la cohérence des sagas.</td><td>Stratégie de tests, rapport de résilience</td></tr>
+      <tr><td>6</td><td>Cluster Kubernetes, déploiements canari, sauvegardes par service, alertes SLO.</td><td>Guide de déploiement, runbook par service</td></tr>
+      <tr><td>7</td><td>Guide voyageur, guide fournisseur, documentation d'exploitation.</td><td>Documentation générale, guides utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p19">
+  <h2 class="a-section__title">19 · Jeu mobile multijoueur en temps réel</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Jeu mobile (Android, iOS) + serveur de jeu</dd></div>
+    <div><dt>Domaine</dt><dd>Jeu vidéo / divertissement</dd></div>
+    <div><dt>Niveau</dt><dd>Expert</dd></div>
+    <div><dt>Durée indicative</dt><dd>12 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Jeu de quiz et de réflexes en arène (4 à 8 joueurs) avec parties classées, saisons, boutique cosmétique et classements. Exigences : synchronisation des joueurs avec une latence inférieure à 150 ms, serveur autoritaire (anti-triche), matchmaking par niveau en moins de 15 secondes, reconnexion en cours de partie, monétisation équitable, 60 images par seconde sur appareils moyens.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 19</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Client</td><td>C# · Unity 2022 LTS · UI Toolkit · Addressables</td><td>Moteur de jeu de référence pour le mobile : rendu, animations, gestion des assets, export Android et iOS depuis un seul projet ; C# solide et typé.</td></tr>
+      <tr><td>Serveur de jeu</td><td>Go · WebSocket (nhooyr) · boucle de jeu à tick fixe · Protobuf</td><td>Goroutines pour des milliers de salles simultanées, faible latence, binaire léger à répliquer ; Protobuf pour des messages compacts.</td></tr>
+      <tr><td>Services</td><td>Go ou Node.js : matchmaking, profils, classements, boutique · Redis (sorted sets) · PostgreSQL</td><td>Classements instantanés, files de matchmaking, persistance des comptes et achats.</td></tr>
+      <tr><td>Monétisation</td><td>Unity IAP, validation serveur des reçus · publicités récompensées</td><td>Achats sécurisés et vérifiés côté serveur.</td></tr>
+      <tr><td>Backend as a service (option)</td><td>Nakama (open source) ou PlayFab</td><td>Comparer un serveur maison à une solution existante et documenter le choix.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Comptes (invité, Google, Apple), profil, avatar, progression et niveaux.</li>
+    <li>Matchmaking par classement (Elo / Glicko), salles privées entre amis.</li>
+    <li>Parties temps réel : questions synchronisées, mini-jeux de réflexes, bonus, chat rapide par émoticônes.</li>
+    <li>Serveur autoritaire : validation des réponses, chronométrage, détection de triche, reconnexion.</li>
+    <li>Classements quotidiens / hebdomadaires / saisonniers, récompenses de saison.</li>
+    <li>Boutique cosmétique, monnaie virtuelle, quêtes journalières, passe de saison.</li>
+    <li>Éditeur de contenu (questions, catégories) et A/B tests de difficulté.</li>
+    <li>Télémétrie de jeu (rétention, durée de session, taux d'abandon).</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Développement de jeu Unity : boucle de jeu, UI, animations, optimisation mobile.</li>
+    <li>Réseau temps réel de jeu : serveur autoritaire, prédiction, réconciliation, ticks.</li>
+    <li>Matchmaking et systèmes de classement.</li>
+    <li>Économie de jeu, achats intégrés sécurisés, télémétrie.</li>
+    <li>Go concurrent, Protobuf, tests de charge de salles, publication stores.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 19</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Game design document (boucle de jeu, règles, économie), personas joueurs, objectifs de performance.</td><td>Cahier des charges, game design document</td></tr>
+      <tr><td>2</td><td>Architecture client-serveur, protocole Protobuf, machine à états d'une partie, ADR serveur maison vs Nakama, maquettes et prototype papier.</td><td>Architecture, ADR, spécification du protocole</td></tr>
+      <tr><td>3</td><td>Projet Unity avec assembly definitions, serveur Go, Docker, CI (Unity Cloud Build ou GameCI), tests de protocole.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : prototype jouable local · Sprint 2 : serveur autoritaire et salle · Sprint 3 : matchmaking et comptes · Sprint 4 : classements et saisons · Sprint 5 : boutique et IAP · Sprint 6 : polish, tutoriel, télémétrie.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Bots de charge (10 000 joueurs simulés), tests de latence artificielle, profilage FPS, playtests avec 20 joueurs.</td><td>Rapport de charge, rapport de playtest</td></tr>
+      <tr><td>6</td><td>Serveurs de jeu multi-régions (Agones ou autoscaling simple), CDN d'assets, publication stores, soft launch.</td><td>Guide de déploiement, runbook</td></tr>
+      <tr><td>7</td><td>Tutoriel intégré, guide joueur, notes de saison, FAQ achats.</td><td>Documentation générale, guide utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="p20">
+  <h2 class="a-section__title">20 · Assistant IA de service client (RAG)</h2>
+  <dl class="a-meta-list">
+    <div><dt>Type</dt><dd>Web (widget intégrable + back-office) + API</dd></div>
+    <div><dt>Domaine</dt><dd>Intelligence artificielle / relation client</dd></div>
+    <div><dt>Niveau</dt><dd>Expert</dd></div>
+    <div><dt>Durée indicative</dt><dd>10 semaines</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Assistant conversationnel qui répond aux clients d'une entreprise à partir de sa documentation (PDF, pages web, FAQ, tickets), cite ses sources, exécute des actions (suivre une commande, créer un ticket) et transfère à un humain si nécessaire. Exigences : réponses ancrées dans les sources (pas d'invention), streaming des réponses, multilingue, isolation des données par client, coût par conversation maîtrisé, évaluation continue de la qualité.</p>
+  <h3>Stack et justification</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Choix techniques du projet 20</caption>
+    <thead><tr><th scope="col">Couche</th><th scope="col">Technologie</th><th scope="col">Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Backend IA</td><td>Python 3.12 · FastAPI · LangChain ou LlamaIndex · Pydantic</td><td>Python concentre l'écosystème IA ; FastAPI gère nativement le streaming (SSE / WebSocket) et l'asynchrone ; les frameworks RAG fournissent découpage, embeddings, récupération et outils.</td></tr>
+      <tr><td>Modèles</td><td>API LLM (OpenAI, Mistral, Anthropic) avec abstraction · modèle open source local (Ollama) en option</td><td>Comparer coût / qualité et documenter le choix ; éviter le verrouillage fournisseur.</td></tr>
+      <tr><td>Vecteurs</td><td>PostgreSQL + pgvector · recherche hybride (BM25 + vecteurs) · reranking</td><td>Une seule base pour données et vecteurs, isolation par tenant, meilleure pertinence avec la recherche hybride.</td></tr>
+      <tr><td>Ingestion</td><td>Celery ou Arq · Unstructured / pypdf · crawler (Playwright)</td><td>Pipeline d'extraction, découpage, embeddings, mise à jour incrémentale.</td></tr>
+      <tr><td>Frontend</td><td>TypeScript · React · widget compilé en Web Component (Vite) · back-office Next.js</td><td>Widget intégrable sur n'importe quel site en une ligne de script ; back-office pour les sources, conversations et évaluations.</td></tr>
+      <tr><td>Évaluation</td><td>Ragas / jeux de tests maison · Langfuse (traces, coûts)</td><td>Mesurer fidélité, pertinence, hallucinations et coût par réponse.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités</h3>
+  <ul class="a-prose">
+    <li>Connexion de sources : upload de documents, crawl de site, import de FAQ et de tickets ; resynchronisation planifiée.</li>
+    <li>Pipeline RAG : découpage sémantique, embeddings, recherche hybride, reranking, prompt avec citations.</li>
+    <li>Chat en streaming avec citations cliquables, suggestions de questions, historique de conversation.</li>
+    <li>Outils / actions : suivi de commande via API cliente, création de ticket, prise de rendez-vous (function calling).</li>
+    <li>Transfert à un agent humain avec résumé de la conversation ; boîte de réception agent.</li>
+    <li>Garde-fous : refus hors périmètre, détection de données sensibles, limites de coût.</li>
+    <li>Back-office : sources, conversations, notes des utilisateurs, tableau de bord de qualité et de coûts.</li>
+    <li>Multi-tenant, clés d'API, widget personnalisable (couleurs, langue, persona).</li>
+    <li>Évaluation automatique sur un jeu de questions de référence à chaque changement de prompt ou de modèle.</li>
+  </ul>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Ingénierie LLM : RAG, embeddings, recherche hybride, prompt engineering, function calling.</li>
+    <li>Évaluation et observabilité des systèmes IA (métriques, traces, coûts).</li>
+    <li>Streaming temps réel (SSE) et conception de widgets embarquables.</li>
+    <li>Pipelines d'ingestion de documents et bases vectorielles.</li>
+    <li>Sécurité des applications IA (injection de prompt, fuites de données), multi-tenant.</li>
+  </ul>
+  <h3>Phases de développement</h3>
+  <div class="a-table-scroll"><table class="a-table"><caption>Phases spécifiques du projet 20</caption>
+    <thead><tr><th scope="col">Phase</th><th scope="col">Étapes clés</th><th scope="col">Document</th></tr></thead>
+    <tbody>
+      <tr><td>0-1</td><td>Cas d'usage d'une entreprise fictive, corpus de documents, 100 questions de référence avec réponses attendues, personas client / agent / administrateur.</td><td>Cahier des charges, spécifications, jeu d'évaluation</td></tr>
+      <tr><td>2</td><td>Architecture du pipeline RAG, schéma pgvector, ADR choix du modèle et de la stratégie de découpage, conception des prompts, maquettes du widget.</td><td>Architecture, ADR, catalogue de prompts</td></tr>
+      <tr><td>3</td><td>Docker Compose (Postgres/pgvector, Redis, Langfuse), uv, ruff, pytest, CI avec évaluation automatique.</td><td>Guide développeur</td></tr>
+      <tr><td>4</td><td>Sprint 1 : ingestion et recherche · Sprint 2 : génération avec citations et streaming · Sprint 3 : widget et back-office · Sprint 4 : actions et transfert humain · Sprint 5 : garde-fous, multi-tenant, évaluation continue.</td><td>Journal de sprints</td></tr>
+      <tr><td>5</td><td>Évaluation Ragas (fidélité, pertinence), tests d'injection de prompt, tests de charge du streaming, mesure du coût par conversation.</td><td>Rapport d'évaluation, stratégie de tests</td></tr>
+      <tr><td>6</td><td>Déploiement conteneurisé, quotas et alertes de coût, rotation des clés, journalisation conforme.</td><td>Guide de déploiement, runbook</td></tr>
+      <tr><td>7</td><td>Guide d'intégration du widget, guide administrateur (sources, qualité), guide agent, FAQ sur les limites de l'IA.</td><td>Documentation générale, guides utilisateur</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="a-section" id="competences">
+  <h2 class="a-section__title">Synthèse des compétences à mettre en avant</h2>
+  <div class="a-table-scroll">
+    <table class="a-table">
+      <caption>Compétences transversales et projets qui les démontrent</caption>
+      <thead><tr><th scope="col">Compétence</th><th scope="col">Projets</th></tr></thead>
+      <tbody>
+        <tr><td>Temps réel (WebSocket, présence, CRDT)</td><td>10, 11, 15, 16, 17, 19</td></tr>
+        <tr><td>Paiements et conformité financière</td><td>03, 06, 07, 08, 12, 17, 18</td></tr>
+        <tr><td>Géolocalisation et données spatiales</td><td>02, 04, 10, 17</td></tr>
+        <tr><td>Hors ligne et synchronisation</td><td>04, 05, 06, 11, 15</td></tr>
+        <tr><td>Sécurité avancée (chiffrement, signatures, modèle de menaces)</td><td>06, 08, 09, 15, 16, 20</td></tr>
+        <tr><td>Données, IA et apprentissage automatique</td><td>05, 13, 14, 20</td></tr>
+        <tr><td>Architecture distribuée et DevOps (Kubernetes, Kafka, observabilité)</td><td>08, 10, 14, 18, 19</td></tr>
+        <tr><td>Mobile natif (Kotlin, Swift, KMP)</td><td>04, 05, 08, 16, 17</td></tr>
+        <tr><td>Mobile multiplateforme (Flutter, React Native)</td><td>06, 09, 10, 15</td></tr>
+        <tr><td>Accessibilité et conformité réglementaire</td><td>01, 03, 09, 12</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="a-callout a-callout--risk">
+    <strong>Risque principal : la dispersion.</strong> Vingt projets complets représentent plus d'un an de travail à temps plein. Livrez chaque projet jusqu'à la phase 7 (documentation et guide utilisateur) avant d'en commencer un autre : un projet documenté et déployé vaut davantage sur un portfolio que trois prototypes inachevés.
+  </div>
+  <details class="a-disclosure">
+    <summary>Modèle de fiche portfolio à produire pour chaque projet terminé</summary>
+    <ul class="a-prose">
+      <li>Titre, une phrase de pitch, capture d'écran principale, lien démo et dépôt.</li>
+      <li>Problème résolu et pour qui.</li>
+      <li>Stack avec, pour chaque brique, une ligne « pourquoi ce choix » (reprise des ADR).</li>
+      <li>Trois défis techniques et comment ils ont été résolus.</li>
+      <li>Chiffres : couverture de tests, temps de réponse, résultats des tests de charge.</li>
+      <li>Liens vers la documentation générale et le guide utilisateur.</li>
+    </ul>
+  </details>
+</section>
+
+
+      <footer class="a-footnote">Durées indicatives pour un développeur seul à temps plein. Les versions de frameworks citées sont celles courantes en 2025-2026 ; adaptez-les au moment du démarrage. Document produit par Devin.</footer>
+    </main>
+    <script>
+/* Devin artifact kit — self-contained behavior for standalone HTML artifacts.
+   No build step, no imports, no network calls. Every widget is progressive
+   enhancement: the markup stays readable and printable with scripting off. */
+(function () {
+  "use strict";
+
+  var root = document.documentElement;
+  var THEMES = { light: 1, dark: 1 };
+
+  function showError(message) {
+    document.querySelectorAll("[data-a-error]").forEach(function (region) {
+      region.hidden = false;
+      var detail = region.querySelector("[data-a-error-detail]");
+      if (detail && message) detail.textContent = message;
+    });
+  }
+
+  window.addEventListener("error", function (event) {
+    showError(event.message);
+  });
+  window.addEventListener("unhandledrejection", function (event) {
+    showError(String(event.reason || "An interactive control failed."));
+  });
+
+  /* ---------- theme ----------
+     Order of precedence:
+       1. an explicit host signal (`?theme=`/`#theme=`, a `devin:theme`
+          message from an embedding page, or a preset `data-theme`),
+       2. a reader's in-document choice,
+       3. the OS/browser preference via `prefers-color-scheme`.
+     Hosts that expose no signal simply fall through to step 3. */
+  function hostTheme() {
+    var search = new URLSearchParams(
+      window.location.search + "&" + window.location.hash.replace(/^#/, "")
+    );
+    var fromUrl = search.get("theme");
+    if (fromUrl && THEMES[fromUrl]) return fromUrl;
+    var preset = root.getAttribute("data-theme");
+    if (preset && THEMES[preset]) return preset;
+    return null;
+  }
+
+  function systemTheme() {
+    return window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
+
+  var pinned = hostTheme();
+
+  function apply(theme) {
+    root.setAttribute("data-theme", theme);
+    document.querySelectorAll("[data-a-theme-toggle]").forEach(function (el) {
+      var label =
+        theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+      el.setAttribute("aria-label", label);
+      el.setAttribute("title", label);
+    });
+  }
+
+  apply(pinned || systemTheme());
+
+  if (window.matchMedia) {
+    var media = window.matchMedia("(prefers-color-scheme: dark)");
+    var onChange = function () {
+      if (!pinned) apply(systemTheme());
+    };
+    if (media.addEventListener) media.addEventListener("change", onChange);
+    else if (media.addListener) media.addListener(onChange);
+  }
+
+  window.addEventListener("message", function (event) {
+    if (window.parent === window || event.source !== window.parent) return;
+    var data = event.data;
+    if (!data || data.type !== "devin:theme" || !THEMES[data.theme]) return;
+    pinned = data.theme;
+    apply(pinned);
+  });
+
+  document.addEventListener("click", function (event) {
+    var toggle = event.target.closest("[data-a-theme-toggle]");
+    if (!toggle) return;
+    pinned = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    apply(pinned);
+  });
+
+  /* ---------- tabs ----------
+     <div data-a-tabs role="tablist">
+       <button class="a-btn" role="tab" aria-controls="panel-id">Label</button>
+     Panels are plain elements toggled with `hidden`, so print reveals the
+     active one and `.a-print-reveal` can opt others in. */
+  function selectTab(list, tab) {
+    list.querySelectorAll('[role="tab"]').forEach(function (candidate) {
+      var selected = candidate === tab;
+      candidate.setAttribute("aria-selected", String(selected));
+      candidate.tabIndex = selected ? 0 : -1;
+      var panel = document.getElementById(
+        candidate.getAttribute("aria-controls") || ""
+      );
+      if (panel) panel.hidden = !selected;
+    });
+  }
+
+  document.querySelectorAll("[data-a-tabs]").forEach(function (list) {
+    var tabs = Array.prototype.slice.call(
+      list.querySelectorAll('[role="tab"]')
+    );
+    if (!tabs.length) return;
+    var active =
+      tabs.filter(function (t) {
+        return t.getAttribute("aria-selected") === "true";
+      })[0] || tabs[0];
+    selectTab(list, active);
+
+    list.addEventListener("click", function (event) {
+      var tab = event.target.closest('[role="tab"]');
+      if (tab) selectTab(list, tab);
+    });
+
+    list.addEventListener("keydown", function (event) {
+      var step =
+        event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+      if (!step) return;
+      event.preventDefault();
+      var current = tabs.indexOf(document.activeElement);
+      var next = tabs[(current + step + tabs.length) % tabs.length];
+      next.focus();
+      selectTab(list, next);
+    });
+  });
+
+  /* ---------- row filters ----------
+     <select data-a-filter="#table-id" data-a-filter-key="team">
+     Rows opt in with a matching `data-team` attribute; "all" clears it. */
+  document.querySelectorAll("[data-a-filter]").forEach(function (control) {
+    var target = document.querySelector(control.getAttribute("data-a-filter"));
+    var key = control.getAttribute("data-a-filter-key") || "filter";
+    if (!target) return;
+
+    var emptySelector = control.getAttribute("data-a-filter-empty");
+    var empty = emptySelector ? document.querySelector(emptySelector) : null;
+
+    var applyFilter = function () {
+      var value = control.value;
+      var shown = 0;
+      /* Re-read the rows every time: a script may have replaced them since
+         the last pass, and those rows must obey the current selection too. */
+      target.querySelectorAll("[data-" + key + "]").forEach(function (row) {
+        var match = value === "all" || row.getAttribute("data-" + key) === value;
+        row.hidden = !match;
+        if (match) shown += 1;
+      });
+      if (empty) empty.hidden = shown !== 0;
+      target.hidden = shown === 0 && !!empty;
+    };
+
+    control.addEventListener("change", applyFilter);
+    applyFilter();
+
+    /* Rows swapped in by a script are filtered as soon as they land, so a
+       redraw never shows rows the current selection excludes. Only childList
+       is watched, so the `hidden` writes above cannot retrigger this. */
+    new MutationObserver(function () {
+      applyFilter();
+    }).observe(target, { childList: true, subtree: true });
+  });
+
+  /* ---------- tooltips ----------
+     One shared tooltip serves every chart and any element carrying
+     `data-a-tip`. Pointer, keyboard focus, and touch all route through the
+     same show/hide pair, so an exact value is never hover-only. */
+  var tipEl = null;
+  var tipRelease = null;
+  var tipHost = null;
+
+  function tipNode() {
+    if (tipEl) return tipEl;
+    tipEl = document.createElement("div");
+    tipEl.className = "a-tip a-no-print";
+    tipEl.setAttribute("role", "tooltip");
+    tipEl.hidden = true;
+    document.body.appendChild(tipEl);
+    return tipEl;
+  }
+
+  function hideTip() {
+    var release = tipRelease;
+    tipRelease = null;
+    tipHost = null;
+    if (release) release();
+    if (tipEl) tipEl.hidden = true;
+  }
+
+  function positionTip(anchor, pointer) {
+    var el = tipNode();
+    var width = el.offsetWidth;
+    var height = el.offsetHeight;
+    var edge = 8;
+    var x = pointer ? pointer.x + 14 : anchor.left + anchor.width / 2 - width / 2;
+    var y = pointer ? pointer.y - height - 16 : anchor.top - height - 10;
+    if (y < edge) y = pointer ? pointer.y + 22 : anchor.bottom + 10;
+    x = Math.max(edge, Math.min(x, window.innerWidth - width - edge));
+    y = Math.max(edge, Math.min(y, window.innerHeight - height - edge));
+    el.style.transform =
+      "translate(" + Math.round(x) + "px, " + Math.round(y) + "px)";
+  }
+
+  function tipRow(row) {
+    var line = document.createElement("div");
+    line.className =
+      "a-tip__row" + (row.series ? " a-series-" + row.series : "");
+    if (row.series) {
+      var swatch = document.createElement("span");
+      swatch.className = "a-tip__swatch";
+      line.appendChild(swatch);
+    }
+    var name = document.createElement("span");
+    name.className = "a-tip__name";
+    name.textContent = row.name || "";
+    line.appendChild(name);
+    var value = document.createElement("span");
+    value.className = "a-tip__value";
+    value.textContent = row.value == null || row.value === "" ? "—" : row.value;
+    line.appendChild(value);
+    return line;
+  }
+
+  /* `content` is { title, text, rows: [{ name, value, series }] }. `release`
+     runs when the tooltip is replaced or dismissed so the owner can drop its
+     highlight state. */
+  function showTip(content, host, anchor, pointer, release) {
+    if (tipRelease && tipRelease !== release) {
+      var previous = tipRelease;
+      tipRelease = null;
+      previous();
+    }
+    tipRelease = release || null;
+    tipHost = host || null;
+    var el = tipNode();
+    el.textContent = "";
+    if (content.title) {
+      var title = document.createElement("div");
+      title.className = "a-tip__title";
+      title.textContent = content.title;
+      el.appendChild(title);
+    }
+    if (content.text) {
+      var text = document.createElement("div");
+      text.className = "a-tip__text";
+      text.textContent = content.text;
+      el.appendChild(text);
+    }
+    (content.rows || []).forEach(function (row) {
+      el.appendChild(tipRow(row));
+    });
+    el.hidden = false;
+    positionTip(anchor, pointer);
+  }
+
+  /* Escape hatch for hand-authored marks: `data-a-tip` holds the value text
+     and the optional `data-a-tip-title` holds a heading. */
+  function annotatedHost(node) {
+    return node && node.closest ? node.closest("[data-a-tip]") : null;
+  }
+
+  function showAnnotatedTip(host, pointer) {
+    showTip(
+      {
+        title: host.getAttribute("data-a-tip-title") || "",
+        text: host.getAttribute("data-a-tip") || ""
+      },
+      host,
+      host.getBoundingClientRect(),
+      pointer,
+      null
+    );
+  }
+
+  document.addEventListener("pointerover", function (event) {
+    var host = annotatedHost(event.target);
+    if (!host) return;
+    showAnnotatedTip(
+      host,
+      event.pointerType === "touch" ? null : { x: event.clientX, y: event.clientY }
+    );
+  });
+
+  document.addEventListener("pointermove", function (event) {
+    if (!tipHost || event.pointerType === "touch") return;
+    if (!tipHost.hasAttribute || !tipHost.hasAttribute("data-a-tip")) return;
+    if (annotatedHost(event.target) !== tipHost) return;
+    positionTip(tipHost.getBoundingClientRect(), {
+      x: event.clientX,
+      y: event.clientY
+    });
+  });
+
+  document.addEventListener("pointerout", function (event) {
+    var host = annotatedHost(event.target);
+    if (!host || host !== tipHost) return;
+    if (event.relatedTarget && host.contains(event.relatedTarget)) return;
+    hideTip();
+  });
+
+  document.addEventListener("focusin", function (event) {
+    var host = annotatedHost(event.target);
+    if (host) showAnnotatedTip(host, null);
+  });
+
+  document.addEventListener("focusout", function (event) {
+    var host = annotatedHost(event.target);
+    if (!host || host !== tipHost) return;
+    /* A still-hovered mark keeps its tooltip; `pointerout` closes that one. */
+    if (host.matches && host.matches(":hover")) return;
+    hideTip();
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") hideTip();
+  });
+
+  window.addEventListener("scroll", hideTip, true);
+  window.addEventListener("resize", hideTip);
+
+  /* ---------- charts ----------
+     <figure class="a-figure" data-a-chart="bar|stacked-bar|line"> wrapping a
+     plain <table> of the same numbers. The table is both the data source and
+     the no-script fallback: the kit draws the chart from it and then keeps it
+     under a disclosure as the exact-value equivalent. Each category gets a
+     hover band that also takes keyboard focus, so pointer, arrow keys, and
+     tap all produce the same readout. */
+  var SVG_NS = "http://www.w3.org/2000/svg";
+  var CHART_WIDTH = 640;
+  var CHART_TYPES = { bar: 1, "stacked-bar": 1, line: 1 };
+
+  function svgNode(name, attrs) {
+    var node = document.createElementNS(SVG_NS, name);
+    Object.keys(attrs || {}).forEach(function (key) {
+      node.setAttribute(key, String(attrs[key]));
+    });
+    return node;
+  }
+
+  /* `data-value` wins so cells can stay human-readable ("1,284", "18m 24s"). */
+  function cellNumber(cell) {
+    var explicit = cell.getAttribute("data-value");
+    var text = (explicit === null ? cell.textContent : explicit) || "";
+    var match = text
+      .replace(/\u2212/g, "-")
+      .replace(/,/g, "")
+      .match(/-?\d*\.?\d+/);
+    return match ? parseFloat(match[0]) : null;
+  }
+
+  function readChartTable(table) {
+    var headCells = table.querySelectorAll("thead th");
+    if (headCells.length < 2) return null;
+    var series = [];
+    for (var column = 1; column < headCells.length; column += 1) {
+      series.push(headCells[column].textContent.trim());
+    }
+    var categories = [];
+    table.querySelectorAll("tbody tr").forEach(function (row) {
+      var cells = row.children;
+      if (cells.length < 2) return;
+      /* A hidden row is filtered out, so the chart matches what is listed. */
+      if (row.hidden || row.hasAttribute("data-a-excluded")) return;
+      var point = {
+        label: cells[0].textContent.trim(),
+        row: row,
+        values: [],
+        texts: []
+      };
+      series.forEach(function (name, position) {
+        var cell = cells[position + 1];
+        point.values.push(cell ? cellNumber(cell) : null);
+        point.texts.push(cell ? cell.textContent.trim() : "");
+      });
+      categories.push(point);
+    });
+    return categories.length
+      ? { series: series, categories: categories }
+      : null;
+  }
+
+  function niceCeil(value) {
+    if (!(value > 0)) return 1;
+    var magnitude = Math.pow(10, Math.floor(Math.log(value) / Math.LN10));
+    var steps = [1, 1.5, 2, 2.5, 3, 4, 5, 7.5, 10];
+    for (var i = 0; i < steps.length; i += 1) {
+      if (value <= steps[i] * magnitude) return steps[i] * magnitude;
+    }
+    return 10 * magnitude;
+  }
+
+  function formatTick(value) {
+    var size = Math.abs(value);
+    if (size >= 1000000) {
+      return (value / 1000000).toFixed(size % 1000000 ? 1 : 0) + "M";
+    }
+    if (size >= 1000) return (value / 1000).toFixed(size % 1000 ? 1 : 0) + "k";
+    return String(Math.round(value * 100) / 100);
+  }
+
+  /* Per-figure render state so a chart can be drawn more than once: the
+     nodes from the previous pass are thrown away and rebuilt from whatever
+     the table says now. */
+  var chartState = new WeakMap();
+
+  function chartTable(figure) {
+    var details = figure.querySelector(".a-chart__data");
+    return (details || figure).querySelector("table");
+  }
+
+  /* The table is the source of truth, so any change to it — a filter hiding
+     rows, new rows, an edited cell — redraws the chart on its own. */
+  function watchChartTable(figure, state) {
+    if (state.observer) return;
+    var queued = false;
+    state.observer = new MutationObserver(function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () {
+        queued = false;
+        renderChart(figure);
+      });
+    });
+    /* Watching the disclosure rather than the table keeps the chart live even
+       when a script replaces the whole <table>. */
+    state.observer.observe(state.details, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ["hidden", "data-a-excluded", "data-value"]
+    });
+  }
+
+  function renderChart(figure) {
+    var type = figure.getAttribute("data-a-chart");
+    var table = chartTable(figure);
+    if (!CHART_TYPES[type] || !table) return;
+
+    var state = chartState.get(figure);
+    if (!state) {
+      state = { nodes: [], details: null, observer: null, focused: null };
+      chartState.set(figure, state);
+    }
+
+    /* Keeping the reader's place: a re-render restores keyboard focus to the
+       same category when it survives. */
+    var hadFocus = state.nodes.some(function (node) {
+      return node.contains(document.activeElement);
+    });
+    var refocus = hadFocus ? state.focused : null;
+    if (tipHost && figure.contains(tipHost)) hideTip();
+    state.nodes.forEach(function (node) {
+      if (node.parentNode) node.parentNode.removeChild(node);
+    });
+    state.nodes = [];
+
+    if (!state.details) {
+      var source = table.closest(".a-table-scroll") || table;
+      var details = document.createElement("details");
+      details.className = "a-disclosure a-chart__data";
+      var summary = document.createElement("summary");
+      summary.textContent = "Data table";
+      details.appendChild(summary);
+      source.parentNode.insertBefore(details, source);
+      details.appendChild(source);
+      state.details = details;
+    }
+    watchChartTable(figure, state);
+
+    var data = readChartTable(table);
+    if (!data) {
+      var empty = document.createElement("p");
+      empty.className = "a-chart__empty";
+      empty.textContent =
+        figure.getAttribute("data-a-chart-empty") ||
+        "No data for this selection.";
+      figure.insertBefore(empty, state.details);
+      state.nodes.push(empty);
+      state.focused = null;
+      return;
+    }
+
+    var stacked = type === "stacked-bar";
+    var isLine = type === "line";
+    var height = parseFloat(figure.getAttribute("data-a-chart-height")) || 220;
+    var unit = figure.getAttribute("data-a-chart-unit") || "";
+    var tickUnit = unit.length <= 2 ? unit : "";
+    var pad = { top: 14, right: 14, bottom: 30, left: 46 };
+    var plotWidth = CHART_WIDTH - pad.left - pad.right;
+    var plotHeight = height - pad.top - pad.bottom;
+    var bandWidth = plotWidth / data.categories.length;
+
+    var high = 0;
+    var low = 0;
+    data.categories.forEach(function (point) {
+      var sum = 0;
+      point.values.forEach(function (value) {
+        if (value === null) return;
+        sum += value > 0 ? value : 0;
+        low = Math.min(low, value);
+        if (!stacked) high = Math.max(high, value);
+      });
+      if (stacked) high = Math.max(high, sum);
+    });
+    var declaredMax = parseFloat(figure.getAttribute("data-a-chart-max"));
+    var maxY = isFinite(declaredMax) ? declaredMax : niceCeil(high);
+    var minY = low < 0 ? -niceCeil(-low) : 0;
+    var span = maxY - minY || 1;
+
+    var scaleY = function (value) {
+      return pad.top + ((maxY - value) / span) * plotHeight;
+    };
+    var centerX = function (index) {
+      return pad.left + bandWidth * (index + 0.5);
+    };
+    var describe = function (index) {
+      var point = data.categories[index];
+      return (
+        point.label +
+        ": " +
+        data.series
+          .map(function (name, position) {
+            return name + " " + (point.texts[position] || "no value");
+          })
+          .join(", ")
+      );
+    };
+
+    var caption = figure.querySelector("figcaption");
+    var svg = svgNode("svg", {
+      class: "a-chart",
+      viewBox: "0 0 " + CHART_WIDTH + " " + height,
+      role: "group",
+      "aria-label":
+        (figure.getAttribute("data-a-chart-label") ||
+          (caption ? caption.textContent.trim() : "Chart")) +
+        ". Use the arrow keys to read each value."
+    });
+
+    var grid = svgNode("g", { class: "a-chart__grid" });
+    var axis = svgNode("g", { class: "a-chart__axis" });
+    for (var tick = 0; tick <= 4; tick += 1) {
+      var value = minY + (span * tick) / 4;
+      var y = scaleY(value);
+      grid.appendChild(
+        svgNode("line", {
+          x1: pad.left,
+          y1: y,
+          x2: CHART_WIDTH - pad.right,
+          y2: y
+        })
+      );
+      var tickLabel = svgNode("text", {
+        x: pad.left - 8,
+        y: y + 3.5,
+        "text-anchor": "end"
+      });
+      tickLabel.textContent = formatTick(value) + tickUnit;
+      axis.appendChild(tickLabel);
+    }
+
+    var labelStep = Math.ceil(data.categories.length / 8);
+    data.categories.forEach(function (point, index) {
+      if (index % labelStep) return;
+      var text = svgNode("text", {
+        x: centerX(index),
+        y: height - 10,
+        "text-anchor": "middle"
+      });
+      text.textContent = point.label;
+      axis.appendChild(text);
+    });
+
+    var plot = svgNode("g", { class: "a-chart__plot" });
+    /* Past ~30 points a marker per category reads as a scatter plot instead
+       of a line, so dense series drop to a bare stroke and only the active
+       point is drawn (CSS gives it a radius again). */
+    var pointRadius = data.categories.length > 30 ? 0 : 2.75;
+    if (isLine) {
+      data.series.forEach(function (name, position) {
+        /* A missing value breaks the line rather than bridging the gap. */
+        var segments = [[]];
+        data.categories.forEach(function (point, index) {
+          var value = point.values[position];
+          if (value === null) {
+            if (segments[segments.length - 1].length) segments.push([]);
+            return;
+          }
+          segments[segments.length - 1].push(
+            centerX(index) + "," + scaleY(value)
+          );
+          plot.appendChild(
+            svgNode("circle", {
+              class: "a-chart__point a-series-" + (position + 1),
+              cx: centerX(index),
+              cy: scaleY(value),
+              r: pointRadius,
+              "data-a-index": index
+            })
+          );
+        });
+        segments.forEach(function (coordinates) {
+          if (!coordinates.length) return;
+          plot.insertBefore(
+            svgNode("polyline", {
+              class: "a-chart__series a-series-" + (position + 1),
+              points: coordinates.join(" ")
+            }),
+            plot.firstChild
+          );
+        });
+      });
+    } else {
+      var inset = bandWidth * 0.18;
+      var slot = (bandWidth - inset * 2) / (stacked ? 1 : data.series.length);
+      var baseline = scaleY(Math.max(minY, 0));
+      data.categories.forEach(function (point, index) {
+        var stackTop = 0;
+        data.series.forEach(function (name, position) {
+          var value = point.values[position];
+          if (value === null) return;
+          var from = baseline;
+          var to;
+          if (stacked) {
+            from = scaleY(stackTop);
+            stackTop += value;
+            to = scaleY(stackTop);
+          } else {
+            to = scaleY(value);
+          }
+          plot.appendChild(
+            svgNode("rect", {
+              class: "a-chart__bar a-series-" + (position + 1),
+              x:
+                pad.left +
+                bandWidth * index +
+                inset +
+                slot * (stacked ? 0 : position),
+              y: Math.min(from, to),
+              width: Math.max(1, slot - 2),
+              height: Math.max(1, Math.abs(to - from)),
+              rx: 2,
+              "data-a-index": index
+            })
+          );
+        });
+      });
+    }
+
+    var crosshair = svgNode("line", {
+      class: "a-chart__crosshair",
+      x1: pad.left,
+      x2: pad.left,
+      y1: pad.top,
+      y2: pad.top + plotHeight,
+      hidden: "hidden"
+    });
+
+    var overlay = svgNode("g", { class: "a-chart__bands" });
+    var bands = data.categories.map(function (point, index) {
+      var band = svgNode("rect", {
+        class: "a-chart__band",
+        x: pad.left + bandWidth * index,
+        y: pad.top,
+        width: bandWidth,
+        height: plotHeight,
+        tabindex: index === 0 ? 0 : -1,
+        role: "img",
+        "aria-label": describe(index)
+      });
+      overlay.appendChild(band);
+      return band;
+    });
+
+    svg.appendChild(grid);
+    svg.appendChild(axis);
+    svg.appendChild(plot);
+    svg.appendChild(crosshair);
+    svg.appendChild(overlay);
+
+    figure.insertBefore(svg, state.details);
+    state.nodes.push(svg);
+
+    if (data.series.length > 1) {
+      var legend = document.createElement("ul");
+      legend.className = "a-legend";
+      data.series.forEach(function (name, position) {
+        var item = document.createElement("li");
+        item.className = "a-series-" + (position + 1);
+        var swatch = document.createElement("span");
+        swatch.className = "a-legend__swatch";
+        item.appendChild(swatch);
+        item.appendChild(document.createTextNode(name));
+        legend.appendChild(item);
+      });
+      figure.insertBefore(legend, state.details);
+      state.nodes.push(legend);
+    }
+
+    var readout = document.createElement("p");
+    readout.className = "a-visually-hidden";
+    readout.setAttribute("aria-live", "polite");
+    figure.appendChild(readout);
+    state.nodes.push(readout);
+
+    var clear = function () {
+      bands.forEach(function (band) {
+        band.removeAttribute("data-a-active");
+      });
+      plot.querySelectorAll("[data-a-index]").forEach(function (mark) {
+        mark.removeAttribute("data-a-active");
+      });
+      crosshair.setAttribute("hidden", "hidden");
+      readout.textContent = "";
+    };
+
+    var activate = function (index, pointer) {
+      if (index < 0 || index >= bands.length) return;
+      clear();
+      bands[index].setAttribute("data-a-active", "true");
+      plot
+        .querySelectorAll('[data-a-index="' + index + '"]')
+        .forEach(function (mark) {
+          mark.setAttribute("data-a-active", "true");
+        });
+      if (isLine) {
+        crosshair.setAttribute("x1", centerX(index));
+        crosshair.setAttribute("x2", centerX(index));
+        crosshair.removeAttribute("hidden");
+      }
+      readout.textContent = describe(index);
+      showTip(
+        {
+          title: data.categories[index].label,
+          rows: data.series.map(function (name, position) {
+            return {
+              name: name,
+              value: data.categories[index].texts[position],
+              series: position + 1
+            };
+          })
+        },
+        bands[index],
+        bands[index].getBoundingClientRect(),
+        pointer,
+        clear
+      );
+    };
+
+    /* -1 outside the plot area, so the axis and margins read as no category. */
+    var indexAt = function (clientX) {
+      var box = svg.getBoundingClientRect();
+      if (!box.width) return -1;
+      var local = ((clientX - box.left) / box.width) * CHART_WIDTH;
+      if (local < pad.left || local > pad.left + plotWidth) return -1;
+      var index = Math.floor((local - pad.left) / bandWidth);
+      return Math.max(0, Math.min(data.categories.length - 1, index));
+    };
+
+    svg.addEventListener("pointermove", function (event) {
+      if (event.pointerType === "touch") return;
+      var index = indexAt(event.clientX);
+      if (index === -1) {
+        if (bands.indexOf(document.activeElement) === -1) hideTip();
+        return;
+      }
+      activate(index, { x: event.clientX, y: event.clientY });
+    });
+
+    svg.addEventListener("pointerdown", function (event) {
+      if (event.pointerType !== "touch") return;
+      activate(indexAt(event.clientX), null);
+    });
+
+    /* Touch leaves as soon as the finger lifts, so a tap keeps its readout. */
+    svg.addEventListener("pointerleave", function (event) {
+      if (event.pointerType === "touch") return;
+      if (bands.indexOf(document.activeElement) === -1) hideTip();
+    });
+
+    bands.forEach(function (band, index) {
+      band.addEventListener("focus", function () {
+        state.focused = {
+          index: index,
+          row: data.categories[index].row,
+          label: data.categories[index].label
+        };
+        activate(index, null);
+      });
+      band.addEventListener("blur", function () {
+        if (tipHost === band) hideTip();
+      });
+    });
+
+    svg.addEventListener("keydown", function (event) {
+      var current = bands.indexOf(document.activeElement);
+      if (current === -1) return;
+      var next = current;
+      if (event.key === "ArrowRight") next = current + 1;
+      else if (event.key === "ArrowLeft") next = current - 1;
+      else if (event.key === "Home") next = 0;
+      else if (event.key === "End") next = bands.length - 1;
+      else return;
+      event.preventDefault();
+      next = Math.max(0, Math.min(bands.length - 1, next));
+      bands.forEach(function (band, position) {
+        band.setAttribute("tabindex", position === next ? "0" : "-1");
+      });
+      bands[next].focus();
+    });
+
+    if (refocus) {
+      /* The same row, not the same slot: filtering rows above the reader's
+         position must not move them onto a different bar. */
+      var target = data.categories.findIndex(function (category) {
+        return category.row === refocus.row;
+      });
+      /* Rows rebuilt wholesale lose their identity, so fall back to the label
+         and then to the old slot. */
+      if (target === -1) {
+        target = data.categories.findIndex(function (category) {
+          return category.label === refocus.label;
+        });
+      }
+      if (target === -1) target = Math.min(refocus.index, bands.length - 1);
+      bands.forEach(function (band, position) {
+        band.setAttribute("tabindex", position === target ? "0" : "-1");
+      });
+      bands[target].focus();
+    }
+  }
+
+  function renderCharts(target) {
+    if (target === undefined || target === null) {
+      document.querySelectorAll("[data-a-chart]").forEach(renderChart);
+      return;
+    }
+    var scope =
+      typeof target === "string" ? document.querySelector(target) : target;
+    if (!scope) return;
+    if (scope.matches && scope.matches("[data-a-chart]")) renderChart(scope);
+    else scope.querySelectorAll("[data-a-chart]").forEach(renderChart);
+  }
+
+  renderCharts();
+
+  /* The only public surface of the kit: artifacts that swap or filter a
+     chart's rows themselves can force a redraw, though the table observer
+     above already covers ordinary DOM edits. */
+  window.artifactKit = window.artifactKit || {};
+  window.artifactKit.renderCharts = renderCharts;
+
+  /* Print carries the numbers, not the hover: expand every chart's data
+     table before the page is rendered. */
+  var printReopened = [];
+  window.addEventListener("beforeprint", function () {
+    hideTip();
+    document.querySelectorAll(".a-chart__data").forEach(function (details) {
+      if (details.open) return;
+      printReopened.push(details);
+      details.open = true;
+    });
+  });
+
+  window.addEventListener("afterprint", function () {
+    printReopened.forEach(function (details) {
+      details.open = false;
+    });
+    printReopened = [];
+  });
+
+  /* ---------- diagram: pan, zoom, select ----------
+     Pointer drag and wheel pan/zoom the viewport group; arrow keys and
+     +/-/0 do the same from the keyboard so the diagram is operable without
+     a pointing device. Node clicks (or Enter/Space) update the inspector. */
+  document.querySelectorAll("[data-a-diagram]").forEach(function (diagram) {
+    var svg = diagram.querySelector("[data-a-diagram-canvas]");
+    var viewport = diagram.querySelector("[data-a-diagram-viewport]");
+    if (!svg || !viewport) return;
+
+    var view = { x: 0, y: 0, scale: 1 };
+    var drag = null;
+
+    var render = function () {
+      viewport.setAttribute(
+        "transform",
+        "translate(" + view.x + " " + view.y + ") scale(" + view.scale + ")"
+      );
+    };
+
+    var zoomBy = function (factor) {
+      view.scale = Math.min(2.5, Math.max(0.5, view.scale * factor));
+      render();
+    };
+
+    svg.addEventListener("pointerdown", function (event) {
+      if (event.target.closest("[data-a-node]")) return;
+      drag = { x: event.clientX, y: event.clientY };
+      svg.setPointerCapture(event.pointerId);
+    });
+
+    svg.addEventListener("pointermove", function (event) {
+      if (!drag) return;
+      view.x += event.clientX - drag.x;
+      view.y += event.clientY - drag.y;
+      drag = { x: event.clientX, y: event.clientY };
+      render();
+    });
+
+    var endDrag = function () {
+      drag = null;
+    };
+    svg.addEventListener("pointerup", endDrag);
+    svg.addEventListener("pointercancel", endDrag);
+
+    svg.addEventListener(
+      "wheel",
+      function (event) {
+        if (!event.ctrlKey && !event.metaKey) return;
+        event.preventDefault();
+        zoomBy(event.deltaY < 0 ? 1.1 : 0.9);
+      },
+      { passive: false }
+    );
+
+    diagram.addEventListener("keydown", function (event) {
+      var pan = { ArrowUp: [0, 24], ArrowDown: [0, -24], ArrowLeft: [24, 0], ArrowRight: [-24, 0] }[
+        event.key
+      ];
+      if (pan && !event.target.closest("[data-a-node]")) {
+        event.preventDefault();
+        view.x += pan[0];
+        view.y += pan[1];
+        render();
+        return;
+      }
+      if (event.key === "+" || event.key === "=") zoomBy(1.1);
+      else if (event.key === "-") zoomBy(0.9);
+      else if (event.key === "0") {
+        view = { x: 0, y: 0, scale: 1 };
+        render();
+      }
+    });
+
+    diagram.querySelectorAll("[data-a-zoom]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var action = button.getAttribute("data-a-zoom");
+        if (action === "in") zoomBy(1.15);
+        else if (action === "out") zoomBy(0.87);
+        else {
+          view = { x: 0, y: 0, scale: 1 };
+          render();
+        }
+      });
+    });
+
+    var inspector = diagram.querySelector("[data-a-inspector]");
+    var select = function (node) {
+      diagram.querySelectorAll("[data-a-node]").forEach(function (other) {
+        other.setAttribute("aria-current", String(other === node));
+      });
+      if (!inspector) return;
+      var title = inspector.querySelector("[data-a-inspector-title]");
+      var body = inspector.querySelector("[data-a-inspector-body]");
+      if (title) title.textContent = node.getAttribute("data-a-title") || "";
+      if (body) body.textContent = node.getAttribute("data-a-detail") || "";
+    };
+
+    diagram.querySelectorAll("[data-a-node]").forEach(function (node) {
+      node.addEventListener("click", function () {
+        select(node);
+      });
+      node.addEventListener("keydown", function (event) {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        select(node);
+      });
+    });
+
+    render();
+  });
+})();
+    </script>
+  </body>
+</html>

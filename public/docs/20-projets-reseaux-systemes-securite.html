@@ -1,0 +1,3216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Devin artifact kit" />
+    <title>20 projets réseaux, systèmes et sécurité</title>
+    <style>
+/* Devin artifact kit — self-contained styles for standalone HTML artifacts.
+   Tokens are translated from the Devin product design system. Light is the
+   default; dark is applied from `prefers-color-scheme` unless a host theme
+   signal (`?theme=`, `data-theme`, or a `devin:theme` message) says otherwise. */
+
+:root {
+  color-scheme: light;
+
+  --bg-page: 252 252 252;
+  --bg-wash: 248 248 248;
+  --bg-elevated: 255 255 255;
+  --tint-tertiary: 0 0 0 / 0.04;
+  --tint-secondary: 0 0 0 / 0.06;
+  --tint-primary: 0 0 0 / 0.08;
+  --text-primary: 25 25 25;
+  --text-secondary: 25 25 25 / 0.64;
+  --text-tertiary: 25 25 25 / 0.4;
+  --text-accent: 49 124 255;
+  --bg-accent: 49 124 255;
+  --border-secondary: 0 0 0 / 0.08;
+  --border-primary: 0 0 0 / 0.1;
+  --text-green: 0 165 88;
+  --text-orange: 245 142 58;
+  --text-red: 245 59 58;
+  --text-blue: 51 125 244;
+  --text-purple: 149 108 222;
+  --shadow-l1: 0 1px 2px rgb(0 0 0 / 0.06);
+  --shadow-l2: 0 4px 12px rgb(0 0 0 / 0.08);
+
+  --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", "Roboto Mono", ui-monospace, monospace;
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-lg: 10px;
+  --unit: 4px;
+  --max-width: 1120px;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg-page: 20 20 20;
+  --bg-wash: 25 25 25;
+  --bg-elevated: 31 31 31;
+  --tint-tertiary: 255 255 255 / 0.03;
+  --tint-secondary: 255 255 255 / 0.05;
+  --tint-primary: 255 255 255 / 0.08;
+  --text-primary: 255 255 255 / 0.9;
+  --text-secondary: 255 255 255 / 0.52;
+  --text-tertiary: 255 255 255 / 0.4;
+  --text-accent: 73 176 255;
+  --bg-accent: 68 137 255;
+  --border-secondary: 255 255 255 / 0.04;
+  --border-primary: 255 255 255 / 0.08;
+  --text-green: 0 236 126;
+  --text-orange: 245 142 58;
+  --text-red: 255 108 107;
+  --text-blue: 92 154 255;
+  --text-purple: 178 145 240;
+  --shadow-l1: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-l2: 0 4px 12px rgb(0 0 0 / 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+
+    --bg-page: 20 20 20;
+    --bg-wash: 25 25 25;
+    --bg-elevated: 31 31 31;
+    --tint-tertiary: 255 255 255 / 0.03;
+    --tint-secondary: 255 255 255 / 0.05;
+    --tint-primary: 255 255 255 / 0.08;
+    --text-primary: 255 255 255 / 0.9;
+    --text-secondary: 255 255 255 / 0.52;
+    --text-tertiary: 255 255 255 / 0.4;
+    --text-accent: 73 176 255;
+    --bg-accent: 68 137 255;
+    --border-secondary: 255 255 255 / 0.04;
+    --border-primary: 255 255 255 / 0.08;
+    --text-green: 0 236 126;
+    --text-orange: 245 142 58;
+    --text-red: 255 108 107;
+    --text-blue: 92 154 255;
+    --text-purple: 178 145 240;
+    --shadow-l1: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-l2: 0 4px 12px rgb(0 0 0 / 0.5);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: rgb(var(--bg-page));
+  color: rgb(var(--text-primary));
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(button, a, input, select, summary, [tabindex]):focus-visible {
+  outline: 1px solid rgb(var(--bg-accent));
+  outline-offset: 1px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- layout ---------- */
+
+.a-shell {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: calc(var(--unit) * 8) calc(var(--unit) * 6) calc(var(--unit) * 16);
+}
+
+.a-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: calc(var(--unit) * 3);
+  padding-bottom: calc(var(--unit) * 4);
+  border-bottom: 1px solid rgb(var(--border-primary));
+}
+
+.a-header__title {
+  margin: 0;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.a-header__subtitle {
+  margin: calc(var(--unit) * 1) 0 0;
+  color: rgb(var(--text-secondary));
+  font-size: 13px;
+  line-height: 18px;
+  max-width: 68ch;
+}
+
+.a-section {
+  margin-top: calc(var(--unit) * 9);
+}
+
+.a-section__title {
+  margin: 0 0 calc(var(--unit) * 1);
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+.a-section__note,
+.a-prose {
+  margin: 0 0 calc(var(--unit) * 4);
+  color: rgb(var(--text-secondary));
+  font-size: 13px;
+  line-height: 20px;
+  max-width: 72ch;
+}
+
+.a-grid {
+  display: grid;
+  gap: calc(var(--unit) * 3);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.a-grid--halves {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* ---------- surfaces ---------- */
+
+.a-panel {
+  background: rgb(var(--bg-elevated));
+  border: 1px solid rgb(var(--border-secondary));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-l1);
+  padding: calc(var(--unit) * 4);
+}
+
+.a-panel__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc(var(--unit) * 2);
+  margin-bottom: calc(var(--unit) * 3);
+}
+
+.a-panel__title {
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+}
+
+.a-label {
+  color: rgb(var(--text-tertiary));
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: none;
+}
+
+/* ---------- metrics ---------- */
+
+.a-metric {
+  background: rgb(var(--tint-tertiary));
+  border: 1px solid rgb(var(--border-secondary));
+  border-radius: var(--radius);
+  padding: calc(var(--unit) * 3);
+}
+
+.a-metric__label {
+  color: rgb(var(--text-secondary));
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.a-metric__value {
+  margin-top: calc(var(--unit) * 1);
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.a-metric__delta {
+  margin-top: calc(var(--unit) * 1);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  color: rgb(var(--text-secondary));
+}
+
+.a-metric__delta[data-trend="up"] {
+  color: rgb(var(--text-green));
+}
+
+.a-metric__delta[data-trend="down"] {
+  color: rgb(var(--text-red));
+}
+
+/* ---------- status ---------- */
+
+.a-status {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--unit) * 1.5);
+  font-size: 12px;
+  line-height: 16px;
+  color: rgb(var(--text-secondary));
+  white-space: nowrap;
+}
+
+.a-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.a-status[data-state="done"] {
+  color: rgb(var(--text-green));
+}
+
+.a-status[data-state="active"] {
+  color: rgb(var(--text-blue));
+}
+
+.a-status[data-state="at-risk"] {
+  color: rgb(var(--text-orange));
+}
+
+.a-status[data-state="blocked"] {
+  color: rgb(var(--text-red));
+}
+
+.a-status[data-state="planned"] {
+  color: rgb(var(--text-tertiary));
+}
+
+/* ---------- tables ---------- */
+
+.a-table-scroll {
+  overflow-x: auto;
+  border: 1px solid rgb(var(--border-secondary));
+  border-radius: var(--radius);
+  background: rgb(var(--bg-elevated));
+}
+
+.a-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.a-table th,
+.a-table td {
+  text-align: left;
+  padding: calc(var(--unit) * 2) calc(var(--unit) * 3);
+  border-bottom: 1px solid rgb(var(--border-secondary));
+  vertical-align: top;
+}
+
+.a-table thead th {
+  position: sticky;
+  top: 0;
+  background: rgb(var(--bg-wash));
+  color: rgb(var(--text-secondary));
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  z-index: 1;
+}
+
+.a-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.a-table tbody tr:hover td {
+  background: rgb(var(--tint-tertiary));
+}
+
+.a-table td[data-numeric],
+.a-table th[data-numeric] {
+  text-align: right;
+  font-family: var(--font-mono);
+}
+
+/* ---------- charts (inline SVG + CSS bars) ---------- */
+
+.a-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.a-chart__grid line {
+  stroke: rgb(var(--border-primary));
+  stroke-dasharray: 2 3;
+}
+
+.a-chart__axis text {
+  fill: rgb(var(--text-tertiary));
+  font-size: 10px;
+  font-family: var(--font-mono);
+}
+
+.a-chart__series {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.a-chart__point {
+  stroke: rgb(var(--bg-elevated));
+  stroke-width: 1.5;
+}
+
+.a-bars {
+  display: grid;
+  gap: calc(var(--unit) * 2);
+  margin: 0;
+}
+
+.a-bars__row {
+  display: grid;
+  grid-template-columns: minmax(88px, 22%) 1fr auto;
+  align-items: center;
+  gap: calc(var(--unit) * 2);
+  font-size: 13px;
+}
+
+.a-bars__track {
+  height: 8px;
+  border-radius: 999px;
+  background: rgb(var(--tint-secondary));
+  overflow: hidden;
+}
+
+.a-bars__fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: rgb(var(--bg-accent));
+}
+
+.a-bars__value {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgb(var(--text-secondary));
+}
+
+.a-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--unit) * 3);
+  margin: calc(var(--unit) * 3) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+  color: rgb(var(--text-secondary));
+}
+
+.a-legend li {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--unit) * 1.5);
+}
+
+.a-legend__swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex: none;
+}
+
+/* Series colors stay stable across themes so legends keep meaning. */
+.a-series-1 {
+  --series: 49 124 255;
+}
+.a-series-2 {
+  --series: 0 165 88;
+}
+.a-series-3 {
+  --series: 149 108 222;
+}
+.a-series-4 {
+  --series: 245 142 58;
+}
+
+.a-chart__series.a-series-1,
+.a-chart__series.a-series-2,
+.a-chart__series.a-series-3,
+.a-chart__series.a-series-4 {
+  stroke: rgb(var(--series));
+}
+
+.a-chart__point.a-series-1,
+.a-chart__point.a-series-2,
+.a-chart__point.a-series-3,
+.a-chart__point.a-series-4 {
+  fill: rgb(var(--series));
+}
+
+.a-series-1 .a-legend__swatch,
+.a-series-2 .a-legend__swatch,
+.a-series-3 .a-legend__swatch,
+.a-series-4 .a-legend__swatch {
+  background: rgb(var(--series));
+}
+
+.a-chart__bar.a-series-1,
+.a-chart__bar.a-series-2,
+.a-chart__bar.a-series-3,
+.a-chart__bar.a-series-4 {
+  fill: rgb(var(--series));
+}
+
+/* Dimming the rest of the plot reads as "this is the value you asked for"
+   without moving anything, which keeps the highlight legible under
+   reduced motion. */
+.a-chart__bar,
+.a-chart__point,
+.a-chart__series {
+  transition: opacity 120ms ease;
+}
+
+.a-chart__plot:has([data-a-active]) .a-chart__bar:not([data-a-active]) {
+  opacity: 0.45;
+}
+
+.a-chart__point[data-a-active] {
+  r: 4.25;
+}
+
+.a-chart__crosshair {
+  stroke: rgb(var(--border-primary));
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+.a-chart__band {
+  fill: transparent;
+  /* Vertical scrolling must still work when a finger lands on the plot. */
+  touch-action: pan-y;
+}
+
+.a-chart__band[data-a-active] {
+  fill: rgb(var(--tint-secondary));
+}
+
+.a-chart__band:focus-visible {
+  outline: 1px solid rgb(var(--bg-accent));
+  outline-offset: -2px;
+}
+
+.a-chart {
+  touch-action: pan-y;
+}
+
+/* Shown in place of the plot when a filter leaves the source table empty. */
+.a-chart__empty {
+  margin: 0 0 calc(var(--unit) * 3);
+  padding: calc(var(--unit) * 6) 0;
+  border: 1px dashed rgb(var(--border-secondary));
+  border-radius: var(--radius);
+  color: rgb(var(--text-secondary));
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ---------- tooltip ---------- */
+
+.a-tip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  min-width: 120px;
+  max-width: 260px;
+  padding: calc(var(--unit) * 2) calc(var(--unit) * 2.5);
+  border: 1px solid rgb(var(--border-secondary));
+  border-radius: var(--radius);
+  background: rgb(var(--bg-elevated));
+  box-shadow: var(--shadow-l2);
+  color: rgb(var(--text-primary));
+  font-size: 12px;
+  line-height: 16px;
+  pointer-events: none;
+}
+
+.a-tip__title {
+  margin-bottom: var(--unit);
+  font-weight: 600;
+  color: rgb(var(--text-primary));
+}
+
+.a-tip__text {
+  color: rgb(var(--text-secondary));
+}
+
+.a-tip__row {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--unit) * 1.5);
+  white-space: nowrap;
+}
+
+.a-tip__swatch {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 2px;
+  background: rgb(var(--series, var(--bg-accent)));
+}
+
+.a-tip__name {
+  color: rgb(var(--text-secondary));
+}
+
+.a-tip__value {
+  margin-left: auto;
+  padding-left: calc(var(--unit) * 2);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- controls: tabs, filters, toggles ---------- */
+
+.a-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--unit) * 2);
+  margin-bottom: calc(var(--unit) * 4);
+}
+
+.a-tabs {
+  display: flex;
+  gap: calc(var(--unit) * 1);
+  padding: 2px;
+  background: rgb(var(--tint-tertiary));
+  border: 1px solid rgb(var(--border-secondary));
+  border-radius: var(--radius);
+}
+
+.a-btn {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgb(var(--text-secondary));
+  font: inherit;
+  font-size: 13px;
+  padding: calc(var(--unit) * 1) calc(var(--unit) * 2.5);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.a-btn:hover {
+  background: rgb(var(--tint-secondary));
+  color: rgb(var(--text-primary));
+}
+
+.a-btn[aria-selected="true"],
+.a-btn[aria-pressed="true"] {
+  background: rgb(var(--bg-elevated));
+  border-color: rgb(var(--border-primary));
+  color: rgb(var(--text-primary));
+  box-shadow: var(--shadow-l1);
+}
+
+.a-btn--outline {
+  border-color: rgb(var(--border-primary));
+  background: rgb(var(--bg-elevated));
+}
+
+.a-btn--icon {
+  display: inline-grid;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  place-items: center;
+}
+
+.a-theme-icon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.a-theme-icon--moon {
+  display: none;
+}
+
+:root[data-theme="dark"] .a-theme-icon--sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .a-theme-icon--moon {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .a-theme-icon--sun {
+    display: none;
+  }
+
+  :root:not([data-theme]) .a-theme-icon--moon {
+    display: block;
+  }
+}
+
+.a-select {
+  appearance: none;
+  font: inherit;
+  font-size: 13px;
+  color: rgb(var(--text-primary));
+  background: rgb(var(--bg-elevated));
+  border: 1px solid rgb(var(--border-primary));
+  border-radius: var(--radius-sm);
+  padding: calc(var(--unit) * 1) calc(var(--unit) * 2);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- diagram ---------- */
+
+.a-diagram {
+  position: relative;
+  background: rgb(var(--bg-wash));
+  border: 1px solid rgb(var(--border-secondary));
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.a-diagram__canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+  cursor: grab;
+}
+
+.a-diagram__canvas:active {
+  cursor: grabbing;
+}
+
+.a-group rect {
+  fill: rgb(var(--tint-tertiary));
+  stroke: rgb(var(--border-primary));
+  stroke-dasharray: 4 4;
+  rx: 10;
+}
+
+.a-group text {
+  fill: rgb(var(--text-tertiary));
+  font-size: 10px;
+  font-family: var(--font-mono);
+}
+
+.a-node rect {
+  fill: rgb(var(--bg-elevated));
+  stroke: rgb(var(--border-primary));
+  rx: 8;
+}
+
+.a-node__title {
+  fill: rgb(var(--text-primary));
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.a-node__sub {
+  fill: rgb(var(--text-secondary));
+  font-size: 10px;
+  font-family: var(--font-mono);
+}
+
+.a-node {
+  cursor: pointer;
+}
+
+.a-node:hover rect,
+.a-node:focus-visible rect {
+  stroke: rgb(var(--bg-accent));
+}
+
+.a-node[aria-current="true"] rect {
+  stroke: rgb(var(--bg-accent));
+  stroke-width: 2;
+}
+
+.a-edge {
+  fill: none;
+  stroke: rgb(var(--text-tertiary));
+  stroke-width: 1.25;
+}
+
+.a-edge--dim {
+  stroke: rgb(var(--border-primary));
+}
+
+.a-edge__label {
+  fill: rgb(var(--text-tertiary));
+  font-size: 10px;
+  font-family: var(--font-mono);
+}
+
+.a-inspector {
+  border-top: 1px solid rgb(var(--border-secondary));
+  background: rgb(var(--bg-elevated));
+  padding: calc(var(--unit) * 3) calc(var(--unit) * 4);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.a-inspector__title {
+  margin: 0 0 calc(var(--unit) * 1);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ---------- plan / process ---------- */
+
+.a-phase {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: calc(var(--unit) * 3);
+  padding: calc(var(--unit) * 4) 0;
+  border-bottom: 1px solid rgb(var(--border-secondary));
+}
+
+.a-phase:last-child {
+  border-bottom: none;
+}
+
+.a-phase__index {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgb(var(--text-tertiary));
+  padding-top: 2px;
+}
+
+.a-phase__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: calc(var(--unit) * 2);
+  justify-content: space-between;
+}
+
+.a-phase__title {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.a-meta-list {
+  display: grid;
+  gap: calc(var(--unit) * 1);
+  margin: calc(var(--unit) * 2) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  color: rgb(var(--text-secondary));
+}
+
+.a-meta-list li,
+.a-meta-list > div {
+  display: grid;
+  grid-template-columns: minmax(96px, 15%) 1fr;
+  gap: calc(var(--unit) * 2);
+}
+
+.a-meta-list dt,
+.a-meta-list .a-meta-list__key {
+  color: rgb(var(--text-tertiary));
+  font-size: 12px;
+}
+
+.a-meta-list dd {
+  margin: 0;
+}
+
+.a-timeline {
+  display: grid;
+  gap: calc(var(--unit) * 1);
+  margin: 0;
+  font-size: 12px;
+}
+
+.a-timeline__row {
+  display: grid;
+  grid-template-columns: minmax(120px, 20%) 1fr;
+  align-items: center;
+  gap: calc(var(--unit) * 2);
+}
+
+.a-timeline__track {
+  position: relative;
+  height: 10px;
+  background: rgb(var(--tint-tertiary));
+  border-radius: var(--radius-sm);
+}
+
+.a-timeline__span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: var(--radius-sm);
+  background: rgb(var(--bg-accent) / 0.75);
+}
+
+.a-timeline__span[data-state="at-risk"] {
+  background: rgb(var(--text-orange) / 0.75);
+}
+
+.a-timeline__span[data-state="done"] {
+  background: rgb(var(--text-green) / 0.7);
+}
+
+.a-timeline__scale {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  color: rgb(var(--text-tertiary));
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.a-callout {
+  border: 1px solid rgb(var(--border-secondary));
+  border-left: 2px solid rgb(var(--text-orange));
+  border-radius: var(--radius-sm);
+  background: rgb(var(--tint-tertiary));
+  padding: calc(var(--unit) * 3);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.a-callout--decision {
+  border-left-color: rgb(var(--bg-accent));
+}
+
+.a-callout--risk {
+  border-left-color: rgb(var(--text-red));
+}
+
+.a-callout__title {
+  margin: 0 0 calc(var(--unit) * 1);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+details.a-disclosure {
+  border-top: 1px solid rgb(var(--border-secondary));
+  padding: calc(var(--unit) * 2) 0;
+}
+
+details.a-disclosure > summary {
+  cursor: pointer;
+  font-size: 13px;
+  color: rgb(var(--text-secondary));
+  list-style: none;
+}
+
+details.a-disclosure > summary::marker,
+details.a-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.a-disclosure > summary::before {
+  content: "+ ";
+  font-family: var(--font-mono);
+}
+
+details.a-disclosure[open] > summary::before {
+  content: "− ";
+}
+
+/* ---------- empty and error states ---------- */
+
+.a-empty,
+.a-error {
+  border: 1px dashed rgb(var(--border-primary));
+  border-radius: var(--radius);
+  padding: calc(var(--unit) * 6);
+  text-align: center;
+  color: rgb(var(--text-secondary));
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.a-error {
+  border-style: solid;
+  border-color: rgb(var(--text-red) / 0.4);
+  color: rgb(var(--text-primary));
+  text-align: left;
+}
+
+.a-error__title {
+  margin: 0 0 calc(var(--unit) * 1);
+  font-size: 13px;
+  font-weight: 600;
+  color: rgb(var(--text-red));
+}
+
+.a-footnote {
+  margin-top: calc(var(--unit) * 10);
+  padding-top: calc(var(--unit) * 4);
+  border-top: 1px solid rgb(var(--border-secondary));
+  color: rgb(var(--text-tertiary));
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.a-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 640px) {
+  .a-shell {
+    padding: calc(var(--unit) * 5) calc(var(--unit) * 4)
+      calc(var(--unit) * 12);
+  }
+
+  .a-header__title {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .a-bars__row,
+  .a-timeline__row,
+  .a-meta-list li,
+  .a-meta-list > div {
+    grid-template-columns: 1fr;
+    gap: calc(var(--unit) * 1);
+  }
+
+  .a-phase {
+    grid-template-columns: 1fr;
+  }
+
+  .a-phase__index {
+    padding-top: 0;
+  }
+
+  .a-toolbar {
+    align-items: stretch;
+  }
+
+  .a-tabs {
+    overflow-x: auto;
+  }
+}
+
+/* ---------- motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- print / export ---------- */
+
+@media print {
+  :root[data-theme],
+  :root:not([data-theme]) {
+    color-scheme: light only;
+    --bg-page: 252 252 252;
+    --bg-wash: 248 248 248;
+    --bg-elevated: 255 255 255;
+    --tint-tertiary: 0 0 0 / 0.04;
+    --tint-secondary: 0 0 0 / 0.06;
+    --tint-primary: 0 0 0 / 0.08;
+    --text-primary: 25 25 25;
+    --text-secondary: 25 25 25 / 0.64;
+    --text-tertiary: 25 25 25 / 0.4;
+    --text-accent: 49 124 255;
+    --bg-accent: 49 124 255;
+    --border-secondary: 0 0 0 / 0.08;
+    --border-primary: 0 0 0 / 0.1;
+    --text-green: 0 165 88;
+    --text-orange: 245 142 58;
+    --text-red: 245 59 58;
+    --text-blue: 51 125 244;
+    --text-purple: 149 108 222;
+    --shadow-l1: none;
+    --shadow-l2: none;
+  }
+
+  body {
+    background: #fff;
+    color: #111;
+  }
+
+  .a-no-print,
+  .a-toolbar,
+  .a-diagram__hint {
+    display: none !important;
+  }
+
+  .a-panel,
+  .a-table-scroll,
+  .a-diagram {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .a-section {
+    break-inside: avoid;
+    margin-top: 24px;
+  }
+
+  [hidden].a-print-reveal {
+    display: revert !important;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <main class="a-shell">
+      <header class="a-header">
+        <div>
+          <h1 class="a-header__title">20 projets réseaux, systèmes et sécurité</h1>
+          <p class="a-header__subtitle">Catalogue de 20 projets complexes et progressifs, avec objectifs, notions à apprendre, outils, ressources, étapes, documentation et la plateforme commune LabHub pour les valoriser.</p>
+        </div>
+        <button
+          type="button"
+          class="a-btn a-btn--icon a-no-print"
+          data-a-theme-toggle
+          aria-label="Switch to dark mode"
+          title="Switch to dark mode"
+        >
+          <svg
+            class="a-theme-icon a-theme-icon--moon"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+          >
+            <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" />
+          </svg>
+          <svg
+            class="a-theme-icon a-theme-icon--sun"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+        </button>
+      </header>
+
+      <section
+        class="a-section a-error"
+        data-a-error
+        role="alert"
+        aria-live="polite"
+        hidden
+      >
+        <p class="a-error__title">Something in this artifact failed to run</p>
+        <p>
+          The content below is still readable, but an interactive control may
+          not respond.
+          <span data-a-error-detail></span>
+        </p>
+      </section>
+
+<section class="a-section" id="intro">
+  <h2 class="a-section__title">Comment lire ce catalogue</h2>
+  <p class="a-prose">Ce document applique la logique du catalogue de projets logiciels au domaine réseaux, systèmes et sécurité : 20 projets complexes, classés par difficulté croissante, qui couvrent l'infrastructure réseau, l'administration système Linux et Windows, la sécurité défensive (blue team), offensive (red team), le cloud, l'automatisation et la gouvernance. Pour chaque projet : objectif et exigences, notions théoriques à rechercher avant de pratiquer, outils et plateformes, ressources d'apprentissage, étapes de réalisation, compétences acquises, façon de documenter (de la théorie à la pratique) et manière de le mettre en valeur, soit par une plateforme dédiée quand le projet s'y prête, soit via la plateforme commune décrite plus bas.</p>
+  <div class="a-grid a-grid--halves">
+    <div class="a-metric"><div class="a-metric__label">Projets</div><div class="a-metric__value">20</div><div class="a-metric__delta">6 réseaux et systèmes · 8 sécurité défensive et offensive · 6 cloud, automatisation, gouvernance</div></div>
+    <div class="a-metric"><div class="a-metric__label">Matériel requis</div><div class="a-metric__value">1 PC</div><div class="a-metric__delta">16 Go de RAM minimum (32 Go recommandés), SSD 500 Go, virtualisation activée ; un compte cloud gratuit pour les projets 17 et 20</div></div>
+  </div>
+  <div class="a-callout a-callout--decision">
+    <strong>Ordre conseillé.</strong> Le projet 01 (home lab) est le socle de tous les autres : il fournit l'hyperviseur, les réseaux virtuels et le pare-feu que les projets suivants réutilisent. Ensuite : <em>Intermédiaire</em> (01 à 06), <em>Avancé</em> (07 à 14), <em>Expert</em> (15 à 20). Le projet 20 (gouvernance et audit) s'applique à tout le lab construit et sert de projet de synthèse.
+  </div>
+</section>
+
+<section class="a-section" id="methode">
+  <h2 class="a-section__title">Méthodologie commune : de la théorie à la pratique documentée</h2>
+  <p class="a-prose">Un projet d'infrastructure ne produit pas de code applicatif mais des configurations, des schémas, des preuves de tests et des procédures. Chaque projet suit six phases ; chaque phase produit un document versionné dans un dépôt Git (<code>lab/&lt;numero&gt;-&lt;nom&gt;/</code>) qui alimente la plateforme commune.</p>
+  <div class="a-table-scroll">
+    <table class="a-table">
+      <caption>Phases communes à tous les projets et livrable de chaque phase</caption>
+      <thead><tr><th scope="col">Phase</th><th scope="col">Activités</th><th scope="col">Livrable</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">1. Étude théorique</th><td>Lire, suivre un cours, lister les notions clés, rédiger des fiches de synthèse avec vos propres mots et schémas.</td><td><code>01-theorie.md</code> : fiches de concepts, glossaire, sources</td></tr>
+        <tr><th scope="row">2. Conception</th><td>Schéma d'architecture (draw.io), plan d'adressage IP, matrice de flux, choix argumentés (ADR), prérequis matériels et logiciels.</td><td><code>02-conception.md</code>, <code>schema.drawio</code>, <code>adressage.xlsx</code></td></tr>
+        <tr><th scope="row">3. Réalisation</th><td>Déploiement pas à pas dans le lab, captures d'écran horodatées, sauvegarde de toutes les configurations dans Git, scripts d'automatisation.</td><td><code>03-procedure.md</code>, dossier <code>configs/</code>, <code>scripts/</code></td></tr>
+        <tr><th scope="row">4. Validation</th><td>Plan de tests (fonctionnels, sécurité, résilience), résultats, captures Wireshark, scans, métriques.</td><td><code>04-tests.md</code>, <code>captures/</code>, rapports d'outils</td></tr>
+        <tr><th scope="row">5. Retour d'expérience</th><td>Incidents rencontrés et résolutions, erreurs à éviter, limites, pistes d'amélioration.</td><td><code>05-retex.md</code></td></tr>
+        <tr><th scope="row">6. Publication</th><td>Page de synthèse sur la plateforme commune, article de blog, vidéo courte de démonstration, badge ou certification associée.</td><td>Page projet publiée, article, vidéo</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <details class="a-disclosure">
+    <summary>Modèle de documentation d'un projet (structure du dossier et de la page)</summary>
+    <ol class="a-prose">
+      <li><strong>Résumé</strong> : problème, contexte, résultat en trois phrases, schéma principal.</li>
+      <li><strong>Concepts théoriques</strong> : chaque notion expliquée en un paragraphe, avec un schéma et un lien vers la source (RFC, guide ANSSI, documentation officielle).</li>
+      <li><strong>Architecture cible</strong> : schéma logique et physique, adressage, matrice de flux, hypothèses.</li>
+      <li><strong>Procédure de mise en œuvre</strong> : étapes numérotées, commandes exactes, extraits de configuration, captures.</li>
+      <li><strong>Validation</strong> : tableau « test attendu / obtenu / preuve ».</li>
+      <li><strong>Sécurité et durcissement</strong> : ce qui a été fait, ce qui reste à faire.</li>
+      <li><strong>Incidents et leçons</strong> : journal de dépannage.</li>
+      <li><strong>Ressources</strong> : cours, livres, vidéos, labs utilisés, avec un avis.</li>
+    </ol>
+  </details>
+</section>
+
+<section class="a-section" id="plateforme">
+  <h2 class="a-section__title">Plateforme commune : « LabHub », le portfolio vivant du laboratoire</h2>
+  <p class="a-prose">La majorité des projets réseaux et sécurité ne produisent pas d'application ; ils produisent des infrastructures, des configurations et des rapports. La plateforme commune les rend visibles et vérifiables. Elle combine un site de documentation statique (simple, robuste) et une application web légère qui affiche l'état réel du lab. Elle constitue elle-même un projet logiciel à part entière et réutilise les compétences du premier catalogue.</p>
+  <div class="a-table-scroll"><table class="a-table"><caption>Composants de la plateforme commune</caption>
+    <thead><tr><th scope="col">Composant</th><th scope="col">Technologie proposée</th><th scope="col">Rôle</th></tr></thead>
+    <tbody>
+      <tr><td>Site de documentation</td><td>MkDocs Material (ou Docusaurus) généré depuis le dépôt Git <code>lab/</code></td><td>Une page par projet suivant le modèle ci-dessus, recherche plein texte, schémas draw.io intégrés, versionnement automatique par CI.</td></tr>
+      <tr><td>Application « tableau de bord du lab »</td><td>Next.js + NestJS (ou Django) · PostgreSQL</td><td>Fiches projets (statut, compétences, badges), inventaire des machines et réseaux synchronisé depuis NetBox, état de santé en direct via l'API Prometheus / Zabbix, chronologie des incidents, galerie de rapports PDF, page « CV technique » générée.</td></tr>
+      <tr><td>Source de vérité infrastructure</td><td>NetBox</td><td>Inventaire des VLAN, adresses IP, VM, câblage ; alimenté par Ansible (projet 08).</td></tr>
+      <tr><td>Supervision intégrée</td><td>Grafana (panneaux embarqués), Wazuh (indicateurs)</td><td>Montre que le lab fonctionne réellement : disponibilité, alertes, événements de sécurité des 7 derniers jours.</td></tr>
+      <tr><td>Blog et vidéos</td><td>Section articles du site + chaîne YouTube ou PeerTube</td><td>Un article de retour d'expérience par projet ; démonstrations de 5 minutes.</td></tr>
+      <tr><td>Dépôts publics</td><td>GitHub / GitLab : <code>lab-configs</code>, <code>ansible-lab</code>, <code>detection-rules</code>, <code>scripts</code></td><td>Preuves techniques, configurations anonymisées, règles de détection, scripts.</td></tr>
+      <tr><td>Hébergement</td><td>VPS durci (projet 10) derrière reverse proxy Traefik ou Caddy, TLS via Let's Encrypt, SSO Keycloak (projet 15)</td><td>La plateforme elle-même est un exemple de déploiement sécurisé.</td></tr>
+    </tbody></table></div>
+  <h3>Fonctionnalités de l'application LabHub</h3>
+  <ul class="a-prose">
+    <li>Catalogue des 20 projets avec statut (planifié, en cours, terminé), niveau, compétences, durée réelle.</li>
+    <li>Fiche projet : résumé, schéma interactif, liens vers documentation, dépôt, rapport PDF, vidéo.</li>
+    <li>Carte du lab : topologie générée depuis NetBox, état en direct de chaque nœud.</li>
+    <li>Matrice de compétences (réseau, système, sécurité, cloud, automatisation) alimentée par les projets terminés.</li>
+    <li>Journal d'incidents et de retours d'expérience, recherche par tag (protocole, outil, technique MITRE ATT&amp;CK).</li>
+    <li>Page publique « CV technique » exportable en PDF, page privée d'administration.</li>
+    <li>Intégration des certifications et badges (Credly, TryHackMe, Hack The Box).</li>
+  </ul>
+  <h3>Étapes de réalisation de la plateforme</h3>
+  <ol class="a-prose">
+    <li>Semaine 1 : dépôt <code>lab/</code> avec le modèle de documentation, MkDocs Material, CI GitHub Actions qui publie sur GitHub Pages.</li>
+    <li>Semaine 2 : modèle de données de LabHub (projet, compétence, machine, incident, ressource), API, authentification.</li>
+    <li>Semaine 3 : interface catalogue et fiches projets, import des pages MkDocs par référence.</li>
+    <li>Semaine 4 : intégration NetBox et Grafana, carte du lab.</li>
+    <li>Ensuite : chaque projet terminé ajoute sa fiche, ses badges et ses preuves ; la plateforme évolue avec le lab.</li>
+  </ol>
+</section>
+
+<section class="a-section" id="matrice">
+  <h2 class="a-section__title">Vue d'ensemble des 20 projets</h2>
+  <div class="a-table-scroll">
+    <table class="a-table">
+      <caption>Les 20 projets, leur domaine, leurs outils principaux, le niveau et le mode de valorisation</caption>
+      <thead><tr><th scope="col">N°</th><th scope="col">Projet</th><th scope="col">Domaine</th><th scope="col">Outils principaux</th><th scope="col">Niveau</th><th scope="col">Valorisation</th></tr></thead>
+      <tbody>
+        <tr><td>01</td><td>Home lab virtualisé et réseau segmenté</td><td>Systèmes / réseau</td><td>Proxmox VE, OPNsense, VLAN, Linux</td><td>Intermédiaire</td><td>Plateforme commune (socle)</td></tr>
+        <tr><td>02</td><td>Réseau d'entreprise multi-sites simulé</td><td>Réseau</td><td>GNS3 / EVE-NG, Cisco IOS, OSPF, HSRP, ACL</td><td>Intermédiaire</td><td>Plateforme commune</td></tr>
+        <tr><td>03</td><td>Annuaire Active Directory et intégration Linux</td><td>Systèmes</td><td>Windows Server, AD DS, GPO, Samba, SSSD</td><td>Intermédiaire</td><td>Plateforme commune</td></tr>
+        <tr><td>04</td><td>Pare-feu, IDS/IPS et filtrage applicatif</td><td>Sécurité réseau</td><td>OPNsense, Suricata, Zenarmor, Squid</td><td>Intermédiaire</td><td>Plateforme commune</td></tr>
+        <tr><td>05</td><td>PKI interne, TLS et contrôle d'accès 802.1X</td><td>Sécurité</td><td>OpenSSL, step-ca, FreeRADIUS, EAP-TLS</td><td>Intermédiaire</td><td>Plateforme dédiée possible (portail de certificats)</td></tr>
+        <tr><td>06</td><td>Supervision, métriques et journalisation centralisée</td><td>Systèmes</td><td>Prometheus, Grafana, Zabbix, Loki ou ELK</td><td>Intermédiaire</td><td>Intégré à la plateforme commune</td></tr>
+        <tr><td>07</td><td>VPN site à site et accès distant</td><td>Réseau / sécurité</td><td>WireGuard, strongSwan (IPsec), OpenVPN</td><td>Avancé</td><td>Plateforme commune</td></tr>
+        <tr><td>08</td><td>Infrastructure as Code et automatisation réseau</td><td>Automatisation</td><td>Ansible, Terraform, NetBox, Nornir, GitLab CI</td><td>Avancé</td><td>Dépôts publics + plateforme commune</td></tr>
+        <tr><td>09</td><td>Cluster Kubernetes sécurisé et pipeline DevSecOps</td><td>Systèmes / sécurité</td><td>k3s ou kubeadm, Cilium, Falco, Trivy, Vault</td><td>Avancé</td><td>Héberge la plateforme commune</td></tr>
+        <tr><td>10</td><td>Durcissement Linux et Windows conforme CIS / ANSSI</td><td>Sécurité système</td><td>OpenSCAP, Lynis, auditd, SELinux, AppArmor</td><td>Avancé</td><td>Plateforme dédiée possible (tableau de conformité)</td></tr>
+        <tr><td>11</td><td>SOC et SIEM : détection et réponse</td><td>Blue team</td><td>Wazuh, Sysmon, Sigma, MITRE ATT&amp;CK, TheHive</td><td>Avancé</td><td>Plateforme dédiée (portail SOC)</td></tr>
+        <tr><td>12</td><td>Laboratoire de tests d'intrusion et rapport professionnel</td><td>Red team</td><td>Kali, Nmap, Burp Suite, Metasploit, HTB</td><td>Avancé</td><td>Plateforme commune (rapports)</td></tr>
+        <tr><td>13</td><td>Attaque et défense Active Directory</td><td>Purple team</td><td>GOAD, BloodHound, Impacket, Wazuh</td><td>Avancé</td><td>Plateforme commune</td></tr>
+        <tr><td>14</td><td>Haute disponibilité, sauvegardes et plan de reprise</td><td>Systèmes</td><td>HAProxy, Keepalived, Ceph ou ZFS, Proxmox Backup, Restic</td><td>Avancé</td><td>Plateforme commune</td></tr>
+        <tr><td>15</td><td>Zero Trust : identité, SSO, MFA et accès sécurisé</td><td>Sécurité / identité</td><td>Keycloak, Authelia, Teleport, Tailscale/Headscale</td><td>Expert</td><td>Protège la plateforme commune</td></tr>
+        <tr><td>16</td><td>Honeypots et renseignement sur les menaces</td><td>Blue team</td><td>T-Pot, Cowrie, MISP, OpenCTI</td><td>Expert</td><td>Plateforme dédiée (tableau de bord des attaques)</td></tr>
+        <tr><td>17</td><td>Cloud hybride sécurisé</td><td>Cloud</td><td>AWS ou Azure, Terraform, VPN, IAM, CloudTrail</td><td>Expert</td><td>Plateforme commune</td></tr>
+        <tr><td>18</td><td>Investigation numérique et réponse à incident</td><td>DFIR</td><td>Velociraptor, Volatility, Autopsy, KAPE, Plaso</td><td>Expert</td><td>Plateforme commune (rapports)</td></tr>
+        <tr><td>19</td><td>Simulation d'adversaire et purple teaming</td><td>Red / blue team</td><td>Caldera, Atomic Red Team, Sliver, Wazuh</td><td>Expert</td><td>Plateforme dédiée possible (couverture ATT&amp;CK)</td></tr>
+        <tr><td>20</td><td>Gouvernance, analyse de risques et audit du lab</td><td>GRC</td><td>ISO 27001, NIST CSF, EBIOS RM, CIS Controls</td><td>Expert</td><td>Plateforme dédiée possible (registre des risques)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <details class="a-disclosure">
+    <summary>Plateformes d'apprentissage et certifications de référence (utilisées dans plusieurs projets)</summary>
+    <ul class="a-prose">
+      <li><strong>Réseau</strong> : Cisco Networking Academy, Packet Tracer, GNS3 Academy, cours CCNA de Jeremy's IT Lab (YouTube), livre « Computer Networking: A Top-Down Approach » (Kurose, Ross), RFC via rfc-editor.org. Certification : CCNA.</li>
+      <li><strong>Systèmes</strong> : Linux Journey, cours RHCSA de Sander van Vugt, documentation Red Hat et Debian, Microsoft Learn (Windows Server, AD). Certifications : LPIC-1, RHCSA, Microsoft AZ-800.</li>
+      <li><strong>Sécurité défensive</strong> : TryHackMe (parcours SOC Level 1 et 2), LetsDefend, CyberDefenders, Blue Team Labs Online, documentation Wazuh et Elastic, MITRE ATT&amp;CK et D3FEND, guides ANSSI, CIS Benchmarks. Certifications : BTL1, CompTIA Security+ et CySA+.</li>
+      <li><strong>Sécurité offensive</strong> : TryHackMe (Jr Penetration Tester), Hack The Box Academy, PortSwigger Web Security Academy, PentesterLab, OWASP Testing Guide. Certifications : eJPT, PNPT, OSCP.</li>
+      <li><strong>Cloud et automatisation</strong> : AWS Skill Builder, Microsoft Learn, KodeKloud, Killercoda, documentation Terraform et Ansible, Kubernetes.io. Certifications : AWS SAA / Security Specialty, AZ-500, CKA, CKS.</li>
+      <li><strong>Gouvernance</strong> : normes ISO 27001 / 27002, NIST CSF 2.0, méthode EBIOS Risk Manager (ANSSI), CIS Controls v8, MOOC ANSSI SecNumacadémie. Certifications : ISO 27001 Lead Implementer, CISSP à terme.</li>
+    </ul>
+  </details>
+</section>
+
+<section class="a-section" id="p01">
+  <h2 class="a-section__title">01 · Home lab virtualisé et réseau segmenté</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Virtualisation, réseau local, administration Linux</dd></div>
+    <div><dt>Niveau</dt><dd>Intermédiaire (socle)</dd></div>
+    <div><dt>Durée indicative</dt><dd>3 à 4 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme commune : page « architecture du lab » et carte NetBox</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Construire l'environnement qui hébergera tous les projets suivants : un hyperviseur, un pare-feu virtuel, des réseaux segmentés en VLAN (management, serveurs, utilisateurs, DMZ, lab d'attaque isolé), des modèles de machines virtuelles et une procédure de sauvegarde. Exigences : isolation stricte du réseau d'attaque, accès administrateur uniquement depuis le VLAN de management, modèles Linux et Windows déployables en moins de 5 minutes, documentation complète de l'adressage.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Virtualisation : hyperviseurs de type 1 et 2, KVM/QEMU, conteneurs LXC, allocation CPU/RAM, stockage (LVM, ZFS), snapshots, cloud-init.</li>
+    <li>Réseau : modèle OSI et TCP/IP, adressage IPv4 et CIDR, sous-réseaux, VLAN (802.1Q), ponts Linux et Open vSwitch, passerelle, NAT, DHCP, DNS.</li>
+    <li>Pare-feu : filtrage à états, zones, règles par défaut « tout refuser », journalisation.</li>
+    <li>Linux : gestion des services systemd, SSH par clés, sudo, paquets, journaux.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>Proxmox VE (gratuit) ou alternative VMware Workstation / VirtualBox si une seule machine ; OPNsense ou pfSense comme pare-feu ; Debian, Ubuntu Server, Windows Server évaluation 180 jours ; NetBox ; draw.io.</li>
+    <li>Ressources : documentation Proxmox, Learn Linux TV (série Proxmox), documentation OPNsense, cours « Networking Fundamentals » de Practical Networking, chapitre réseau de Linux Journey.</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches sur VLAN, sous-réseaux, filtrage à états ; exercice d'adressage sur papier.</li>
+    <li>Conception : schéma du lab (5 VLAN), plan d'adressage, matrice de flux entre zones, dimensionnement des VM.</li>
+    <li>Installation de Proxmox, configuration du pont VLAN-aware, stockage ZFS, dépôt de modèles.</li>
+    <li>Déploiement d'OPNsense avec une interface par VLAN, règles de base, DHCP et DNS par zone.</li>
+    <li>Création de modèles cloud-init (Debian, Ubuntu) et d'un modèle Windows Server avec sysprep.</li>
+    <li>Sauvegardes planifiées des VM (Proxmox Backup Server ou vzdump) et test de restauration.</li>
+    <li>Inventaire de tout le lab dans NetBox ; validation : tests de connectivité et d'isolation entre VLAN (ping, nmap, captures).</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Administration d'un hyperviseur et gestion du stockage et des sauvegardes.</li>
+    <li>Conception et mise en œuvre d'un réseau segmenté par VLAN avec pare-feu inter-zones.</li>
+    <li>Industrialisation de la création de machines (modèles, cloud-init).</li>
+    <li>Documentation d'infrastructure (schémas, adressage, inventaire).</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : schéma physique et logique, tableau d'adressage, matrice de flux, procédure d'installation reproductible, rapport de tests d'isolation avec captures nmap, procédure de restauration testée. Sur la plateforme commune, ce projet devient la page « Architecture du lab » que toutes les autres pages référencent ; la carte NetBox y est affichée en direct.</p>
+</section>
+
+<section class="a-section" id="p02">
+  <h2 class="a-section__title">02 · Réseau d'entreprise multi-sites simulé</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Réseau (commutation, routage, services)</dd></div>
+    <div><dt>Niveau</dt><dd>Intermédiaire (niveau CCNA)</dd></div>
+    <div><dt>Durée indicative</dt><dd>5 à 6 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme commune : topologies, configurations, captures</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Concevoir et configurer le réseau d'une entreprise fictive de trois sites (siège, agence, centre de données) avec redondance, routage dynamique, qualité de service et sécurité des équipements. Exigences : convergence après panne de lien en moins de 5 secondes, aucun accès non authentifié aux équipements, séparation voix / données / invités, connectivité IPv6 en parallèle d'IPv4, documentation au standard d'un dossier d'architecture technique.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Commutation : VLAN, trunks, VTP, STP / RSTP / MSTP, EtherChannel (LACP), sécurité des ports, DHCP snooping, Dynamic ARP Inspection.</li>
+    <li>Routage : statique, OSPF multi-aires, EIGRP ou BGP de base, redistribution, routage inter-VLAN, HSRP / VRRP, NAT, PBR.</li>
+    <li>Services : DHCP relais, DNS, NTP, SNMPv3, syslog, NetFlow.</li>
+    <li>IPv6 : adressage, SLAAC, DHCPv6, OSPFv3, double pile.</li>
+    <li>Sécurité : ACL standard et étendues, AAA, SSH, plans de contrôle et de gestion, QoS (classification, files).</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>GNS3 ou EVE-NG Community (images Cisco IOSv / IOL, ou alternatives libres : VyOS, Arista cEOS, FRRouting) ; Packet Tracer pour les premiers exercices ; Wireshark ; iperf3.</li>
+    <li>Ressources : Cisco Networking Academy (CCNA 1 à 3), Jeremy's IT Lab (cours et labs gratuits), livre « CCNA 200-301 Official Cert Guide » (Odom), documentation FRRouting, RFC 2328 (OSPF), RFC 4861 (IPv6 ND).</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : un chapitre CCNA par semaine avec fiches ; labs Packet Tracer associés.</li>
+    <li>Conception : topologie hiérarchique (cœur, distribution, accès) par site, plan VLAN et IP v4/v6, choix OSPF multi-aires (ADR), plan de QoS.</li>
+    <li>Commutation : VLAN, trunks, RSTP, EtherChannel, sécurité de couche 2 sur le site principal, puis réplication.</li>
+    <li>Routage : inter-VLAN, OSPF entre sites via liens WAN simulés, HSRP sur les passerelles, NAT vers Internet simulé.</li>
+    <li>Services et gestion : DHCP, DNS, NTP, SNMPv3, syslog vers le collecteur du projet 06, AAA local puis RADIUS (projet 05).</li>
+    <li>IPv6 en double pile et OSPFv3.</li>
+    <li>Validation : tests de convergence (couper un lien, chronométrer), captures Wireshark des protocoles, vérification des ACL, tests iperf de la QoS.</li>
+    <li>Sauvegarde de toutes les configurations dans Git avec un script (Netmiko) : première étape vers le projet 08.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Conception de réseau hiérarchique et redondant, adressage v4/v6.</li>
+    <li>Configuration et dépannage de la commutation et du routage dynamique.</li>
+    <li>Sécurisation des équipements et de la couche 2.</li>
+    <li>Analyse de protocoles avec Wireshark ; rédaction d'un dossier d'architecture technique.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : dossier d'architecture technique (DAT) avec topologies L1/L2/L3, tableau des VLAN et adresses, configurations commentées dans Git, rapport de tests de convergence avec chronométrages et captures, fiches de dépannage. Sur la plateforme commune : page du projet avec topologie interactive (draw.io), lien vers le dépôt <code>lab-configs</code> et les captures ; le fichier de projet GNS3 exporté est fourni pour reproduction.</p>
+</section>
+
+<section class="a-section" id="p03">
+  <h2 class="a-section__title">03 · Annuaire Active Directory et intégration Linux</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Systèmes Windows et Linux, identité</dd></div>
+    <div><dt>Niveau</dt><dd>Intermédiaire</dd></div>
+    <div><dt>Durée indicative</dt><dd>4 à 5 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme commune ; réutilisé par les projets 11, 13 et 15</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Mettre en place l'annuaire d'entreprise : domaine Active Directory avec deux contrôleurs, DNS et DHCP intégrés, unités d'organisation, stratégies de groupe, partages de fichiers avec droits, serveur d'impression, puis intégration de postes et serveurs Linux au domaine. Exigences : modèle d'administration par niveaux (tiering), aucun compte administrateur du domaine utilisé au quotidien, mots de passe conformes à une politique, sauvegarde de l'état système et test de restauration d'un contrôleur.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>AD DS : forêt, domaine, sites, contrôleurs, catalogue global, réplication, rôles FSMO, schéma, DNS intégré (zones, SRV).</li>
+    <li>Kerberos et NTLM : tickets TGT / TGS, SPN, délégation ; LDAP et LDAPS.</li>
+    <li>GPO : ordre d'application, filtrage de sécurité, préférences, modèles ADMX, baselines de sécurité Microsoft.</li>
+    <li>Modèle d'administration en tiers (Tier 0/1/2), comptes de service gérés (gMSA), LAPS.</li>
+    <li>Intégration Linux : SSSD, realmd, Kerberos client, Samba, sudo via l'annuaire, montage de partages.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>Windows Server 2022 (évaluation), Windows 11 Entreprise (évaluation), RSAT, PowerShell, Debian/Rocky Linux, Samba, SSSD ; Microsoft Security Compliance Toolkit ; PingCastle (audit AD).</li>
+    <li>Ressources : Microsoft Learn (parcours AZ-800), documentation ANSSI « Recommandations de sécurité relatives à Active Directory », chaîne « MSFT WebCast », documentation Red Hat « Integrating RHEL with AD », blog ADSecurity.org.</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches Kerberos, réplication, GPO, tiering ; schéma du fonctionnement d'une ouverture de session.</li>
+    <li>Conception : nom de domaine, plan d'OU, convention de nommage, groupes (AGDLP), politique de mots de passe, plan de tiering.</li>
+    <li>Déploiement du premier contrôleur (DNS, DHCP avec basculement), puis du second ; vérification de la réplication.</li>
+    <li>Création des OU, utilisateurs et groupes par script PowerShell depuis un CSV ; comptes d'administration par tiers.</li>
+    <li>GPO : baseline de sécurité, restrictions de connexion par tiers, mappage de lecteurs, configuration du pare-feu Windows, LAPS.</li>
+    <li>Serveur de fichiers (partages, quotas, FSRM) et serveur d'impression ; jonction des postes Windows.</li>
+    <li>Intégration Linux : jonction avec realmd/SSSD, connexion avec compte AD, sudo par groupe AD, partage Samba avec ACL.</li>
+    <li>Audit avec PingCastle, correction des points relevés, sauvegarde et restauration d'un contrôleur.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Administration d'Active Directory, DNS, DHCP et GPO.</li>
+    <li>Sécurisation de l'annuaire (tiering, LAPS, baselines) et audit.</li>
+    <li>PowerShell pour l'automatisation de l'administration.</li>
+    <li>Interopérabilité Windows / Linux (Kerberos, SSSD, Samba).</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : dossier de conception de l'annuaire (OU, groupes, nommage), catalogue des GPO avec justification, scripts PowerShell commentés, rapport PingCastle avant/après, procédure d'intégration Linux, procédure de restauration testée. Sur la plateforme commune : page projet avec le rapport PingCastle « avant / après » comme preuve chiffrée d'amélioration.</p>
+</section>
+
+<section class="a-section" id="p04">
+  <h2 class="a-section__title">04 · Pare-feu, IDS/IPS et filtrage applicatif</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Sécurité réseau</dd></div>
+    <div><dt>Niveau</dt><dd>Intermédiaire</dd></div>
+    <div><dt>Durée indicative</dt><dd>4 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme commune ; alertes remontées au SOC (projet 11)</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Transformer le pare-feu du lab en passerelle de sécurité complète : politique de filtrage documentée par zone, détection et prévention d'intrusion, filtrage web et DNS, publication sécurisée d'un service en DMZ avec reverse proxy, journalisation exploitable. Exigences : matrice de flux appliquée à la lettre (tout ce qui n'est pas listé est refusé et journalisé), IPS actif sur la DMZ sans faux positif bloquant, blocage des domaines malveillants, tests d'attaque prouvant les détections.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Filtrage à états, NAT (source, destination, 1:1), alias, planification des règles, anti-spoofing, journalisation.</li>
+    <li>IDS/IPS : signatures vs anomalies, Suricata (règles ET Open, mode inline), faux positifs, réglage.</li>
+    <li>Filtrage DNS (Unbound, listes de blocage, DNS over TLS), proxy web et inspection TLS (limites et éthique).</li>
+    <li>DMZ et publication : reverse proxy (HAProxy ou Nginx), WAF (ModSecurity, CRS OWASP), certificats.</li>
+    <li>GeoIP, limitation de débit, protection contre le balayage de ports.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>OPNsense (ou pfSense), Suricata, Zenarmor (édition gratuite), Unbound, HAProxy, ModSecurity, Nmap, hping3, testmyids.com, OWASP Juice Shop comme cible en DMZ.</li>
+    <li>Ressources : documentation OPNsense, documentation Suricata et Emerging Threats, guide ANSSI « Recommandations pour la définition d'une politique de filtrage réseau », OWASP CRS documentation, cours TryHackMe « Network Security » et « Snort/Suricata ».</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches sur le filtrage à états, NAT, fonctionnement d'un IDS, WAF.</li>
+    <li>Conception : matrice de flux complète (source, destination, port, justification, propriétaire), plan de journalisation, ADR IDS en mode détection puis prévention.</li>
+    <li>Mise en œuvre des règles par zone avec alias et descriptions ; règles de refus explicites journalisées.</li>
+    <li>Activation de Suricata sur WAN et DMZ, jeux de règles ET Open, période d'observation, réglage, passage en IPS sur la DMZ.</li>
+    <li>Filtrage DNS avec listes de blocage, DNS over TLS vers l'extérieur, blocage du DNS sortant direct.</li>
+    <li>Publication de Juice Shop en DMZ via HAProxy + ModSecurity CRS, certificat de la PKI (projet 05).</li>
+    <li>Tests : nmap depuis chaque zone, attaques web sur Juice Shop (bloquées par le WAF), téléchargement de fichiers de test EICAR, vérification des journaux ; envoi des journaux au collecteur (projet 06 / 11).</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Rédaction et application d'une politique de filtrage réseau.</li>
+    <li>Déploiement et réglage d'un IDS/IPS, gestion des faux positifs.</li>
+    <li>Publication sécurisée de services (reverse proxy, WAF, TLS).</li>
+    <li>Tests de validation offensive de contrôles défensifs.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : matrice de flux versionnée, export de la configuration du pare-feu, rapport de réglage IDS (alertes avant/après), rapport de tests d'attaque avec captures d'alertes, procédure de publication d'un service. Sur la plateforme commune : page projet avec un panneau Grafana « alertes Suricata des 7 derniers jours » et la matrice de flux consultable.</p>
+</section>
+
+<section class="a-section" id="p05">
+  <h2 class="a-section__title">05 · PKI interne, TLS et contrôle d'accès réseau 802.1X</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Cryptographie appliquée, sécurité réseau</dd></div>
+    <div><dt>Niveau</dt><dd>Intermédiaire à avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>4 à 5 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme dédiée possible : portail de demande et d'inventaire de certificats</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Déployer une infrastructure à clés publiques à deux niveaux (autorité racine hors ligne, autorité intermédiaire émettrice), distribuer des certificats à tous les services du lab, automatiser leur renouvellement, puis utiliser la PKI pour authentifier les machines sur le réseau (802.1X avec EAP-TLS) et les administrateurs (certificats clients, clés SSH signées). Exigences : clé racine hors ligne et protégée, révocation fonctionnelle (CRL, OCSP), aucun certificat auto-signé restant dans le lab, un poste non authentifié placé automatiquement dans un VLAN invité.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Cryptographie : symétrique / asymétrique, RSA et courbes elliptiques, hachage, signatures, échange de clés, TLS 1.2/1.3 (handshake, suites), PFS.</li>
+    <li>PKI : X.509, chaînes de confiance, extensions (SAN, EKU), CSR, CRL, OCSP, HSM, cérémonie de clés, durée de vie, ACME.</li>
+    <li>802.1X : supplicant, authentificateur, serveur d'authentification, EAP-TLS / PEAP, RADIUS, attribution dynamique de VLAN, MAB.</li>
+    <li>SSH : autorités de certification SSH, certificats d'hôte et d'utilisateur.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>OpenSSL, step-ca (Smallstep) ou EJBCA / AD CS pour comparer, FreeRADIUS, wpa_supplicant, commutateur virtuel supportant 802.1X (Cisco IOSv dans GNS3 ou un commutateur physique d'occasion), certbot / acme.sh, testssl.sh, Wireshark.</li>
+    <li>Ressources : cours Cryptography I (Coursera, Dan Boneh), documentation Smallstep, RFC 5280 (X.509), RFC 8446 (TLS 1.3), guide ANSSI « Recommandations de sécurité relatives à TLS », documentation FreeRADIUS, wiki 802.1X de Cisco.</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches cryptographie et TLS ; décodage manuel d'un certificat et d'un handshake dans Wireshark.</li>
+    <li>Conception : hiérarchie de la PKI, politique de certification (durées, algorithmes, usages), procédure de cérémonie de la racine, plan de distribution des certificats, plan 802.1X par VLAN.</li>
+    <li>Création de la racine sur une VM hors ligne (puis éteinte et exportée), de l'intermédiaire avec step-ca, publication de la CRL et d'OCSP.</li>
+    <li>Distribution de la racine aux clients (GPO pour Windows, paquet pour Linux), émission automatisée via ACME pour les services web du lab, renouvellement planifié.</li>
+    <li>Remplacement de tous les certificats auto-signés (Proxmox, OPNsense, Grafana…) ; vérification avec testssl.sh.</li>
+    <li>FreeRADIUS avec EAP-TLS, certificats machine, configuration 802.1X du commutateur, VLAN dynamique, VLAN invité pour les échecs, MAB pour les imprimantes.</li>
+    <li>Autorité SSH : certificats d'hôte et d'utilisateur avec durée courte ; révocation d'un certificat et vérification de son rejet.</li>
+    <li>Tests : poste sans certificat placé en VLAN invité, certificat révoqué refusé, captures de l'échange EAP.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Compréhension opérationnelle de la cryptographie et de TLS.</li>
+    <li>Conception et exploitation d'une PKI d'entreprise, gestion du cycle de vie des certificats.</li>
+    <li>Contrôle d'accès réseau 802.1X et RADIUS.</li>
+    <li>Automatisation ACME et durcissement des configurations TLS.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : politique de certification, compte rendu de cérémonie de clés, schéma de la PKI, procédures d'émission / renouvellement / révocation, rapport testssl.sh avant/après, captures EAP-TLS. Plateforme dédiée envisageable : un <strong>portail de certificats</strong> (application web Python/FastAPI ou Go) où l'on demande un certificat, visualise l'inventaire, les dates d'expiration et les révocations, avec alertes avant expiration ; il s'appuie sur l'API de step-ca et démontre la maîtrise du sujet de bout en bout.</p>
+</section>
+
+<section class="a-section" id="p06">
+  <h2 class="a-section__title">06 · Supervision, métriques et journalisation centralisée</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Administration système, observabilité</dd></div>
+    <div><dt>Niveau</dt><dd>Intermédiaire</dd></div>
+    <div><dt>Durée indicative</dt><dd>4 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Directement intégré à la plateforme commune (panneaux Grafana en direct)</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Rendre le lab observable : métriques de tous les équipements et services, journaux centralisés et recherchables, tableaux de bord, alertes envoyées par e-mail et messagerie, pages de statut. Exigences : découverte automatique des nouvelles machines, rétention de 30 jours de journaux, alertes pertinentes (pas de bruit) avec procédure associée, disponibilité mesurée pour chaque service, journaux horodatés de manière fiable (NTP).</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Métriques, journaux, traces ; modèles pull (Prometheus) vs push ; SNMP (MIB, OID, v3), exporters, PromQL.</li>
+    <li>Journalisation : syslog (RFC 5424), journald, Windows Event Log, agents (Promtail, Filebeat, rsyslog), analyse et normalisation, rétention et rotation.</li>
+    <li>Alerting : seuils, symptômes vs causes, SLI/SLO, fatigue d'alerte, astreinte.</li>
+    <li>Synchronisation temporelle NTP / chrony ; importance pour la corrélation et la forensique.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>Prometheus, node_exporter, windows_exporter, snmp_exporter, blackbox_exporter, Grafana, Alertmanager, Loki + Promtail (ou Elastic Stack), Zabbix (pour comparer une approche « classique »), Uptime Kuma, chrony.</li>
+    <li>Ressources : documentation Prometheus et Grafana, livre « Prometheus: Up &amp; Running », Grafana Labs tutorials, documentation Zabbix, cours KodeKloud « Prometheus Certified Associate ».</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches métriques / journaux, PromQL de base, SNMP.</li>
+    <li>Conception : liste des sources, ce qu'il faut mesurer par service (méthode RED / USE), politique de rétention, canaux d'alerte, ADR Prometheus + Loki vs Zabbix vs ELK.</li>
+    <li>Serveur NTP interne (chrony) et configuration de tous les équipements.</li>
+    <li>Prometheus et exporters sur toutes les VM Linux et Windows, snmp_exporter pour les équipements réseau, blackbox pour les tests HTTP/ICMP.</li>
+    <li>Loki + Promtail (ou Filebeat) : journaux Linux, Windows, OPNsense, Suricata, équipements réseau via syslog.</li>
+    <li>Tableaux de bord Grafana par domaine (réseau, systèmes, sécurité, plateforme), pages de statut Uptime Kuma.</li>
+    <li>Règles d'alerte avec libellés de gravité, Alertmanager vers e-mail et Telegram/Discord ; une fiche de procédure par alerte.</li>
+    <li>Découverte automatique via fichiers générés par Ansible depuis NetBox (préfiguration du projet 08) ; validation par simulation de pannes.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Déploiement d'une pile d'observabilité complète et PromQL.</li>
+    <li>Collecte et normalisation de journaux hétérogènes.</li>
+    <li>Conception d'alertes actionnables et de tableaux de bord lisibles.</li>
+    <li>Culture SRE : SLI, SLO, procédures d'exploitation.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : cartographie des sources supervisées, catalogue des alertes avec procédures, tableaux de bord exportés en JSON, rapport de disponibilité mensuel. Intégration à la plateforme commune : les panneaux Grafana sont embarqués dans LabHub (disponibilité, charge, alertes) et prouvent en continu que le lab est réel et exploité ; le rapport de disponibilité mensuel est publié automatiquement.</p>
+</section>
+<section class="a-section" id="p07">
+  <h2 class="a-section__title">07 · VPN site à site et accès distant</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Réseau et sécurité (chiffrement des communications)</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>3 à 4 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme commune ; sécurise l'accès au lab</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Relier deux sites du lab par un tunnel chiffré et offrir un accès distant sécurisé aux administrateurs, en comparant trois technologies (WireGuard, IPsec, OpenVPN). Exigences : tunnel site à site chiffré et redémarrant seul, accès distant avec authentification forte et certificats (PKI du projet 05), routage et pare-feu corrects entre sites, comparaison mesurée des performances, aucun accès administrateur exposé directement sur Internet.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>IPsec : IKEv2, phases 1 et 2, ESP, tunnel vs transport, PSK vs certificats, NAT-T.</li>
+    <li>WireGuard : cryptographie moderne (Noise), clés, AllowedIPs, keepalive, roaming.</li>
+    <li>OpenVPN : TLS, tun/tap, routage push, authentification par certificat + TOTP.</li>
+    <li>Routage entre sites, split tunneling, DNS via VPN, MTU / MSS clamping.</li>
+    <li>Concepts d'accès distant moderne (préparation du Zero Trust, projet 15).</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>WireGuard, strongSwan, OpenVPN (intégrés à OPNsense), iperf3, mtr, Wireshark ; Google Authenticator / FreeOTP pour le TOTP.</li>
+    <li>Ressources : documentation WireGuard (whitepaper de Jason Donenfeld), documentation strongSwan, guide ANSSI « Recommandations de sécurité IPsec », wiki OPNsense, cours TryHackMe « VPN ».</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches IPsec / WireGuard / OpenVPN, schéma du chiffrement de chaque solution.</li>
+    <li>Conception : plan d'adressage des tunnels, matrice de flux inter-sites, ADR de choix par usage (site à site vs nomade).</li>
+    <li>Tunnel site à site WireGuard entre deux pare-feux, routage, règles de filtrage, redémarrage automatique.</li>
+    <li>Même tunnel en IPsec IKEv2 avec certificats de la PKI, pour comparaison.</li>
+    <li>Accès distant : WireGuard nomade et OpenVPN avec certificat client + TOTP, DNS interne, split tunneling maîtrisé.</li>
+    <li>Bastion d'administration accessible uniquement via le VPN ; suppression de toute exposition SSH/RDP directe.</li>
+    <li>Validation : captures Wireshark (trafic chiffré illisible), tests iperf3 et latence pour comparer les trois solutions, test de bascule après coupure.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Déploiement et comparaison de technologies VPN.</li>
+    <li>Conception d'un accès distant sécurisé avec MFA et certificats.</li>
+    <li>Routage inter-sites et dépannage de MTU / MSS.</li>
+    <li>Analyse comparative argumentée (sécurité, performance, exploitation).</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : schéma des tunnels, configurations, tableau comparatif WireGuard / IPsec / OpenVPN (débit, latence, complexité, sécurité), procédure d'onboarding d'un administrateur nomade. Sur la plateforme commune : page projet avec le tableau comparatif et un schéma « comment j'accède au lab » servant aussi de documentation d'exploitation.</p>
+</section>
+
+<section class="a-section" id="p08">
+  <h2 class="a-section__title">08 · Infrastructure as Code et automatisation réseau</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Automatisation, DevOps réseau</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>5 à 6 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Dépôts publics (preuves de code) + plateforme commune</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Rendre tout le lab reproductible et versionné : provisionnement des VM, configuration des systèmes, configuration des équipements réseau et de NetBox comme source de vérité, le tout piloté par Git et une chaîne CI/CD. Exigences : reconstruire une VM ou un service entièrement à partir du code, aucune configuration faite « à la main » sans être reportée dans le code, tests automatiques avant application, secrets chiffrés, NetBox comme référentiel unique de l'inventaire.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Idempotence, gestion de configuration vs provisionnement, immutable vs mutable infrastructure.</li>
+    <li>Ansible : inventaires (statique, dynamique depuis NetBox), rôles, playbooks, handlers, templates Jinja2, Ansible Vault, collections (réseau).</li>
+    <li>Terraform : providers (Proxmox, NetBox), état, plan/apply, modules, variables.</li>
+    <li>Automatisation réseau : Netmiko, NAPALM, Nornir, modèles de configuration, drift detection.</li>
+    <li>CI/CD : GitLab CI ou GitHub Actions, lint (ansible-lint, yamllint), tests (Molecule), déploiement progressif, revue.</li>
+    <li>Source de vérité : NetBox (modèle de données, API), génération de configuration depuis les données.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>Ansible, Terraform, NetBox, Nornir/NAPALM/Netmiko, GitLab CE (auto-hébergé) ou GitHub, Molecule, pre-commit, SOPS ou Ansible Vault.</li>
+    <li>Ressources : documentation Ansible et « Ansible for DevOps » (Jeff Geerling), documentation Terraform, chaîne « Jeff Geerling » (YouTube), documentation NetBox, livre « Network Programmability and Automation » (O'Reilly), cours KodeKloud Ansible/Terraform.</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches idempotence, Jinja2, modèle de données NetBox.</li>
+    <li>Conception : arborescence du dépôt <code>ansible-lab</code>, stratégie d'inventaire dynamique, plan de gestion des secrets, ADR Ansible + Terraform + NetBox.</li>
+    <li>Terraform : provisionnement des VM sur Proxmox à partir des modèles, création des enregistrements NetBox.</li>
+    <li>Ansible : rôles pour le socle Linux (utilisateurs, SSH, pare-feu, exporters du projet 06), rôle Windows via WinRM, chiffrement des secrets.</li>
+    <li>Automatisation réseau : génération des configurations des équipements depuis NetBox (Jinja2), application via Nornir/NAPALM, détection de dérive.</li>
+    <li>Inventaire dynamique Ansible depuis NetBox ; Prometheus et Loki configurés automatiquement pour toute nouvelle machine.</li>
+    <li>CI/CD : lint, tests Molecule, exécution en mode vérification (check) sur merge request, application après validation.</li>
+    <li>Validation : détruire puis reconstruire une VM entièrement par le code ; introduire une dérive manuelle et prouver sa détection.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Infrastructure as Code (Terraform) et gestion de configuration (Ansible).</li>
+    <li>Automatisation réseau pilotée par une source de vérité (NetBox).</li>
+    <li>CI/CD d'infrastructure, tests et gestion des secrets.</li>
+    <li>Culture GitOps et reproductibilité.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : dépôts publics <code>ansible-lab</code> et <code>terraform-lab</code> avec README, schéma du flux GitOps, démonstration de reconstruction, capture de la détection de dérive. Ces dépôts sont la vitrine « code » du portfolio ; sur la plateforme commune, la page projet met en avant le pipeline CI et l'inventaire NetBox synchronisé automatiquement.</p>
+</section>
+
+<section class="a-section" id="p09">
+  <h2 class="a-section__title">09 · Cluster Kubernetes sécurisé et pipeline DevSecOps</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Conteneurs, systèmes, sécurité applicative</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>6 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Héberge la plateforme commune LabHub</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Déployer un cluster Kubernetes qui héberge la plateforme LabHub et d'autres services internes, en appliquant les bonnes pratiques de sécurité des conteneurs et une chaîne d'intégration continue « sécurisée par conception ». Exigences : images scannées et signées, politiques réseau « refus par défaut » entre pods, secrets gérés par un coffre, admission contrôlée (pas de conteneur privilégié), détection d'exécution anormale, sauvegarde et restauration du cluster.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Conteneurs : namespaces, cgroups, images, registres, rootless, différence conteneur / VM.</li>
+    <li>Kubernetes : pods, services, ingress, deployments, RBAC, namespaces, NetworkPolicy, PodSecurity, stockage persistant, Helm.</li>
+    <li>Sécurité : scan d'images (Trivy), signature (cosign / Sigstore), politiques d'admission (Kyverno / OPA Gatekeeper), runtime security (Falco), CIS Kubernetes Benchmark (kube-bench).</li>
+    <li>DevSecOps : SAST, SCA, secrets scanning, tests dans le pipeline, GitOps (Argo CD / Flux), gestion des secrets (Vault, External Secrets).</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>k3s ou kubeadm, Cilium (CNI + NetworkPolicy + Hubble), Traefik ou Nginx Ingress, Helm, Argo CD, HashiCorp Vault, Trivy, cosign, Kyverno, Falco, kube-bench, Gitea/GitLab + runners.</li>
+    <li>Ressources : Kubernetes.io tutorials, « Kubernetes Up &amp; Running », KodeKloud (CKA/CKS), documentation Cilium et Falco, OWASP « Kubernetes Security Cheat Sheet », cours « Killer Shell » CKS.</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches conteneurs, architecture Kubernetes, modèle RBAC, NetworkPolicy.</li>
+    <li>Conception : topologie du cluster (nœuds sur Proxmox), plan de namespaces et RBAC, stratégie de secrets, ADR k3s vs kubeadm et Cilium vs autres CNI.</li>
+    <li>Installation du cluster (Terraform + Ansible du projet 08), CNI Cilium, ingress, stockage persistant, sauvegarde (Velero).</li>
+    <li>Déploiement de la plateforme LabHub via Helm et Argo CD (GitOps).</li>
+    <li>Sécurité : Vault + External Secrets, Kyverno (interdire privileged, exiger limites et images signées), NetworkPolicy « deny all » puis ouvertures ciblées, Falco pour la détection runtime.</li>
+    <li>Pipeline DevSecOps : build d'image, scan Trivy, signature cosign, tests, déploiement GitOps ; échec du pipeline si vulnérabilité critique.</li>
+    <li>Audit : kube-bench (CIS), correction ; envoi des événements Falco au SOC (projet 11).</li>
+    <li>Validation : tenter de déployer un pod privilégié (refusé), un pod avec image non signée (refusé), déclencher une alerte Falco (shell dans un conteneur).</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Administration et sécurisation de Kubernetes (RBAC, NetworkPolicy, admission).</li>
+    <li>Sécurité de la chaîne d'approvisionnement logicielle (scan, signature).</li>
+    <li>GitOps et gestion des secrets.</li>
+    <li>Détection d'intrusion au niveau conteneur.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : schéma du cluster, manifests et charts dans Git, rapport kube-bench avant/après, démonstration des refus d'admission, procédure de restauration Velero. Ce projet héberge LabHub : la plateforme commune tourne donc sur une infrastructure dont la sécurité est elle-même documentée et démontrée.</p>
+</section>
+
+<section class="a-section" id="p10">
+  <h2 class="a-section__title">10 · Durcissement des systèmes conforme CIS / ANSSI</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Sécurité système (Linux et Windows)</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>4 à 5 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme dédiée possible : tableau de bord de conformité</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Élaborer et appliquer des référentiels de durcissement pour les serveurs Linux et Windows du lab, mesurer la conformité, automatiser l'application et suivre l'évolution dans le temps. Exigences : score de conformité mesuré avant / après, durcissement appliqué par Ansible/GPO (reproductible), aucune régression fonctionnelle, contrôle continu, gestion documentée des exceptions.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Référentiels : CIS Benchmarks, guides ANSSI (durcissement GNU/Linux, Windows), DISA STIG, SCAP / OpenSCAP, notion de baseline et de profil (niveau 1/2).</li>
+    <li>Linux : comptes et sudo, PAM, SSH durci, pare-feu (nftables), services minimaux, systemd hardening, montages (noexec, nosuid), audit (auditd), MAC (SELinux, AppArmor), intégrité (AIDE), mises à jour automatiques.</li>
+    <li>Windows : baselines de sécurité, LAPS, restriction des privilèges, journalisation avancée, AppLocker/WDAC, désactivation de protocoles hérités (SMBv1, NTLMv1), BitLocker.</li>
+    <li>Gestion des exceptions et acceptation du risque.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>OpenSCAP + SCAP Security Guide, Lynis, CIS-CAT (édition gratuite), auditd, SELinux/AppArmor, AIDE, Ansible (rôles ANSSI/DevSec Hardening), Microsoft Security Compliance Toolkit, PolicyAnalyzer.</li>
+    <li>Ressources : CIS Benchmarks (téléchargement gratuit), guides ANSSI, documentation OpenSCAP, projet « ansible-lockdown » (CIS/STIG), Microsoft Learn (baselines).</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : lecture ciblée d'un CIS Benchmark Linux et d'un guide ANSSI ; fiches par thème (SSH, audit, MAC).</li>
+    <li>Conception : choix des référentiels et du niveau, périmètre, registre des exceptions, ADR.</li>
+    <li>Audit initial avec OpenSCAP et Lynis sur un serveur type : score et liste des écarts.</li>
+    <li>Écriture d'un rôle Ansible de durcissement Linux (idempotent), application sur un serveur de test, vérification de non-régression.</li>
+    <li>Durcissement Windows via GPO / baselines et scripts, audit CIS-CAT.</li>
+    <li>Contrôle continu : exécution planifiée des scans, remontée des scores dans Prometheus/Grafana (projet 06).</li>
+    <li>Généralisation à l'ensemble du lab via le pipeline du projet 08 ; documentation des exceptions justifiées.</li>
+    <li>Validation : comparaison des scores avant/après, tests fonctionnels des services durcis.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Lecture et application de référentiels de sécurité reconnus.</li>
+    <li>Durcissement Linux et Windows automatisé et mesurable.</li>
+    <li>Gestion de la conformité dans le temps et des exceptions.</li>
+    <li>Équilibre sécurité / disponibilité (non-régression).</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : référentiel de durcissement du lab, rôles Ansible publiés, rapports OpenSCAP/CIS-CAT avant/après, registre des exceptions. Plateforme dédiée envisageable : un <strong>tableau de bord de conformité</strong> qui agrège les scores SCAP par machine et leur évolution (application web + base de résultats), montrant la progression de la posture de sécurité du lab.</p>
+</section>
+
+<section class="a-section" id="p11">
+  <h2 class="a-section__title">11 · SOC et SIEM : détection et réponse</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Sécurité défensive (blue team)</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>6 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme dédiée : portail SOC (alertes, cas, couverture ATT&amp;CK)</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Construire un centre opérationnel de sécurité pour le lab : collecte des journaux de sécurité de toutes les sources, détection basée sur des règles alignées sur MITRE ATT&amp;CK, gestion des alertes en cas d'incident, et procédures de réponse. Exigences : couverture des principales sources (Windows/Sysmon, Linux, réseau, pare-feu, Kubernetes), règles de détection versionnées (Sigma), réduction des faux positifs, chaîne alerte → cas → réponse, tableau de bord de couverture ATT&amp;CK.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Fonctionnement d'un SOC, niveaux d'analystes, cycle de détection et réponse, pyramide de la douleur, kill chain.</li>
+    <li>MITRE ATT&amp;CK : tactiques, techniques, cartographie de la détection (Navigator).</li>
+    <li>Sources et télémétrie : Sysmon (configuration), journaux Windows utiles, auditd, EDR vs SIEM.</li>
+    <li>Détection : règles Sigma, langage de requête du SIEM, corrélation, seuils, allowlists.</li>
+    <li>Réponse à incident : triage, confinement, playbooks, SOAR, gestion de cas.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>Wazuh (SIEM/XDR) ou Elastic Security ; Sysmon + config SwiftOnSecurity/Olaf Hartong ; Sigma + sigmac ; MITRE ATT&amp;CK Navigator ; TheHive + Cortex (gestion de cas et réponse) ; Shuffle (SOAR).</li>
+    <li>Ressources : parcours TryHackMe « SOC Level 1/2 », LetsDefend, documentation Wazuh, dépôt SigmaHQ, MITRE ATT&amp;CK, blog « Florian Roth », « The DFIR Report » pour des cas réels.</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches ATT&amp;CK, kill chain, rôle du SIEM ; cartographie des sources du lab.</li>
+    <li>Conception : architecture de collecte, liste des cas d'usage de détection prioritaires (mappés ATT&amp;CK), plan de gestion des alertes, ADR Wazuh vs Elastic.</li>
+    <li>Déploiement du SIEM, agents sur Windows/Linux, Sysmon configuré, collecte du pare-feu, Suricata, Kubernetes/Falco.</li>
+    <li>Écriture et import de règles de détection (Sigma converties) : force brute, mouvement latéral, persistance, exfiltration, désactivation de logs, etc.</li>
+    <li>Réglage : génération de faux positifs, création d'allowlists, ajustement des seuils.</li>
+    <li>Chaîne de réponse : intégration TheHive, création automatique de cas, playbooks de triage et de confinement, SOAR pour les actions simples (bloquer une IP sur OPNsense).</li>
+    <li>Tableau de bord de couverture ATT&amp;CK (Navigator) montrant les techniques détectées.</li>
+    <li>Validation : exécuter des tests d'attaque (Atomic Red Team, projet 19) et vérifier la détection ; mesurer le délai de détection.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Ingénierie de détection (Sigma, ATT&amp;CK) et réglage des règles.</li>
+    <li>Exploitation d'un SIEM et gestion des sources de télémétrie.</li>
+    <li>Gestion des incidents (triage, cas, playbooks) et SOAR.</li>
+    <li>Mesure et amélioration de la couverture de détection.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : architecture du SOC, dépôt <code>detection-rules</code> (Sigma), playbooks de réponse, matrice de couverture ATT&amp;CK, rapports d'incidents simulés. Plateforme dédiée : un <strong>portail SOC</strong> (ou l'intégration dans LabHub) affichant les alertes récentes, les cas TheHive et la couverture ATT&amp;CK ; c'est une vitrine forte pour un profil blue team.</p>
+</section>
+
+<section class="a-section" id="p12">
+  <h2 class="a-section__title">12 · Laboratoire de tests d'intrusion et rapport professionnel</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Sécurité offensive (pentest)</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>6 semaines (puis continu)</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme commune : rapports et write-ups (contenu anonymisé)</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Monter un environnement d'entraînement offensif isolé, s'exercer méthodiquement (réseau, web, systèmes) et surtout produire des rapports de test d'intrusion de qualité professionnelle. Exigences : réseau d'attaque strictement isolé (aucun impact sur les autres VLAN ni sur Internet non maîtrisé), méthodologie reconnue suivie (PTES / OWASP), chaque exploitation documentée avec preuve, remédiations proposées et priorisées, rapport rédigé comme pour un client.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Méthodologie : PTES, cyber kill chain, OWASP Testing Guide, catégories OWASP Top 10, gestion de la portée et de l'autorisation (éthique et légalité).</li>
+    <li>Reconnaissance et scan : OSINT, Nmap (scripts NSE), énumération de services.</li>
+    <li>Web : injections (SQL, commande), XSS, IDOR, SSRF, auth cassée, upload, désérialisation.</li>
+    <li>Systèmes : exploitation de services vulnérables, élévation de privilèges Linux et Windows, credential dumping, pivoting.</li>
+    <li>Post-exploitation, nettoyage, notation CVSS, rédaction de rapport.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>Kali Linux ou Parrot, Nmap, Burp Suite (Community), ffuf, sqlmap, Metasploit, Hydra, John/Hashcat, linPEAS/winPEAS, Ligolo-ng ; cibles : Metasploitable, VulnHub, DVWA, OWASP Juice Shop, et plateformes en ligne Hack The Box, TryHackMe, PortSwigger Academy.</li>
+    <li>Ressources : Hack The Box Academy, TryHackMe « Jr Penetration Tester », PortSwigger Web Security Academy (gratuit), livre « The Web Application Hacker's Handbook », « TCM Security Practical Ethical Hacking », modèles de rapports (TCM, PentesterLab).</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches méthodologie PTES et OWASP ; rappel du cadre légal (ne tester que ce qu'on possède ou ce qui est autorisé).</li>
+    <li>Conception : VLAN d'attaque isolé, cibles déployées, règle d'engagement écrite pour soi-même, modèle de rapport.</li>
+    <li>Entraînement structuré : un thème par semaine (reconnaissance, web, AD, élévation de privilèges), notes détaillées.</li>
+    <li>Mission fil rouge : traiter une cible complète de bout en bout (recon → exploitation → post-exploitation → nettoyage) comme un vrai engagement.</li>
+    <li>Corrélation défensive : vérifier ce que le SOC (projet 11) a détecté pendant les attaques.</li>
+    <li>Rédaction du rapport professionnel : synthèse pour la direction, détails techniques, preuves, CVSS, remédiations priorisées.</li>
+    <li>Validation : appliquer les remédiations proposées puis rejouer l'attaque pour prouver la correction.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Méthodologie de test d'intrusion et état d'esprit offensif.</li>
+    <li>Exploitation web, réseau et système, élévation de privilèges, pivoting.</li>
+    <li>Notation des vulnérabilités et proposition de remédiations.</li>
+    <li>Rédaction de rapports professionnels et communication du risque.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : rapports de pentest (anonymisés), write-ups de machines, cheat sheets personnelles, preuves de remédiation. Sur la plateforme commune : section « rapports » (PDF) et blog de write-ups ; les profils Hack The Box / TryHackMe et certifications (eJPT, PNPT) y sont liés comme preuves externes.</p>
+</section>
+
+<section class="a-section" id="p13">
+  <h2 class="a-section__title">13 · Attaque et défense d'Active Directory</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Purple team (offensif + défensif sur AD)</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>5 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme commune : chaînes d'attaque et détections associées</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Comprendre en profondeur les attaques ciblant Active Directory et les défenses correspondantes, en jouant successivement l'attaquant et le défenseur sur un domaine délibérément vulnérable, puis en durcissant. Exigences : domaine de test isolé, chaque technique d'attaque suivie de sa détection (SIEM du projet 11) et de sa remédiation, réduction mesurable des chemins d'attaque (BloodHound avant/après), aucune de ces techniques exécutée hors du lab.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Reconnaissance AD, énumération LDAP/SMB, chemins d'attaque (BloodHound).</li>
+    <li>Attaques d'authentification : Kerberoasting, AS-REP roasting, Pass-the-Hash, Pass-the-Ticket, Overpass-the-Hash, DCSync, délégations (non contrainte, contrainte, basée sur les ressources).</li>
+    <li>Élévation et persistance : ACL abusives, GPO abusives, Golden/Silver Ticket, ADCS (ESC1-ESC8).</li>
+    <li>Défense : tiering, comptes protégés, gMSA, durcissement Kerberos, détection (event IDs, Sigma), LAPS, désactivation des protocoles hérités.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>GOAD (Game of Active Directory) ou un domaine vulnérable maison, BloodHound/SharpHound, Impacket, Rubeus, Mimikatz, Certipy, CrackMapExec/NetExec ; côté défense : Wazuh, PingCastle, Purple Knight.</li>
+    <li>Ressources : projet GOAD (Orange Cyberdefense), TryHackMe/HTB parcours AD, « The Hacker Recipes » (thehacker.recipes), ADSecurity.org, documentation Microsoft sur la sécurisation d'AD, guide ANSSI AD.</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches Kerberos (rappel projet 03) et chaque famille d'attaque expliquée avec un schéma.</li>
+    <li>Conception : déploiement de GOAD isolé, plan « attaque → détection → remédiation » par technique.</li>
+    <li>Cartographie initiale avec BloodHound ; identification des chemins vers Domain Admin.</li>
+    <li>Exécution des attaques une par une, avec captures ; vérification de la détection côté SIEM.</li>
+    <li>Remédiation après chaque technique (durcissement, désactivation, comptes protégés) ; nouvelle mesure BloodHound.</li>
+    <li>Focus ADCS : identifier et corriger un modèle de certificat vulnérable (ESC1).</li>
+    <li>Validation : rejouer les attaques après durcissement pour prouver qu'elles échouent ou sont détectées ; comparer les graphes BloodHound avant/après.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Compréhension approfondie des attaques AD et de Kerberos.</li>
+    <li>Détection et remédiation des techniques (approche purple team).</li>
+    <li>Analyse de chemins d'attaque et réduction de la surface (BloodHound).</li>
+    <li>Sécurisation avancée d'Active Directory et d'ADCS.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : matrice « technique / commande / détection / remédiation », captures BloodHound avant/après, règles de détection ajoutées au dépôt <code>detection-rules</code>, rapport de durcissement AD. Sur la plateforme commune : page très valorisante montrant la double compétence attaque et défense sur le sujet le plus recherché en entreprise.</p>
+</section>
+
+<section class="a-section" id="p14">
+  <h2 class="a-section__title">14 · Haute disponibilité, sauvegardes et plan de reprise</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Ingénierie système, résilience</dd></div>
+    <div><dt>Niveau</dt><dd>Avancé</dd></div>
+    <div><dt>Durée indicative</dt><dd>4 à 5 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme commune : preuves de bascule et de restauration</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Rendre les services critiques du lab résilients : redondance, répartition de charge, sauvegardes fiables selon la règle 3-2-1 et un véritable plan de reprise d'activité testé. Exigences : bascule automatique d'un service sans coupure perçue, sauvegardes chiffrées et vérifiées, objectifs de reprise définis (RTO/RPO) et respectés lors d'un test grandeur nature, restauration prouvée (pas seulement des sauvegardes qui « existent »).</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Disponibilité : redondance active/passive et active/active, load balancing (L4/L7), IP virtuelle (VRRP/Keepalived), health checks, quorum, split-brain.</li>
+    <li>Réplication de données : bases (réplication PostgreSQL), stockage (ZFS send/receive, Ceph), cohérence.</li>
+    <li>Sauvegarde : complète/incrémentale/différentielle, règle 3-2-1(-1-0), immuabilité, chiffrement, rétention (GFS), test de restauration.</li>
+    <li>PRA/PCA : RTO, RPO, criticité des services, procédures, exercices.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>HAProxy + Keepalived, PostgreSQL en réplication (Patroni en option), ZFS et/ou Ceph, Proxmox Backup Server, Restic ou BorgBackup (dépôt distant chiffré), MinIO avec object lock (immutabilité).</li>
+    <li>Ressources : documentation HAProxy et Keepalived, documentation Proxmox Backup Server, documentation PostgreSQL (high availability), « Site Reliability Engineering » (Google), guides sur la règle 3-2-1.</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches HA, réplication, 3-2-1, RTO/RPO.</li>
+    <li>Conception : liste des services critiques et leur criticité, cibles RTO/RPO, architecture HA par service, stratégie de sauvegarde et plan de PRA, ADR.</li>
+    <li>Répartition de charge et VIP (HAProxy + Keepalived) devant un service web répliqué ; test de bascule.</li>
+    <li>Réplication d'une base de données et test de promotion du secondaire.</li>
+    <li>Sauvegardes : Proxmox Backup Server pour les VM, Restic/Borg pour les données applicatives, copie hors site chiffrée et immuable ; planification et vérification d'intégrité.</li>
+    <li>Rédaction du plan de reprise (rôles, étapes, ordre de redémarrage, contacts fictifs).</li>
+    <li>Validation : exercice de sinistre (arrêt brutal d'un nœud ou « perte » d'une VM), restauration chronométrée, comparaison au RTO/RPO cibles, corrections.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Conception d'architectures à haute disponibilité (équilibrage, VIP, réplication).</li>
+    <li>Stratégies de sauvegarde robustes et immuables.</li>
+    <li>Élaboration et test d'un plan de reprise d'activité.</li>
+    <li>Mesure et amélioration de la résilience (RTO/RPO).</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : schémas HA, matrice de criticité, plan de sauvegarde, plan de reprise, rapport d'exercice de sinistre avec chronométrage. Sur la plateforme commune : page projet avec la vidéo d'un test de bascule et le rapport de restauration — des preuves concrètes rarement montrées et très appréciées des recruteurs.</p>
+</section>
+<section class="a-section" id="p15">
+  <h2 class="a-section__title">15 · Zero Trust : identité, SSO, MFA et accès sécurisé</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Gestion des identités et des accès</dd></div>
+    <div><dt>Niveau</dt><dd>Expert</dd></div>
+    <div><dt>Durée indicative</dt><dd>5 à 6 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Protège la plateforme commune (SSO réel devant LabHub)</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Remplacer le modèle « périmètre de confiance » par une architecture Zero Trust : chaque accès est authentifié, autorisé et chiffré, quel que soit l'emplacement. Mise en place d'un fournisseur d'identité central avec SSO et MFA, d'un proxy d'accès aux applications, d'un accès administrateur audité avec enregistrement de session, et d'un réseau maillé chiffré. Exigences : plus aucun mot de passe local sur les applications du lab, MFA obligatoire pour les accès d'administration, décision d'accès tenant compte de l'utilisateur, de l'appareil et du contexte, journalisation de tous les accès dans le SIEM, principe du moindre privilège avec accès temporaires.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Zero Trust : principes NIST SP 800-207, micro-segmentation, politique dynamique, PEP/PDP.</li>
+    <li>Protocoles d'identité : OAuth 2.0, OpenID Connect (flux, jetons, scopes), SAML 2.0, LDAP, SCIM.</li>
+    <li>Authentification forte : TOTP, WebAuthn / FIDO2 / passkeys, attestation d'appareil, résistance au phishing.</li>
+    <li>Autorisation : RBAC, ABAC, politiques (OPA/Rego), accès juste-à-temps, PAM (comptes à privilèges), enregistrement de session.</li>
+    <li>Réseau : overlay chiffré (WireGuard maillé), identity-aware proxy, mTLS entre services.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>Keycloak (fournisseur d'identité), Authelia ou oauth2-proxy (proxy d'authentification devant les applications), Teleport (accès SSH/Kubernetes audité avec enregistrement), Headscale/Tailscale (réseau maillé), Open Policy Agent, clés FIDO2 (YubiKey ou équivalent) ou passkeys logicielles, Vaultwarden (gestion des mots de passe restants).</li>
+    <li>Ressources : NIST SP 800-207, documentation Keycloak et Authelia, documentation Teleport, guide Google BeyondCorp, cours « OAuth 2.0 / OIDC » de Okta Developer, guide ANSSI sur l'authentification multifacteur.</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches OIDC / SAML / WebAuthn avec schémas de flux ; lecture du NIST SP 800-207.</li>
+    <li>Conception : inventaire des applications et des accès, cartographie identité → rôle → ressource, politiques d'accès contextuelles, ADR Keycloak + Authelia + Teleport.</li>
+    <li>Déploiement de Keycloak (fédéré avec l'AD du projet 03), realms, clients, rôles, MFA obligatoire (TOTP puis FIDO2).</li>
+    <li>Mise derrière SSO de toutes les applications du lab : Grafana, Wazuh, NetBox, LabHub, Proxmox (OIDC ou via Authelia pour celles qui ne le supportent pas).</li>
+    <li>Accès d'administration via Teleport : SSH et Kubernetes avec certificats courts, enregistrement de session, approbation d'accès pour les rôles sensibles.</li>
+    <li>Réseau maillé chiffré Headscale entre postes et serveurs ; suppression des accès directs, micro-segmentation avec les NetworkPolicy et le pare-feu.</li>
+    <li>Politiques avancées : OPA pour des décisions contextuelles (heure, appareil conforme), accès juste-à-temps avec expiration.</li>
+    <li>Validation : tentative d'accès sans MFA (refusée), sans appareil connu (refusée), vérification des enregistrements de session, revue des journaux d'accès dans le SIEM.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Architecture Zero Trust et gestion centralisée des identités.</li>
+    <li>Maîtrise d'OAuth 2.0 / OIDC / SAML et de l'authentification résistante au phishing.</li>
+    <li>Gestion des accès à privilèges (PAM) avec audit et enregistrement.</li>
+    <li>Politiques d'autorisation comme code (OPA) et micro-segmentation.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : schéma d'architecture Zero Trust, cartographie des accès, politiques versionnées, procédure d'enrôlement d'un utilisateur et d'une clé FIDO2, rapport de tests d'accès refusés. Mise en valeur directe : la plateforme commune LabHub est elle-même protégée par ce SSO — un visiteur constate la page de connexion Keycloak, preuve immédiate que le projet est réel et en production.</p>
+</section>
+
+<section class="a-section" id="p16">
+  <h2 class="a-section__title">16 · Honeypots et renseignement sur les menaces</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Sécurité défensive, threat intelligence</dd></div>
+    <div><dt>Niveau</dt><dd>Expert</dd></div>
+    <div><dt>Durée indicative</dt><dd>5 semaines (puis collecte continue)</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme dédiée : tableau de bord public des attaques observées</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Déployer des leurres exposés sur Internet pour observer de vraies attaques, analyser les données collectées, les enrichir avec du renseignement sur les menaces et en tirer des indicateurs exploitables par le SOC. Exigences : isolation totale des honeypots (aucune possibilité de rebond vers le lab), collecte continue pendant au moins un mois, analyse statistique des attaques (origines, ports, identifiants, charges utiles), partage des indicateurs dans une plateforme de threat intelligence, respect du cadre légal et éthique.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Types de honeypots : basse / haute interaction, honeytokens, canary tokens, deception technology.</li>
+    <li>Isolation : DMZ dédiée, filtrage sortant strict, VLAN séparé, risques juridiques du rebond.</li>
+    <li>Threat intelligence : cycle du renseignement, IOC vs TTP, formats STIX/TAXII, MISP, scoring, attribution (et ses limites).</li>
+    <li>Analyse : familles de malwares, botnets, credential stuffing, scanners de masse (Shodan, Censys), enrichissement (GeoIP, ASN, réputation).</li>
+    <li>Analyse de charges utiles en environnement de sandbox (bases de l'analyse de malware).</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>T-Pot (ensemble de honeypots avec tableaux de bord), Cowrie (SSH/Telnet), Dionaea, Honeytrap, OpenCanary ; MISP et OpenCTI pour le renseignement ; AbuseIPDB, VirusTotal, GreyNoise, Shodan ; Elastic/Kibana intégré à T-Pot ; VPS bon marché pour l'exposition.</li>
+    <li>Ressources : documentation T-Pot (Telekom Security), documentation Cowrie, MISP training, documentation OpenCTI, parcours TryHackMe « Threat Intelligence », rapports annuels (ENISA Threat Landscape, Verizon DBIR).</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches honeypots, cycle du renseignement, formats d'IOC ; étude du cadre légal (responsabilité en cas de rebond).</li>
+    <li>Conception : emplacement (VPS dédié plutôt que réseau personnel), architecture d'isolation, données à collecter, ADR T-Pot vs honeypots individuels.</li>
+    <li>Déploiement de T-Pot sur un VPS isolé, filtrage sortant strict, surveillance de la machine elle-même.</li>
+    <li>Collecte pendant plusieurs semaines ; transfert sécurisé des journaux vers le lab (unidirectionnel).</li>
+    <li>Analyse : statistiques (pays, ASN, ports, identifiants les plus tentés), extraction des charges utiles, classement des campagnes.</li>
+    <li>Enrichissement et partage : import des IOC dans MISP, enrichissement via VirusTotal/AbuseIPDB, création d'un flux consommé par le SIEM (projet 11) pour bloquer ou alerter.</li>
+    <li>Honeytokens internes : faux comptes AD, faux partages, canary tokens dans des documents ; alerte immédiate si utilisés.</li>
+    <li>Validation : vérifier qu'une IP observée par le honeypot est bien bloquée / détectée dans le lab ; déclencher un honeytoken et mesurer le délai d'alerte.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Déploiement sécurisé et isolé de systèmes leurres.</li>
+    <li>Analyse de données d'attaques réelles et production d'indicateurs.</li>
+    <li>Utilisation de plateformes de threat intelligence (MISP, OpenCTI) et partage d'IOC.</li>
+    <li>Intégration du renseignement dans la détection opérationnelle.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : architecture d'isolation, rapport mensuel d'observation des menaces (statistiques et graphiques), collection MISP publiée, procédure de déploiement d'un honeytoken. Plateforme dédiée : un <strong>tableau de bord public « menaces observées »</strong> intégré à LabHub (carte des attaques, top ports et identifiants, campagnes du mois) — très visuel, il attire l'attention sur le portfolio et démontre une capacité d'analyse.</p>
+</section>
+
+<section class="a-section" id="p17">
+  <h2 class="a-section__title">17 · Cloud hybride sécurisé</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Cloud, réseau, sécurité</dd></div>
+    <div><dt>Niveau</dt><dd>Expert</dd></div>
+    <div><dt>Durée indicative</dt><dd>5 à 6 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme commune ; peut héberger une partie de LabHub</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Étendre le lab vers un fournisseur cloud public et relier les deux environnements de manière sécurisée, en appliquant les bonnes pratiques d'architecture, d'identité, de réseau et de surveillance cloud, tout en maîtrisant les coûts. Exigences : tout déployé par Terraform (aucune création manuelle durable), réseau cloud privé segmenté sans accès public non justifié, identités sans clés statiques quand c'est possible, chiffrement au repos et en transit, journalisation d'audit activée et remontée au SIEM, budget mensuel plafonné avec alertes, environnement destructible et reconstructible.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Modèles de service (IaaS/PaaS/SaaS), responsabilité partagée, régions et zones de disponibilité.</li>
+    <li>Réseau cloud : VPC/VNet, sous-réseaux publics et privés, tables de routage, passerelles NAT et Internet, groupes de sécurité et NACL, VPN site à site et peering, DNS privé.</li>
+    <li>Identité : IAM (utilisateurs, rôles, politiques), moindre privilège, rôles assumés, fédération OIDC (par exemple depuis GitHub Actions), absence de clés longue durée.</li>
+    <li>Sécurité et surveillance : chiffrement (KMS), journaux d'audit (CloudTrail / Azure Monitor), détection managée (GuardDuty / Defender), gestion de posture (Security Hub / Defender for Cloud), CSPM open source.</li>
+    <li>Coûts : dimensionnement, budgets, alertes, ressources à arrêter, offres gratuites.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>AWS (offre gratuite) ou Azure (crédit d'essai) — un seul suffit ; Terraform, AWS CLI / Azure CLI, Prowler ou ScoutSuite (audit de posture), Checkov ou tfsec (analyse statique du code d'infrastructure), CloudMapper/Steampipe pour la cartographie.</li>
+    <li>Ressources : AWS Skill Builder (parcours Solutions Architect et Security), Microsoft Learn (AZ-104 / AZ-500), AWS Well-Architected Framework, Cloud Security Alliance, documentation Terraform AWS/AzureRM, « flaws.cloud » et « CloudGoat » pour la pratique offensive cloud.</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches VPC, IAM, responsabilité partagée, chiffrement KMS ; estimation de coûts avant tout déploiement.</li>
+    <li>Conception : architecture cible (VPC segmenté, VPN vers le lab, services managés utilisés), modèle IAM, plan de journalisation, budget, ADR AWS vs Azure.</li>
+    <li>Socle Terraform : compte et organisation, garde-fous (budgets, alertes, restriction de régions), état distant chiffré.</li>
+    <li>Réseau : VPC avec sous-réseaux publics/privés, NAT, groupes de sécurité restrictifs, VPN IPsec vers OPNsense du lab, DNS privé partagé.</li>
+    <li>Charges de travail : déploiement d'une application (par exemple une partie de LabHub ou une réplique de sauvegarde) sur instances ou service managé, base de données chiffrée, stockage objet privé avec versionnement.</li>
+    <li>Sécurité : rôles IAM minimaux, fédération OIDC pour la CI, KMS, activation des journaux d'audit et transfert vers le SIEM du lab, activation de la détection managée.</li>
+    <li>Audit de posture avec Prowler/ScoutSuite, correction des écarts, analyse statique Checkov dans la CI.</li>
+    <li>Validation : destruction et reconstruction complète par Terraform, test de bascule du service vers le cloud, vérification du plafond de coûts et des alertes.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Architecture cloud sécurisée (réseau, identité, chiffrement) et cloud hybride.</li>
+    <li>Infrastructure as Code appliquée au cloud et CI fédérée sans secrets statiques.</li>
+    <li>Audit de posture cloud (CSPM) et remédiation.</li>
+    <li>Maîtrise des coûts et gouvernance d'un compte cloud.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : schéma de l'architecture hybride, dépôt Terraform public, rapport Prowler avant/après, tableau de suivi des coûts, procédure de destruction/reconstruction. Sur la plateforme commune : page projet avec le schéma hybride et le rapport de posture ; si une partie de LabHub tourne dans le cloud, le mentionner explicitement comme preuve d'exploitation réelle.</p>
+</section>
+
+<section class="a-section" id="p18">
+  <h2 class="a-section__title">18 · Investigation numérique et réponse à incident (DFIR)</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Forensique, réponse à incident</dd></div>
+    <div><dt>Niveau</dt><dd>Expert</dd></div>
+    <div><dt>Durée indicative</dt><dd>6 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme commune : rapports d'investigation et chronologies</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Acquérir la capacité d'investiguer un incident : collecter des preuves de manière fiable, analyser disque, mémoire et réseau, reconstituer une chronologie, identifier la cause initiale et produire un rapport d'incident exploitable. Exigences : chaîne de conservation respectée (empreintes, horodatages, copie de travail), analyse conduite sur un incident réellement joué dans le lab (attaque du projet 12 ou 19), chronologie complète des actions de l'attaquant, rapport avec recommandations, procédures de réponse mises à jour ensuite.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Cycle de réponse à incident (NIST SP 800-61) : préparation, détection, analyse, confinement, éradication, rétablissement, leçons.</li>
+    <li>Ordre de volatilité, acquisition (disque bit à bit, mémoire vive), intégrité (hachage), chaîne de conservation, aspects légaux.</li>
+    <li>Artefacts Windows : MFT, journaux d'événements, registre, prefetch, amcache, shimcache, jump lists, USN journal, navigateurs.</li>
+    <li>Artefacts Linux : journaux, bash history, systemd, fichiers modifiés, persistance (cron, services).</li>
+    <li>Analyse mémoire : processus, injections, connexions, credentials en mémoire.</li>
+    <li>Réseau : analyse de captures, extraction de fichiers, détection de canaux de commande et contrôle ; « super timeline ».</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>Velociraptor (collecte à distance à grande échelle), KAPE, FTK Imager, dd/dc3dd, Volatility 3, Autopsy / Sleuth Kit, Plaso/log2timeline + Timesketch, Eric Zimmerman Tools, Wireshark / Zeek, YARA, CyberChef ; REMnux pour l'analyse de malware.</li>
+    <li>Ressources : « The DFIR Report » (cas réels), SANS DFIR posters et cheat sheets, cours TryHackMe « DFIR » et CyberDefenders (exercices d'investigation), documentation Volatility et Velociraptor, livre « Incident Response &amp; Computer Forensics ».</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches cycle de réponse, ordre de volatilité, artefacts Windows/Linux.</li>
+    <li>Préparation : déploiement de Velociraptor sur le parc du lab, activation des journaux nécessaires (Sysmon, auditd), procédures d'acquisition écrites, trousse d'outils prête.</li>
+    <li>Jouer un incident : exécuter une chaîne d'attaque complète (projet 12/13/19) sur des machines du lab, sans prendre de notes côté attaquant pour rendre l'investigation réaliste.</li>
+    <li>Détection et déclenchement : partir de l'alerte du SIEM, ouvrir un cas dans TheHive.</li>
+    <li>Collecte : acquisition mémoire et disque de la machine compromise, hachage et copie de travail, collecte à distance des artefacts sur les autres machines.</li>
+    <li>Analyse : mémoire (Volatility), disque (Autopsy, outils Zimmerman), réseau (Zeek/Wireshark) ; recherche de persistance et de mouvement latéral ; règles YARA sur les binaires trouvés.</li>
+    <li>Chronologie : construction d'une super timeline (Plaso + Timesketch) reconstituant les actions de l'attaquant heure par heure.</li>
+    <li>Confinement, éradication, rétablissement ; rapport d'incident avec cause initiale, impact, indicateurs, recommandations ; mise à jour des détections et du durcissement.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Acquisition de preuves respectant l'intégrité et la chaîne de conservation.</li>
+    <li>Analyse forensique disque, mémoire et réseau, connaissance des artefacts.</li>
+    <li>Construction de chronologies et identification de la cause initiale.</li>
+    <li>Conduite d'une réponse à incident complète et rédaction du rapport.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : procédures d'acquisition, journal d'investigation horodaté, chronologie Timesketch exportée, rapport d'incident complet, indicateurs partagés et nouvelles règles de détection. Sur la plateforme commune : page « investigations » avec les rapports (scénarios de lab, donc publiables intégralement) — un rapport DFIR bien rédigé est l'une des meilleures preuves de compétence blue team.</p>
+</section>
+
+<section class="a-section" id="p19">
+  <h2 class="a-section__title">19 · Simulation d'adversaire et purple teaming</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>Red team automatisée et amélioration de la détection</dd></div>
+    <div><dt>Niveau</dt><dd>Expert</dd></div>
+    <div><dt>Durée indicative</dt><dd>5 à 6 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme dédiée possible : suivi de la couverture ATT&amp;CK dans le temps</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Mesurer et améliorer méthodiquement la capacité de détection du lab en simulant les techniques d'adversaires connus de façon reproductible et automatisée, puis en comblant les lacunes détectées. Exigences : simulations exécutées automatiquement et sans risque (techniques non destructives), résultat de chaque technique classé (détectée, journalisée sans alerte, non vue), couverture mesurée dans le temps, chaque lacune donnant lieu à une nouvelle règle de détection ou à du durcissement, campagne complète reproduisant le mode opératoire d'un groupe réel.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Différence entre test d'intrusion, red team, purple team et simulation d'adversaire.</li>
+    <li>MITRE ATT&amp;CK approfondi : mode opératoire de groupes, émulation de plans (Adversary Emulation Library du Center for Threat-Informed Defense).</li>
+    <li>Commande et contrôle : fonctionnement d'un implant, canaux (HTTPS, DNS), évasion (limites éthiques), détection des balises.</li>
+    <li>Ingénierie de détection : cycle détection → test → ajustement, notion de « detection as code », métriques (délai de détection, taux de couverture).</li>
+    <li>Mesure : matrice ATT&amp;CK Navigator, scoring de la couverture, tests de régression de détection.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>Atomic Red Team (tests unitaires par technique), MITRE Caldera (simulation automatisée), Sliver ou Havoc (C2 open source, usage strictement en lab), Invoke-AtomicRedTeam, VECTR (suivi des campagnes purple team), ATT&amp;CK Navigator ; côté détection : Wazuh/Elastic, dépôt Sigma, Falco.</li>
+    <li>Ressources : documentation Atomic Red Team et Caldera, Adversary Emulation Library (MITRE CTID), « SANS Purple Team » ressources gratuites, blog Red Canary (Threat Detection Report), documentation VECTR.</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches sur l'émulation d'adversaire, lecture d'un plan d'émulation (par exemple APT29) et du Threat Detection Report de Red Canary.</li>
+    <li>Conception : périmètre et règles de sécurité des simulations (machines cibles, techniques exclues), plan de campagne, tableau de suivi VECTR, ADR Caldera vs exécution manuelle.</li>
+    <li>Baseline : exécution d'Atomic Red Team technique par technique sur une machine témoin, classement des résultats (détectée / journalisée / non vue).</li>
+    <li>Comblement des lacunes : nouvelles règles Sigma, activation de journaux manquants, durcissement ; ré-exécution jusqu'à détection.</li>
+    <li>Automatisation : orchestration des tests via Caldera et un pipeline planifié ; tests de régression de détection à chaque changement du SIEM.</li>
+    <li>Campagne complète : émulation du mode opératoire d'un groupe réel avec un C2 en lab (accès initial simulé, persistance, découverte, mouvement latéral, exfiltration factice).</li>
+    <li>Analyse de la campagne avec l'équipe défensive (soi-même) : ce qui a alerté, ce qui a manqué, délais ; alimentation du projet 18 (investigation) avec les traces produites.</li>
+    <li>Publication de la matrice de couverture ATT&amp;CK avant / après et des métriques d'amélioration.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Simulation d'adversaire reproductible et automatisée.</li>
+    <li>Ingénierie de détection dirigée par la menace (threat-informed defense).</li>
+    <li>Mesure objective d'une posture de détection et suivi dans le temps.</li>
+    <li>Manipulation maîtrisée d'infrastructures de commande et contrôle en environnement contrôlé.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : plan de campagne, tableau de résultats par technique, matrices ATT&amp;CK avant/après, règles de détection ajoutées, rapport purple team. Plateforme dédiée envisageable : un <strong>suivi de couverture de détection</strong> intégré à LabHub (matrice ATT&amp;CK colorée, historique des campagnes, délai moyen de détection) : c'est l'un des livrables les plus différenciants pour un profil sécurité.</p>
+</section>
+
+<section class="a-section" id="p20">
+  <h2 class="a-section__title">20 · Gouvernance, analyse de risques et audit du lab</h2>
+  <dl class="a-meta-list">
+    <div><dt>Domaine</dt><dd>GRC (gouvernance, risque, conformité)</dd></div>
+    <div><dt>Niveau</dt><dd>Expert (projet de synthèse)</dd></div>
+    <div><dt>Durée indicative</dt><dd>5 à 6 semaines</dd></div>
+    <div><dt>Valorisation</dt><dd>Plateforme dédiée possible : registre des risques et tableau de conformité</dd></div>
+  </dl>
+  <h3>Objectif et exigences</h3>
+  <p class="a-prose">Traiter le lab comme un système d'information d'entreprise et lui appliquer une démarche de gouvernance complète : politique de sécurité, analyse de risques, plan de traitement, indicateurs, audit interne et amélioration continue. C'est le projet qui relie tous les autres et démontre la capacité à parler sécurité avec une direction, pas seulement avec des machines. Exigences : périmètre et actifs formellement inventoriés, analyse de risques menée avec une méthode reconnue, plan de traitement chiffré et priorisé et rattaché aux projets techniques 01 à 19, audit interne avec constats et preuves, indicateurs suivis dans le temps, documentation utilisable telle quelle comme modèle professionnel.</p>
+  <h3>Notions à rechercher et apprendre</h3>
+  <ul class="a-prose">
+    <li>Normes et référentiels : ISO 27001 (système de management) et 27002 (mesures), NIST CSF 2.0 (fonctions gouverner, identifier, protéger, détecter, répondre, rétablir), CIS Controls v8, RGPD pour les données personnelles.</li>
+    <li>Analyse de risques : méthode EBIOS Risk Manager (ateliers, sources de risque, scénarios stratégiques et opérationnels), ou ISO 27005, notions de menace, vulnérabilité, vraisemblance, gravité, risque résiduel.</li>
+    <li>Traitement du risque : réduire, transférer, éviter, accepter ; plan de traitement, propriétaire du risque, échéance.</li>
+    <li>Pilotage : politique de sécurité (PSSI), procédures, indicateurs et tableaux de bord, revue de direction, audit interne (ISO 19011), non-conformités et actions correctives.</li>
+    <li>Gestion des vulnérabilités et des actifs comme processus continus.</li>
+  </ul>
+  <h3>Outils, plateformes et ressources</h3>
+  <ul class="a-prose">
+    <li>Modèles ANSSI (EBIOS RM, guides d'hygiène), CIS Controls Assessment Tool (CIS-CAT / CSAT), tableur ou outil GRC open source (Eramba, SimpleRisk), NetBox comme inventaire d'actifs, OpenVAS / Greenbone pour la gestion des vulnérabilités, Grafana pour les indicateurs.</li>
+    <li>Ressources : guides ANSSI (EBIOS Risk Manager, « Guide d'hygiène informatique »), MOOC SecNumacadémie (gratuit), NIST CSF 2.0 et ses quick start guides, texte des normes ISO 27001/27002 (via bibliothèque ou achat), CIS Controls v8 (téléchargement gratuit), cours « ISO 27001 Foundation » en ligne.</li>
+  </ul>
+  <h3>Étapes de réalisation</h3>
+  <ol class="a-prose">
+    <li>Théorie : fiches ISO 27001 vs NIST CSF vs CIS Controls, principes d'EBIOS RM, vocabulaire du risque.</li>
+    <li>Cadrage : définir l'organisation fictive (activité, enjeux, parties prenantes), le périmètre du système d'information (le lab), les besoins de sécurité (disponibilité, intégrité, confidentialité, traçabilité) par actif.</li>
+    <li>Inventaire des actifs depuis NetBox : matériel, VM, services, données, comptes ; classification et valeur métier.</li>
+    <li>Analyse de risques EBIOS RM : sources de risque et objectifs visés, scénarios stratégiques, scénarios opérationnels (en s'appuyant sur ATT&amp;CK et les observations du projet 16), évaluation de la vraisemblance et de la gravité, cartographie des risques.</li>
+    <li>Plan de traitement : associer à chaque risque une mesure concrète — et la relier au projet technique correspondant (segmentation → projet 01/04, MFA → projet 15, sauvegardes → projet 14, détection → projet 11) ; chiffrer l'effort, prioriser, documenter le risque résiduel accepté.</li>
+    <li>Rédaction du corpus documentaire : PSSI, charte utilisateur, politique de mots de passe, politique de sauvegarde, procédure de gestion des incidents, procédure de gestion des vulnérabilités, plan de continuité (lié au projet 14).</li>
+    <li>Gestion des vulnérabilités : scans Greenbone planifiés sur tout le lab, priorisation (CVSS + exposition), suivi des corrections, indicateur de délai de remédiation.</li>
+    <li>Audit interne : construire un référentiel d'audit (CIS Controls v8 ou annexe A d'ISO 27001), auditer chaque mesure avec preuves (captures, configurations, rapports des projets précédents), rédiger les constats et non-conformités, proposer des actions correctives.</li>
+    <li>Pilotage : définir 8 à 12 indicateurs (taux de conformité CIS, couverture ATT&amp;CK, délai de remédiation, taux de sauvegardes vérifiées, disponibilité, nombre d'incidents), les publier dans Grafana/LabHub, tenir une « revue de direction » écrite trimestrielle.</li>
+  </ol>
+  <h3>Compétences acquises</h3>
+  <ul class="a-prose">
+    <li>Conduite d'une analyse de risques avec une méthode reconnue (EBIOS RM).</li>
+    <li>Rédaction d'un corpus documentaire de sécurité (PSSI, politiques, procédures).</li>
+    <li>Réalisation d'un audit interne avec constats, preuves et actions correctives.</li>
+    <li>Pilotage par indicateurs et amélioration continue ; capacité à traduire la technique en langage de risque pour une direction.</li>
+  </ul>
+  <h3>Documentation et mise en valeur</h3>
+  <p class="a-prose">Livrables : dossier d'analyse de risques EBIOS RM, cartographie des risques, plan de traitement relié aux 19 projets techniques, PSSI et politiques, rapport d'audit interne, tableau de bord d'indicateurs, compte rendu de revue de direction. Plateforme dédiée envisageable : un <strong>module GRC dans LabHub</strong> présentant le registre des risques, l'état d'avancement du plan de traitement et les indicateurs de conformité — il transforme le portfolio technique en démonstration de vision globale, ce qui distingue un profil senior.</p>
+</section>
+
+<section class="a-section" id="synthese">
+  <h2 class="a-section__title">Synthèse : compétences, séquencement et mise en valeur</h2>
+  <div class="a-table-scroll">
+    <table class="a-table">
+      <caption>Compétences transversales et projets qui les démontrent</caption>
+      <thead><tr><th scope="col">Compétence</th><th scope="col">Projets</th></tr></thead>
+      <tbody>
+        <tr><td>Conception et exploitation réseau (VLAN, routage, redondance)</td><td>01, 02, 04, 07, 14</td></tr>
+        <tr><td>Administration systèmes Linux et Windows</td><td>01, 03, 06, 10, 14</td></tr>
+        <tr><td>Identité et contrôle d'accès (AD, PKI, 802.1X, SSO, MFA)</td><td>03, 05, 13, 15</td></tr>
+        <tr><td>Sécurité défensive et détection (SIEM, IDS, EDR, threat intel)</td><td>04, 06, 11, 16, 19</td></tr>
+        <tr><td>Sécurité offensive (pentest, AD, émulation d'adversaire)</td><td>12, 13, 19</td></tr>
+        <tr><td>Forensique et réponse à incident</td><td>11, 18, 19</td></tr>
+        <tr><td>Automatisation et Infrastructure as Code</td><td>08, 09, 10, 17</td></tr>
+        <tr><td>Conteneurs, Kubernetes et DevSecOps</td><td>09, 17</td></tr>
+        <tr><td>Cloud et hybridation</td><td>17, 09, 14</td></tr>
+        <tr><td>Résilience, sauvegardes et continuité</td><td>14, 06, 20</td></tr>
+        <tr><td>Gouvernance, risque, conformité et audit</td><td>10, 20, 16</td></tr>
+        <tr><td>Développement de plateformes de valorisation</td><td>Plateforme commune LabHub, 05, 10, 11, 16, 19, 20</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Séquencement conseillé sur 12 mois</h3>
+  <div class="a-table-scroll">
+    <table class="a-table">
+      <caption>Progression indicative pour un rythme de 10 à 15 heures par semaine</caption>
+      <thead><tr><th scope="col">Période</th><th scope="col">Projets</th><th scope="col">Objectif de la période</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Mois 1-2</th><td>01, plateforme commune (socle MkDocs)</td><td>Disposer du lab et d'un endroit pour documenter dès le premier jour</td></tr>
+        <tr><th scope="row">Mois 3-4</th><td>02, 03</td><td>Fondations réseau et annuaire (niveau CCNA et administration Windows)</td></tr>
+        <tr><th scope="row">Mois 5-6</th><td>04, 05, 06</td><td>Sécurité périmétrique, PKI, observabilité : le lab devient exploitable</td></tr>
+        <tr><th scope="row">Mois 7-8</th><td>07, 08, 10</td><td>Accès distant, automatisation complète, durcissement mesurable</td></tr>
+        <tr><th scope="row">Mois 9-10</th><td>09, 11, 12</td><td>Kubernetes sécurisé, SOC opérationnel, premiers rapports de pentest</td></tr>
+        <tr><th scope="row">Mois 11</th><td>13, 14, 15</td><td>Purple team AD, résilience prouvée, Zero Trust devant les applications</td></tr>
+        <tr><th scope="row">Mois 12</th><td>16, 17, 18, 19, 20</td><td>Threat intel, cloud hybride, DFIR, émulation d'adversaire, gouvernance de synthèse</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="a-callout a-callout--risk">
+    <strong>Deux précautions indispensables.</strong> D'une part, toutes les techniques offensives (projets 12, 13, 19) ne doivent être exécutées que sur vos propres machines isolées ou sur des plateformes d'entraînement autorisées : hors de ce cadre, elles sont illégales. D'autre part, un honeypot ou un service exposé (projet 16, 17) doit être hébergé hors de votre réseau personnel et strictement isolé, sinon il devient un point d'entrée réel.
+  </div>
+  <div class="a-callout a-callout--decision">
+    <strong>Où créer une plateforme logicielle dédiée et où s'en passer.</strong> Une plateforme dédiée n'a de sens que si elle produit une valeur que la documentation ne donne pas : un état en direct, un flux de données, une mesure qui évolue. Cinq cas s'y prêtent : portail de certificats (05), tableau de bord de conformité (10), portail SOC (11), tableau de bord des menaces observées (16), suivi de couverture ATT&amp;CK (19), auxquels s'ajoute le module GRC (20). Tous les autres projets se valorisent mieux par une page documentaire riche dans LabHub : schéma, procédure, preuves de tests, retour d'expérience. Construire LabHub une seule fois et bien, plutôt que six petites applications isolées, reste la stratégie la plus efficace.
+  </div>
+  <details class="a-disclosure">
+    <summary>Modèle de fiche portfolio pour un projet d'infrastructure ou de sécurité</summary>
+    <ul class="a-prose">
+      <li>Titre, contexte en une phrase, schéma d'architecture principal.</li>
+      <li>Problème traité et exigences de départ (disponibilité, sécurité, conformité).</li>
+      <li>Architecture et choix techniques, avec un « pourquoi » par choix (issu des ADR).</li>
+      <li>Trois difficultés rencontrées et comment elles ont été résolues (le plus lu par un recruteur technique).</li>
+      <li>Preuves : captures, rapports d'outils, mesures avant/après, vidéo de démonstration de 3 à 5 minutes.</li>
+      <li>Indicateurs : score de conformité, délai de détection, RTO mesuré, nombre de techniques détectées.</li>
+      <li>Liens : documentation complète, dépôts de configurations et de scripts, certification associée.</li>
+    </ul>
+  </details>
+</section>
+
+
+      <footer class="a-footnote">Document rédigé comme guide de progression et de documentation : toutes les activités offensives décrites doivent rester dans un laboratoire isolé et autorisé. Les durées sont indicatives pour un rythme de 10 à 15 heures par semaine.</footer>
+    </main>
+    <script>
+/* Devin artifact kit — self-contained behavior for standalone HTML artifacts.
+   No build step, no imports, no network calls. Every widget is progressive
+   enhancement: the markup stays readable and printable with scripting off. */
+(function () {
+  "use strict";
+
+  var root = document.documentElement;
+  var THEMES = { light: 1, dark: 1 };
+
+  function showError(message) {
+    document.querySelectorAll("[data-a-error]").forEach(function (region) {
+      region.hidden = false;
+      var detail = region.querySelector("[data-a-error-detail]");
+      if (detail && message) detail.textContent = message;
+    });
+  }
+
+  window.addEventListener("error", function (event) {
+    showError(event.message);
+  });
+  window.addEventListener("unhandledrejection", function (event) {
+    showError(String(event.reason || "An interactive control failed."));
+  });
+
+  /* ---------- theme ----------
+     Order of precedence:
+       1. an explicit host signal (`?theme=`/`#theme=`, a `devin:theme`
+          message from an embedding page, or a preset `data-theme`),
+       2. a reader's in-document choice,
+       3. the OS/browser preference via `prefers-color-scheme`.
+     Hosts that expose no signal simply fall through to step 3. */
+  function hostTheme() {
+    var search = new URLSearchParams(
+      window.location.search + "&" + window.location.hash.replace(/^#/, "")
+    );
+    var fromUrl = search.get("theme");
+    if (fromUrl && THEMES[fromUrl]) return fromUrl;
+    var preset = root.getAttribute("data-theme");
+    if (preset && THEMES[preset]) return preset;
+    return null;
+  }
+
+  function systemTheme() {
+    return window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
+
+  var pinned = hostTheme();
+
+  function apply(theme) {
+    root.setAttribute("data-theme", theme);
+    document.querySelectorAll("[data-a-theme-toggle]").forEach(function (el) {
+      var label =
+        theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+      el.setAttribute("aria-label", label);
+      el.setAttribute("title", label);
+    });
+  }
+
+  apply(pinned || systemTheme());
+
+  if (window.matchMedia) {
+    var media = window.matchMedia("(prefers-color-scheme: dark)");
+    var onChange = function () {
+      if (!pinned) apply(systemTheme());
+    };
+    if (media.addEventListener) media.addEventListener("change", onChange);
+    else if (media.addListener) media.addListener(onChange);
+  }
+
+  window.addEventListener("message", function (event) {
+    if (window.parent === window || event.source !== window.parent) return;
+    var data = event.data;
+    if (!data || data.type !== "devin:theme" || !THEMES[data.theme]) return;
+    pinned = data.theme;
+    apply(pinned);
+  });
+
+  document.addEventListener("click", function (event) {
+    var toggle = event.target.closest("[data-a-theme-toggle]");
+    if (!toggle) return;
+    pinned = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    apply(pinned);
+  });
+
+  /* ---------- tabs ----------
+     <div data-a-tabs role="tablist">
+       <button class="a-btn" role="tab" aria-controls="panel-id">Label</button>
+     Panels are plain elements toggled with `hidden`, so print reveals the
+     active one and `.a-print-reveal` can opt others in. */
+  function selectTab(list, tab) {
+    list.querySelectorAll('[role="tab"]').forEach(function (candidate) {
+      var selected = candidate === tab;
+      candidate.setAttribute("aria-selected", String(selected));
+      candidate.tabIndex = selected ? 0 : -1;
+      var panel = document.getElementById(
+        candidate.getAttribute("aria-controls") || ""
+      );
+      if (panel) panel.hidden = !selected;
+    });
+  }
+
+  document.querySelectorAll("[data-a-tabs]").forEach(function (list) {
+    var tabs = Array.prototype.slice.call(
+      list.querySelectorAll('[role="tab"]')
+    );
+    if (!tabs.length) return;
+    var active =
+      tabs.filter(function (t) {
+        return t.getAttribute("aria-selected") === "true";
+      })[0] || tabs[0];
+    selectTab(list, active);
+
+    list.addEventListener("click", function (event) {
+      var tab = event.target.closest('[role="tab"]');
+      if (tab) selectTab(list, tab);
+    });
+
+    list.addEventListener("keydown", function (event) {
+      var step =
+        event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+      if (!step) return;
+      event.preventDefault();
+      var current = tabs.indexOf(document.activeElement);
+      var next = tabs[(current + step + tabs.length) % tabs.length];
+      next.focus();
+      selectTab(list, next);
+    });
+  });
+
+  /* ---------- row filters ----------
+     <select data-a-filter="#table-id" data-a-filter-key="team">
+     Rows opt in with a matching `data-team` attribute; "all" clears it. */
+  document.querySelectorAll("[data-a-filter]").forEach(function (control) {
+    var target = document.querySelector(control.getAttribute("data-a-filter"));
+    var key = control.getAttribute("data-a-filter-key") || "filter";
+    if (!target) return;
+
+    var emptySelector = control.getAttribute("data-a-filter-empty");
+    var empty = emptySelector ? document.querySelector(emptySelector) : null;
+
+    var applyFilter = function () {
+      var value = control.value;
+      var shown = 0;
+      /* Re-read the rows every time: a script may have replaced them since
+         the last pass, and those rows must obey the current selection too. */
+      target.querySelectorAll("[data-" + key + "]").forEach(function (row) {
+        var match = value === "all" || row.getAttribute("data-" + key) === value;
+        row.hidden = !match;
+        if (match) shown += 1;
+      });
+      if (empty) empty.hidden = shown !== 0;
+      target.hidden = shown === 0 && !!empty;
+    };
+
+    control.addEventListener("change", applyFilter);
+    applyFilter();
+
+    /* Rows swapped in by a script are filtered as soon as they land, so a
+       redraw never shows rows the current selection excludes. Only childList
+       is watched, so the `hidden` writes above cannot retrigger this. */
+    new MutationObserver(function () {
+      applyFilter();
+    }).observe(target, { childList: true, subtree: true });
+  });
+
+  /* ---------- tooltips ----------
+     One shared tooltip serves every chart and any element carrying
+     `data-a-tip`. Pointer, keyboard focus, and touch all route through the
+     same show/hide pair, so an exact value is never hover-only. */
+  var tipEl = null;
+  var tipRelease = null;
+  var tipHost = null;
+
+  function tipNode() {
+    if (tipEl) return tipEl;
+    tipEl = document.createElement("div");
+    tipEl.className = "a-tip a-no-print";
+    tipEl.setAttribute("role", "tooltip");
+    tipEl.hidden = true;
+    document.body.appendChild(tipEl);
+    return tipEl;
+  }
+
+  function hideTip() {
+    var release = tipRelease;
+    tipRelease = null;
+    tipHost = null;
+    if (release) release();
+    if (tipEl) tipEl.hidden = true;
+  }
+
+  function positionTip(anchor, pointer) {
+    var el = tipNode();
+    var width = el.offsetWidth;
+    var height = el.offsetHeight;
+    var edge = 8;
+    var x = pointer ? pointer.x + 14 : anchor.left + anchor.width / 2 - width / 2;
+    var y = pointer ? pointer.y - height - 16 : anchor.top - height - 10;
+    if (y < edge) y = pointer ? pointer.y + 22 : anchor.bottom + 10;
+    x = Math.max(edge, Math.min(x, window.innerWidth - width - edge));
+    y = Math.max(edge, Math.min(y, window.innerHeight - height - edge));
+    el.style.transform =
+      "translate(" + Math.round(x) + "px, " + Math.round(y) + "px)";
+  }
+
+  function tipRow(row) {
+    var line = document.createElement("div");
+    line.className =
+      "a-tip__row" + (row.series ? " a-series-" + row.series : "");
+    if (row.series) {
+      var swatch = document.createElement("span");
+      swatch.className = "a-tip__swatch";
+      line.appendChild(swatch);
+    }
+    var name = document.createElement("span");
+    name.className = "a-tip__name";
+    name.textContent = row.name || "";
+    line.appendChild(name);
+    var value = document.createElement("span");
+    value.className = "a-tip__value";
+    value.textContent = row.value == null || row.value === "" ? "—" : row.value;
+    line.appendChild(value);
+    return line;
+  }
+
+  /* `content` is { title, text, rows: [{ name, value, series }] }. `release`
+     runs when the tooltip is replaced or dismissed so the owner can drop its
+     highlight state. */
+  function showTip(content, host, anchor, pointer, release) {
+    if (tipRelease && tipRelease !== release) {
+      var previous = tipRelease;
+      tipRelease = null;
+      previous();
+    }
+    tipRelease = release || null;
+    tipHost = host || null;
+    var el = tipNode();
+    el.textContent = "";
+    if (content.title) {
+      var title = document.createElement("div");
+      title.className = "a-tip__title";
+      title.textContent = content.title;
+      el.appendChild(title);
+    }
+    if (content.text) {
+      var text = document.createElement("div");
+      text.className = "a-tip__text";
+      text.textContent = content.text;
+      el.appendChild(text);
+    }
+    (content.rows || []).forEach(function (row) {
+      el.appendChild(tipRow(row));
+    });
+    el.hidden = false;
+    positionTip(anchor, pointer);
+  }
+
+  /* Escape hatch for hand-authored marks: `data-a-tip` holds the value text
+     and the optional `data-a-tip-title` holds a heading. */
+  function annotatedHost(node) {
+    return node && node.closest ? node.closest("[data-a-tip]") : null;
+  }
+
+  function showAnnotatedTip(host, pointer) {
+    showTip(
+      {
+        title: host.getAttribute("data-a-tip-title") || "",
+        text: host.getAttribute("data-a-tip") || ""
+      },
+      host,
+      host.getBoundingClientRect(),
+      pointer,
+      null
+    );
+  }
+
+  document.addEventListener("pointerover", function (event) {
+    var host = annotatedHost(event.target);
+    if (!host) return;
+    showAnnotatedTip(
+      host,
+      event.pointerType === "touch" ? null : { x: event.clientX, y: event.clientY }
+    );
+  });
+
+  document.addEventListener("pointermove", function (event) {
+    if (!tipHost || event.pointerType === "touch") return;
+    if (!tipHost.hasAttribute || !tipHost.hasAttribute("data-a-tip")) return;
+    if (annotatedHost(event.target) !== tipHost) return;
+    positionTip(tipHost.getBoundingClientRect(), {
+      x: event.clientX,
+      y: event.clientY
+    });
+  });
+
+  document.addEventListener("pointerout", function (event) {
+    var host = annotatedHost(event.target);
+    if (!host || host !== tipHost) return;
+    if (event.relatedTarget && host.contains(event.relatedTarget)) return;
+    hideTip();
+  });
+
+  document.addEventListener("focusin", function (event) {
+    var host = annotatedHost(event.target);
+    if (host) showAnnotatedTip(host, null);
+  });
+
+  document.addEventListener("focusout", function (event) {
+    var host = annotatedHost(event.target);
+    if (!host || host !== tipHost) return;
+    /* A still-hovered mark keeps its tooltip; `pointerout` closes that one. */
+    if (host.matches && host.matches(":hover")) return;
+    hideTip();
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") hideTip();
+  });
+
+  window.addEventListener("scroll", hideTip, true);
+  window.addEventListener("resize", hideTip);
+
+  /* ---------- charts ----------
+     <figure class="a-figure" data-a-chart="bar|stacked-bar|line"> wrapping a
+     plain <table> of the same numbers. The table is both the data source and
+     the no-script fallback: the kit draws the chart from it and then keeps it
+     under a disclosure as the exact-value equivalent. Each category gets a
+     hover band that also takes keyboard focus, so pointer, arrow keys, and
+     tap all produce the same readout. */
+  var SVG_NS = "http://www.w3.org/2000/svg";
+  var CHART_WIDTH = 640;
+  var CHART_TYPES = { bar: 1, "stacked-bar": 1, line: 1 };
+
+  function svgNode(name, attrs) {
+    var node = document.createElementNS(SVG_NS, name);
+    Object.keys(attrs || {}).forEach(function (key) {
+      node.setAttribute(key, String(attrs[key]));
+    });
+    return node;
+  }
+
+  /* `data-value` wins so cells can stay human-readable ("1,284", "18m 24s"). */
+  function cellNumber(cell) {
+    var explicit = cell.getAttribute("data-value");
+    var text = (explicit === null ? cell.textContent : explicit) || "";
+    var match = text
+      .replace(/\u2212/g, "-")
+      .replace(/,/g, "")
+      .match(/-?\d*\.?\d+/);
+    return match ? parseFloat(match[0]) : null;
+  }
+
+  function readChartTable(table) {
+    var headCells = table.querySelectorAll("thead th");
+    if (headCells.length < 2) return null;
+    var series = [];
+    for (var column = 1; column < headCells.length; column += 1) {
+      series.push(headCells[column].textContent.trim());
+    }
+    var categories = [];
+    table.querySelectorAll("tbody tr").forEach(function (row) {
+      var cells = row.children;
+      if (cells.length < 2) return;
+      /* A hidden row is filtered out, so the chart matches what is listed. */
+      if (row.hidden || row.hasAttribute("data-a-excluded")) return;
+      var point = {
+        label: cells[0].textContent.trim(),
+        row: row,
+        values: [],
+        texts: []
+      };
+      series.forEach(function (name, position) {
+        var cell = cells[position + 1];
+        point.values.push(cell ? cellNumber(cell) : null);
+        point.texts.push(cell ? cell.textContent.trim() : "");
+      });
+      categories.push(point);
+    });
+    return categories.length
+      ? { series: series, categories: categories }
+      : null;
+  }
+
+  function niceCeil(value) {
+    if (!(value > 0)) return 1;
+    var magnitude = Math.pow(10, Math.floor(Math.log(value) / Math.LN10));
+    var steps = [1, 1.5, 2, 2.5, 3, 4, 5, 7.5, 10];
+    for (var i = 0; i < steps.length; i += 1) {
+      if (value <= steps[i] * magnitude) return steps[i] * magnitude;
+    }
+    return 10 * magnitude;
+  }
+
+  function formatTick(value) {
+    var size = Math.abs(value);
+    if (size >= 1000000) {
+      return (value / 1000000).toFixed(size % 1000000 ? 1 : 0) + "M";
+    }
+    if (size >= 1000) return (value / 1000).toFixed(size % 1000 ? 1 : 0) + "k";
+    return String(Math.round(value * 100) / 100);
+  }
+
+  /* Per-figure render state so a chart can be drawn more than once: the
+     nodes from the previous pass are thrown away and rebuilt from whatever
+     the table says now. */
+  var chartState = new WeakMap();
+
+  function chartTable(figure) {
+    var details = figure.querySelector(".a-chart__data");
+    return (details || figure).querySelector("table");
+  }
+
+  /* The table is the source of truth, so any change to it — a filter hiding
+     rows, new rows, an edited cell — redraws the chart on its own. */
+  function watchChartTable(figure, state) {
+    if (state.observer) return;
+    var queued = false;
+    state.observer = new MutationObserver(function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () {
+        queued = false;
+        renderChart(figure);
+      });
+    });
+    /* Watching the disclosure rather than the table keeps the chart live even
+       when a script replaces the whole <table>. */
+    state.observer.observe(state.details, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ["hidden", "data-a-excluded", "data-value"]
+    });
+  }
+
+  function renderChart(figure) {
+    var type = figure.getAttribute("data-a-chart");
+    var table = chartTable(figure);
+    if (!CHART_TYPES[type] || !table) return;
+
+    var state = chartState.get(figure);
+    if (!state) {
+      state = { nodes: [], details: null, observer: null, focused: null };
+      chartState.set(figure, state);
+    }
+
+    /* Keeping the reader's place: a re-render restores keyboard focus to the
+       same category when it survives. */
+    var hadFocus = state.nodes.some(function (node) {
+      return node.contains(document.activeElement);
+    });
+    var refocus = hadFocus ? state.focused : null;
+    if (tipHost && figure.contains(tipHost)) hideTip();
+    state.nodes.forEach(function (node) {
+      if (node.parentNode) node.parentNode.removeChild(node);
+    });
+    state.nodes = [];
+
+    if (!state.details) {
+      var source = table.closest(".a-table-scroll") || table;
+      var details = document.createElement("details");
+      details.className = "a-disclosure a-chart__data";
+      var summary = document.createElement("summary");
+      summary.textContent = "Data table";
+      details.appendChild(summary);
+      source.parentNode.insertBefore(details, source);
+      details.appendChild(source);
+      state.details = details;
+    }
+    watchChartTable(figure, state);
+
+    var data = readChartTable(table);
+    if (!data) {
+      var empty = document.createElement("p");
+      empty.className = "a-chart__empty";
+      empty.textContent =
+        figure.getAttribute("data-a-chart-empty") ||
+        "No data for this selection.";
+      figure.insertBefore(empty, state.details);
+      state.nodes.push(empty);
+      state.focused = null;
+      return;
+    }
+
+    var stacked = type === "stacked-bar";
+    var isLine = type === "line";
+    var height = parseFloat(figure.getAttribute("data-a-chart-height")) || 220;
+    var unit = figure.getAttribute("data-a-chart-unit") || "";
+    var tickUnit = unit.length <= 2 ? unit : "";
+    var pad = { top: 14, right: 14, bottom: 30, left: 46 };
+    var plotWidth = CHART_WIDTH - pad.left - pad.right;
+    var plotHeight = height - pad.top - pad.bottom;
+    var bandWidth = plotWidth / data.categories.length;
+
+    var high = 0;
+    var low = 0;
+    data.categories.forEach(function (point) {
+      var sum = 0;
+      point.values.forEach(function (value) {
+        if (value === null) return;
+        sum += value > 0 ? value : 0;
+        low = Math.min(low, value);
+        if (!stacked) high = Math.max(high, value);
+      });
+      if (stacked) high = Math.max(high, sum);
+    });
+    var declaredMax = parseFloat(figure.getAttribute("data-a-chart-max"));
+    var maxY = isFinite(declaredMax) ? declaredMax : niceCeil(high);
+    var minY = low < 0 ? -niceCeil(-low) : 0;
+    var span = maxY - minY || 1;
+
+    var scaleY = function (value) {
+      return pad.top + ((maxY - value) / span) * plotHeight;
+    };
+    var centerX = function (index) {
+      return pad.left + bandWidth * (index + 0.5);
+    };
+    var describe = function (index) {
+      var point = data.categories[index];
+      return (
+        point.label +
+        ": " +
+        data.series
+          .map(function (name, position) {
+            return name + " " + (point.texts[position] || "no value");
+          })
+          .join(", ")
+      );
+    };
+
+    var caption = figure.querySelector("figcaption");
+    var svg = svgNode("svg", {
+      class: "a-chart",
+      viewBox: "0 0 " + CHART_WIDTH + " " + height,
+      role: "group",
+      "aria-label":
+        (figure.getAttribute("data-a-chart-label") ||
+          (caption ? caption.textContent.trim() : "Chart")) +
+        ". Use the arrow keys to read each value."
+    });
+
+    var grid = svgNode("g", { class: "a-chart__grid" });
+    var axis = svgNode("g", { class: "a-chart__axis" });
+    for (var tick = 0; tick <= 4; tick += 1) {
+      var value = minY + (span * tick) / 4;
+      var y = scaleY(value);
+      grid.appendChild(
+        svgNode("line", {
+          x1: pad.left,
+          y1: y,
+          x2: CHART_WIDTH - pad.right,
+          y2: y
+        })
+      );
+      var tickLabel = svgNode("text", {
+        x: pad.left - 8,
+        y: y + 3.5,
+        "text-anchor": "end"
+      });
+      tickLabel.textContent = formatTick(value) + tickUnit;
+      axis.appendChild(tickLabel);
+    }
+
+    var labelStep = Math.ceil(data.categories.length / 8);
+    data.categories.forEach(function (point, index) {
+      if (index % labelStep) return;
+      var text = svgNode("text", {
+        x: centerX(index),
+        y: height - 10,
+        "text-anchor": "middle"
+      });
+      text.textContent = point.label;
+      axis.appendChild(text);
+    });
+
+    var plot = svgNode("g", { class: "a-chart__plot" });
+    /* Past ~30 points a marker per category reads as a scatter plot instead
+       of a line, so dense series drop to a bare stroke and only the active
+       point is drawn (CSS gives it a radius again). */
+    var pointRadius = data.categories.length > 30 ? 0 : 2.75;
+    if (isLine) {
+      data.series.forEach(function (name, position) {
+        /* A missing value breaks the line rather than bridging the gap. */
+        var segments = [[]];
+        data.categories.forEach(function (point, index) {
+          var value = point.values[position];
+          if (value === null) {
+            if (segments[segments.length - 1].length) segments.push([]);
+            return;
+          }
+          segments[segments.length - 1].push(
+            centerX(index) + "," + scaleY(value)
+          );
+          plot.appendChild(
+            svgNode("circle", {
+              class: "a-chart__point a-series-" + (position + 1),
+              cx: centerX(index),
+              cy: scaleY(value),
+              r: pointRadius,
+              "data-a-index": index
+            })
+          );
+        });
+        segments.forEach(function (coordinates) {
+          if (!coordinates.length) return;
+          plot.insertBefore(
+            svgNode("polyline", {
+              class: "a-chart__series a-series-" + (position + 1),
+              points: coordinates.join(" ")
+            }),
+            plot.firstChild
+          );
+        });
+      });
+    } else {
+      var inset = bandWidth * 0.18;
+      var slot = (bandWidth - inset * 2) / (stacked ? 1 : data.series.length);
+      var baseline = scaleY(Math.max(minY, 0));
+      data.categories.forEach(function (point, index) {
+        var stackTop = 0;
+        data.series.forEach(function (name, position) {
+          var value = point.values[position];
+          if (value === null) return;
+          var from = baseline;
+          var to;
+          if (stacked) {
+            from = scaleY(stackTop);
+            stackTop += value;
+            to = scaleY(stackTop);
+          } else {
+            to = scaleY(value);
+          }
+          plot.appendChild(
+            svgNode("rect", {
+              class: "a-chart__bar a-series-" + (position + 1),
+              x:
+                pad.left +
+                bandWidth * index +
+                inset +
+                slot * (stacked ? 0 : position),
+              y: Math.min(from, to),
+              width: Math.max(1, slot - 2),
+              height: Math.max(1, Math.abs(to - from)),
+              rx: 2,
+              "data-a-index": index
+            })
+          );
+        });
+      });
+    }
+
+    var crosshair = svgNode("line", {
+      class: "a-chart__crosshair",
+      x1: pad.left,
+      x2: pad.left,
+      y1: pad.top,
+      y2: pad.top + plotHeight,
+      hidden: "hidden"
+    });
+
+    var overlay = svgNode("g", { class: "a-chart__bands" });
+    var bands = data.categories.map(function (point, index) {
+      var band = svgNode("rect", {
+        class: "a-chart__band",
+        x: pad.left + bandWidth * index,
+        y: pad.top,
+        width: bandWidth,
+        height: plotHeight,
+        tabindex: index === 0 ? 0 : -1,
+        role: "img",
+        "aria-label": describe(index)
+      });
+      overlay.appendChild(band);
+      return band;
+    });
+
+    svg.appendChild(grid);
+    svg.appendChild(axis);
+    svg.appendChild(plot);
+    svg.appendChild(crosshair);
+    svg.appendChild(overlay);
+
+    figure.insertBefore(svg, state.details);
+    state.nodes.push(svg);
+
+    if (data.series.length > 1) {
+      var legend = document.createElement("ul");
+      legend.className = "a-legend";
+      data.series.forEach(function (name, position) {
+        var item = document.createElement("li");
+        item.className = "a-series-" + (position + 1);
+        var swatch = document.createElement("span");
+        swatch.className = "a-legend__swatch";
+        item.appendChild(swatch);
+        item.appendChild(document.createTextNode(name));
+        legend.appendChild(item);
+      });
+      figure.insertBefore(legend, state.details);
+      state.nodes.push(legend);
+    }
+
+    var readout = document.createElement("p");
+    readout.className = "a-visually-hidden";
+    readout.setAttribute("aria-live", "polite");
+    figure.appendChild(readout);
+    state.nodes.push(readout);
+
+    var clear = function () {
+      bands.forEach(function (band) {
+        band.removeAttribute("data-a-active");
+      });
+      plot.querySelectorAll("[data-a-index]").forEach(function (mark) {
+        mark.removeAttribute("data-a-active");
+      });
+      crosshair.setAttribute("hidden", "hidden");
+      readout.textContent = "";
+    };
+
+    var activate = function (index, pointer) {
+      if (index < 0 || index >= bands.length) return;
+      clear();
+      bands[index].setAttribute("data-a-active", "true");
+      plot
+        .querySelectorAll('[data-a-index="' + index + '"]')
+        .forEach(function (mark) {
+          mark.setAttribute("data-a-active", "true");
+        });
+      if (isLine) {
+        crosshair.setAttribute("x1", centerX(index));
+        crosshair.setAttribute("x2", centerX(index));
+        crosshair.removeAttribute("hidden");
+      }
+      readout.textContent = describe(index);
+      showTip(
+        {
+          title: data.categories[index].label,
+          rows: data.series.map(function (name, position) {
+            return {
+              name: name,
+              value: data.categories[index].texts[position],
+              series: position + 1
+            };
+          })
+        },
+        bands[index],
+        bands[index].getBoundingClientRect(),
+        pointer,
+        clear
+      );
+    };
+
+    /* -1 outside the plot area, so the axis and margins read as no category. */
+    var indexAt = function (clientX) {
+      var box = svg.getBoundingClientRect();
+      if (!box.width) return -1;
+      var local = ((clientX - box.left) / box.width) * CHART_WIDTH;
+      if (local < pad.left || local > pad.left + plotWidth) return -1;
+      var index = Math.floor((local - pad.left) / bandWidth);
+      return Math.max(0, Math.min(data.categories.length - 1, index));
+    };
+
+    svg.addEventListener("pointermove", function (event) {
+      if (event.pointerType === "touch") return;
+      var index = indexAt(event.clientX);
+      if (index === -1) {
+        if (bands.indexOf(document.activeElement) === -1) hideTip();
+        return;
+      }
+      activate(index, { x: event.clientX, y: event.clientY });
+    });
+
+    svg.addEventListener("pointerdown", function (event) {
+      if (event.pointerType !== "touch") return;
+      activate(indexAt(event.clientX), null);
+    });
+
+    /* Touch leaves as soon as the finger lifts, so a tap keeps its readout. */
+    svg.addEventListener("pointerleave", function (event) {
+      if (event.pointerType === "touch") return;
+      if (bands.indexOf(document.activeElement) === -1) hideTip();
+    });
+
+    bands.forEach(function (band, index) {
+      band.addEventListener("focus", function () {
+        state.focused = {
+          index: index,
+          row: data.categories[index].row,
+          label: data.categories[index].label
+        };
+        activate(index, null);
+      });
+      band.addEventListener("blur", function () {
+        if (tipHost === band) hideTip();
+      });
+    });
+
+    svg.addEventListener("keydown", function (event) {
+      var current = bands.indexOf(document.activeElement);
+      if (current === -1) return;
+      var next = current;
+      if (event.key === "ArrowRight") next = current + 1;
+      else if (event.key === "ArrowLeft") next = current - 1;
+      else if (event.key === "Home") next = 0;
+      else if (event.key === "End") next = bands.length - 1;
+      else return;
+      event.preventDefault();
+      next = Math.max(0, Math.min(bands.length - 1, next));
+      bands.forEach(function (band, position) {
+        band.setAttribute("tabindex", position === next ? "0" : "-1");
+      });
+      bands[next].focus();
+    });
+
+    if (refocus) {
+      /* The same row, not the same slot: filtering rows above the reader's
+         position must not move them onto a different bar. */
+      var target = data.categories.findIndex(function (category) {
+        return category.row === refocus.row;
+      });
+      /* Rows rebuilt wholesale lose their identity, so fall back to the label
+         and then to the old slot. */
+      if (target === -1) {
+        target = data.categories.findIndex(function (category) {
+          return category.label === refocus.label;
+        });
+      }
+      if (target === -1) target = Math.min(refocus.index, bands.length - 1);
+      bands.forEach(function (band, position) {
+        band.setAttribute("tabindex", position === target ? "0" : "-1");
+      });
+      bands[target].focus();
+    }
+  }
+
+  function renderCharts(target) {
+    if (target === undefined || target === null) {
+      document.querySelectorAll("[data-a-chart]").forEach(renderChart);
+      return;
+    }
+    var scope =
+      typeof target === "string" ? document.querySelector(target) : target;
+    if (!scope) return;
+    if (scope.matches && scope.matches("[data-a-chart]")) renderChart(scope);
+    else scope.querySelectorAll("[data-a-chart]").forEach(renderChart);
+  }
+
+  renderCharts();
+
+  /* The only public surface of the kit: artifacts that swap or filter a
+     chart's rows themselves can force a redraw, though the table observer
+     above already covers ordinary DOM edits. */
+  window.artifactKit = window.artifactKit || {};
+  window.artifactKit.renderCharts = renderCharts;
+
+  /* Print carries the numbers, not the hover: expand every chart's data
+     table before the page is rendered. */
+  var printReopened = [];
+  window.addEventListener("beforeprint", function () {
+    hideTip();
+    document.querySelectorAll(".a-chart__data").forEach(function (details) {
+      if (details.open) return;
+      printReopened.push(details);
+      details.open = true;
+    });
+  });
+
+  window.addEventListener("afterprint", function () {
+    printReopened.forEach(function (details) {
+      details.open = false;
+    });
+    printReopened = [];
+  });
+
+  /* ---------- diagram: pan, zoom, select ----------
+     Pointer drag and wheel pan/zoom the viewport group; arrow keys and
+     +/-/0 do the same from the keyboard so the diagram is operable without
+     a pointing device. Node clicks (or Enter/Space) update the inspector. */
+  document.querySelectorAll("[data-a-diagram]").forEach(function (diagram) {
+    var svg = diagram.querySelector("[data-a-diagram-canvas]");
+    var viewport = diagram.querySelector("[data-a-diagram-viewport]");
+    if (!svg || !viewport) return;
+
+    var view = { x: 0, y: 0, scale: 1 };
+    var drag = null;
+
+    var render = function () {
+      viewport.setAttribute(
+        "transform",
+        "translate(" + view.x + " " + view.y + ") scale(" + view.scale + ")"
+      );
+    };
+
+    var zoomBy = function (factor) {
+      view.scale = Math.min(2.5, Math.max(0.5, view.scale * factor));
+      render();
+    };
+
+    svg.addEventListener("pointerdown", function (event) {
+      if (event.target.closest("[data-a-node]")) return;
+      drag = { x: event.clientX, y: event.clientY };
+      svg.setPointerCapture(event.pointerId);
+    });
+
+    svg.addEventListener("pointermove", function (event) {
+      if (!drag) return;
+      view.x += event.clientX - drag.x;
+      view.y += event.clientY - drag.y;
+      drag = { x: event.clientX, y: event.clientY };
+      render();
+    });
+
+    var endDrag = function () {
+      drag = null;
+    };
+    svg.addEventListener("pointerup", endDrag);
+    svg.addEventListener("pointercancel", endDrag);
+
+    svg.addEventListener(
+      "wheel",
+      function (event) {
+        if (!event.ctrlKey && !event.metaKey) return;
+        event.preventDefault();
+        zoomBy(event.deltaY < 0 ? 1.1 : 0.9);
+      },
+      { passive: false }
+    );
+
+    diagram.addEventListener("keydown", function (event) {
+      var pan = { ArrowUp: [0, 24], ArrowDown: [0, -24], ArrowLeft: [24, 0], ArrowRight: [-24, 0] }[
+        event.key
+      ];
+      if (pan && !event.target.closest("[data-a-node]")) {
+        event.preventDefault();
+        view.x += pan[0];
+        view.y += pan[1];
+        render();
+        return;
+      }
+      if (event.key === "+" || event.key === "=") zoomBy(1.1);
+      else if (event.key === "-") zoomBy(0.9);
+      else if (event.key === "0") {
+        view = { x: 0, y: 0, scale: 1 };
+        render();
+      }
+    });
+
+    diagram.querySelectorAll("[data-a-zoom]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var action = button.getAttribute("data-a-zoom");
+        if (action === "in") zoomBy(1.15);
+        else if (action === "out") zoomBy(0.87);
+        else {
+          view = { x: 0, y: 0, scale: 1 };
+          render();
+        }
+      });
+    });
+
+    var inspector = diagram.querySelector("[data-a-inspector]");
+    var select = function (node) {
+      diagram.querySelectorAll("[data-a-node]").forEach(function (other) {
+        other.setAttribute("aria-current", String(other === node));
+      });
+      if (!inspector) return;
+      var title = inspector.querySelector("[data-a-inspector-title]");
+      var body = inspector.querySelector("[data-a-inspector-body]");
+      if (title) title.textContent = node.getAttribute("data-a-title") || "";
+      if (body) body.textContent = node.getAttribute("data-a-detail") || "";
+    };
+
+    diagram.querySelectorAll("[data-a-node]").forEach(function (node) {
+      node.addEventListener("click", function () {
+        select(node);
+      });
+      node.addEventListener("keydown", function (event) {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        select(node);
+      });
+    });
+
+    render();
+  });
+})();
+    </script>
+  </body>
+</html>

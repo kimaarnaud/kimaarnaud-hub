@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { DOMAINS } from '../content.config';
+import StatusBadge from './StatusBadge.astro';
+
+interface Props {
+  projet: CollectionEntry<'projets'>;
+}
+
+const { projet } = Astro.props;
+const d = projet.data;
+const domain = DOMAINS[d.domain];
+const num = String(d.number).padStart(2, '0');
+---
+
+<article
+  class="rounded-lg border border-slate-200 p-4 flex flex-col gap-2 hover:border-slate-400 transition-colors"
+  data-domain={d.domain}
+  data-status={d.status}
+  data-level={d.level}
+  data-search={`${d.title} ${d.stack.join(' ')} ${d.skills.join(' ')}`.toLowerCase()}
+>
+  <div class="flex items-center justify-between text-xs text-slate-500">
+    <span>
+      {domain.short} · {num}
+    </span>
+    <StatusBadge status={d.status} />
+  </div>
+  <h3 class="font-semibold leading-snug">
+    <a href={`/projets/${projet.id}/`} class="hover:underline underline-offset-4">
+      {d.title}
+    </a>
+  </h3>
+  <p class="text-sm text-slate-600 line-clamp-3">{d.summary}</p>
+  <ul class="mt-auto flex flex-wrap gap-1 pt-2" aria-label="Technologies">
+    {d.stack.slice(0, 5).map((s) => (
+      <li class="text-xs rounded bg-slate-100 px-2 py-0.5">{s}</li>
+    ))}
+  </ul>
+</article>

@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { DOMAINS, type Domain } from '../../content.config';
+
+const projets = (await getCollection('projets')).sort((a, b) =>
+  a.data.domain === b.data.domain
+    ? a.data.number - b.data.number
+    : Object.keys(DOMAINS).indexOf(a.data.domain) - Object.keys(DOMAINS).indexOf(b.data.domain),
+);
+---
+
+<Base
+  title="Projets"
+  description="Les 80 projets du portfolio, filtrables par domaine, niveau, statut et technologie."
+>
+  <h1 class="text-3xl font-bold tracking-tight">Projets</h1>
+  <p class="mt-2 text-slate-600">{projets.length} projets. Filtrez par domaine, niveau, statut ou mot-clé.</p>
+
+  <form id="filters" class="mt-6 grid gap-3 sm:grid-cols-4" aria-label="Filtres">
+    <select name="domain" class="rounded border border-slate-300 px-3 py-2 text-sm" aria-label="Domaine">
+      <option value="">Tous les domaines</option>
+      {(Object.keys(DOMAINS) as Domain[]).map((d) => (
+        <option value={d}>{DOMAINS[d].label}</option>
+      ))}
+    </select>
+    <select name="level" class="rounded border border-slate-300 px-3 py-2 text-sm" aria-label="Niveau">
+      <option value="">Tous les niveaux</option>
+      <option value="fondations">Fondations</option>
+      <option value="avance">Avancé</option>
+      <option value="expert">Expert</option>
+    </select>
+    <select name="status" class="rounded border border-slate-300 px-3 py-2 text-sm" aria-label="Statut">
+      <option value="">Tous les statuts</option>
+      <option value="termine">Terminé</option>
+      <option value="en-cours">En cours</option>
+      <option value="planifie">Planifié</option>
+    </select>
+    <input
+      name="q"
+      type="search"
+      placeholder="Technologie, compétence…"
+      class="rounded border border-slate-300 px-3 py-2 text-sm"
+      aria-label="Recherche"
+    />
+  </form>
+
+  <p id="count" class="mt-4 text-sm text-slate-500" aria-live="polite"></p>
+
+  <div id="grid" class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {projets.map((p) => (
+      <ProjectCard projet={p} />
+    ))}
+  </div>
+  <p id="empty" class="mt-8 text-slate-500" hidden>
+    Aucun projet ne correspond à ces filtres.
+  </p>
+</Base>
+
+<script>
+  const form = document.getElementById('filters') as HTMLFormElement;
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('#grid > article'));
+  const count = document.getElementById('count')!;
+  const empty = document.getElementById('empty')!;
+
+  function apply() {
+    const data = new FormData(form);
+    const domain = data.get('domain') as string;
+    const level = data.get('level') as string;
+    const status = data.get('status') as string;
+    const q = ((data.get('q') as string) || '').trim().toLowerCase();
+    let visible = 0;
+    for (const card of cards) {
+      const ok =
+        (!domain || card.dataset.domain === domain) &&
+        (!level || card.dataset.level === level) &&
+        (!status || card.dataset.status === status) &&
+        (!q || (card.dataset.search ?? '').includes(q));
+      card.hidden = !ok;
+      if (ok) visible++;
+    }
+    count.textContent = `${visible} projet${visible > 1 ? 's' : ''} affiché${visible > 1 ? 's' : ''}`;
+    empty.hidden = visible > 0;
+    const params = new URLSearchParams();
+    for (const [k, v] of data) if (v) params.set(k, v as string);
+    history.replaceState(null, '', params.size ? `?${params}` : location.pathname);
+  }
+
+  const initial = new URLSearchParams(location.search);
+  for (const [k, v] of initial) {
+    const field = form.elements.namedItem(k) as HTMLInputElement | HTMLSelectElement | null;
+    if (field) field.value = v;
+  }
+  form.addEventListener('input', apply);
+  apply();
+</script>
