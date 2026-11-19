@@ -8,6 +8,7 @@ summary: "Le site que vous lisez : portail statique Astro qui présente les 80 p
 stack: [Astro, TypeScript, Tailwind CSS, nginx, Docker, Traefik, GitHub Actions]
 skills: [Site statique et SEO, Conteneurisation, CI/CD, Reverse proxy et TLS, Administration VPS]
 duration: "3 semaines"
+cover: ./00-hub-cover.svg
 updated: 2026-09-28
 links:
   repo: https://github.com/kimaarnaud/kimaarnaud-hub

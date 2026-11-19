@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+  <rect width="1200" height="630" fill="#1c1a15"/>
+  <g fill="#2e2b22">
+    <circle cx="80" cy="80" r="3"/><circle cx="140" cy="80" r="3"/><circle cx="200" cy="80" r="3"/><circle cx="260" cy="80" r="3"/><circle cx="320" cy="80" r="3"/><circle cx="380" cy="80" r="3"/><circle cx="440" cy="80" r="3"/><circle cx="500" cy="80" r="3"/><circle cx="560" cy="80" r="3"/><circle cx="620" cy="80" r="3"/><circle cx="680" cy="80" r="3"/><circle cx="740" cy="80" r="3"/><circle cx="800" cy="80" r="3"/><circle cx="860" cy="80" r="3"/><circle cx="920" cy="80" r="3"/><circle cx="980" cy="80" r="3"/><circle cx="1040" cy="80" r="3"/><circle cx="1100" cy="80" r="3"/>
+    <circle cx="80" cy="140" r="3"/><circle cx="140" cy="140" r="3"/><circle cx="200" cy="140" r="3"/><circle cx="260" cy="140" r="3"/><circle cx="320" cy="140" r="3"/><circle cx="380" cy="140" r="3"/><circle cx="440" cy="140" r="3"/><circle cx="500" cy="140" r="3"/><circle cx="560" cy="140" r="3"/><circle cx="620" cy="140" r="3"/><circle cx="680" cy="140" r="3"/><circle cx="740" cy="140" r="3"/><circle cx="800" cy="140" r="3"/><circle cx="860" cy="140" r="3"/><circle cx="920" cy="140" r="3"/><circle cx="980" cy="140" r="3"/><circle cx="1040" cy="140" r="3"/><circle cx="1100" cy="140" r="3"/>
+    <circle cx="80" cy="200" r="3"/><circle cx="140" cy="200" r="3"/><circle cx="200" cy="200" r="3"/><circle cx="260" cy="200" r="3"/><circle cx="320" cy="200" r="3"/><circle cx="380" cy="200" r="3"/><circle cx="440" cy="200" r="3"/><circle cx="500" cy="200" r="3"/><circle cx="560" cy="200" r="3"/><circle cx="620" cy="200" r="3"/><circle cx="680" cy="200" r="3"/><circle cx="740" cy="200" r="3"/><circle cx="800" cy="200" r="3"/><circle cx="860" cy="200" r="3"/><circle cx="920" cy="200" r="3"/><circle cx="980" cy="200" r="3"/><circle cx="1040" cy="200" r="3"/><circle cx="1100" cy="200" r="3"/>
+  </g>
+  <rect x="80" y="300" width="34" height="34" rx="7" fill="none" stroke="#f2efe6" stroke-width="3"/>
+  <rect x="90.5" y="310.5" width="6" height="6" rx="1.5" fill="#f2efe6"/>
+  <rect x="103.5" y="310.5" width="6" height="6" rx="1.5" fill="#f2efe6"/>
+  <rect x="90.5" y="323.5" width="6" height="6" rx="1.5" fill="#f2efe6"/>
+  <rect x="103.5" y="323.5" width="6" height="6" rx="1.5" fill="#d94e1f"/>
+  <text x="80" y="430" fill="#f2efe6" font-size="72" font-weight="700" letter-spacing="-2">kimaarnaud<tspan fill="#6b675c">.com</tspan></text>
+  <text x="80" y="490" fill="#8a867a" font-size="28" letter-spacing="4">HUB — LOGICIEL · FICHE 00</text>
+  <rect x="80" y="540" width="1040" height="1" fill="#3a372c"/>
+  <text x="80" y="580" fill="#6b675c" font-size="20">81 projets · 4 domaines · 3 plateformes</text>
+</svg>
