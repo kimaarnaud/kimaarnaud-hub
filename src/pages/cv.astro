@@ -1,0 +1,143 @@
+---
+import { existsSync } from 'node:fs';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { DOMAINS } from '../content.config';
+import { accroche, parcours, formation } from '../data/cv';
+
+const projets = await getCollection('projets');
+const hasPdf = existsSync('public/cv.pdf');
+
+const skills = new Map<string, number>();
+for (const p of projets) {
+  if (p.data.status === 'planifie') continue;
+  for (const s of p.data.skills) skills.set(s, (skills.get(s) ?? 0) + 1);
+}
+const topSkills = [...skills.entries()]
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'fr'))
+  .slice(0, 15);
+---
+
+<Base title="CV" description={accroche}>
+  <div class="flex flex-wrap items-end justify-between gap-6">
+    <div class="max-w-2xl">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent-ink">curriculum vitae</p>
+      <h1 class="mt-3 text-4xl font-bold tracking-tight">Kima Arnaud</h1>
+      <p class="mt-3 leading-relaxed text-ink-2">{accroche}</p>
+    </div>
+    <div class="flex items-center gap-3">
+      {hasPdf ? (
+        <a
+          href="/cv.pdf"
+          class="inline-flex items-center rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-bg transition-transform duration-150 ease-(--ease-out-expo) hover:opacity-90 active:scale-[0.98]"
+        >
+          Télécharger le PDF ↓
+        </a>
+      ) : (
+        <span class="rounded-full border border-dashed border-line px-5 py-2.5 font-mono text-xs text-ink-3">
+          cv.pdf à déposer dans public/
+        </span>
+      )}
+      <a
+        href="/contact/"
+        class="inline-flex items-center rounded-full border border-line px-5 py-2.5 text-sm font-medium transition-colors duration-200 hover:border-ink-3 active:scale-[0.98]"
+      >
+        Me contacter
+      </a>
+    </div>
+  </div>
+
+  <div class="mt-14 grid gap-14 lg:grid-cols-2">
+    <section aria-labelledby="parcours">
+      <h2 id="parcours" class="font-mono text-[11px] uppercase tracking-wider text-ink-3">
+        Parcours
+      </h2>
+      <dl class="mt-4 divide-y divide-line border-y border-line">
+        {parcours.map((e) => (
+          <div class="grid gap-1 py-4 sm:grid-cols-[7.5rem_1fr] sm:gap-4">
+            <dt class="font-mono text-xs text-ink-3 tabular-nums">{e.period}</dt>
+            <dd>
+              <p class="font-medium tracking-tight">{e.title}</p>
+              <p class="text-sm text-ink-2">{e.org}</p>
+              {e.note && <p class="mt-1 text-sm leading-relaxed text-ink-3">{e.note}</p>}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section aria-labelledby="formation">
+      <h2 id="formation" class="font-mono text-[11px] uppercase tracking-wider text-ink-3">
+        Formation
+      </h2>
+      <dl class="mt-4 divide-y divide-line border-y border-line">
+        {formation.map((e) => (
+          <div class="grid gap-1 py-4 sm:grid-cols-[7.5rem_1fr] sm:gap-4">
+            <dt class="font-mono text-xs text-ink-3 tabular-nums">{e.period}</dt>
+            <dd>
+              <p class="font-medium tracking-tight">{e.title}</p>
+              <p class="text-sm text-ink-2">{e.org}</p>
+              {e.note && <p class="mt-1 text-sm leading-relaxed text-ink-3">{e.note}</p>}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  </div>
+
+  <section class="mt-14" aria-labelledby="competences">
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 id="competences" class="font-mono text-[11px] uppercase tracking-wider text-ink-3">
+        Compétences démontrées
+      </h2>
+      <a href="/competences/" class="font-mono text-xs text-ink-3 transition-colors hover:text-ink">
+        matrice complète →
+      </a>
+    </div>
+    {topSkills.length > 0 ? (
+      <ul class="mt-4 flex flex-wrap gap-2 border-y border-line py-4">
+        {topSkills.map(([s, n]) => (
+          <li class="flex items-center gap-1.5 rounded-md bg-surface-2 px-2.5 py-1 text-xs">
+            {s}
+            <span class="font-mono text-[10px] tabular-nums text-ink-3">×{n}</span>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="mt-4 border-y border-line py-4 text-sm text-ink-2">
+        Les compétences s'afficheront ici dès que des fiches projets passeront en
+        « en cours » ou « terminé » — elles sont extraites automatiquement des fiches.
+      </p>
+    )}
+  </section>
+
+  <section class="mt-14" aria-labelledby="domaines">
+    <h2 id="domaines" class="font-mono text-[11px] uppercase tracking-wider text-ink-3">
+      Domaines couverts
+    </h2>
+    <ul class="mt-4 divide-y divide-line border-y border-line">
+      {(Object.keys(DOMAINS) as (keyof typeof DOMAINS)[]).map((d) => {
+        const total = projets.filter((p) => p.data.domain === d).length;
+        return (
+          <li class="flex items-center gap-3 py-3">
+            <span
+              class="h-1.5 w-1.5 rounded-[2px]"
+              style={`background: var(--${DOMAINS[d].color})`}
+              aria-hidden="true"
+            />
+            <span class="font-medium tracking-tight">{DOMAINS[d].label}</span>
+            <span class="ml-auto font-mono text-xs tabular-nums text-ink-3">
+              {total} projets
+            </span>
+            <a
+              href={`/projets/?domain=${d}`}
+              class="font-mono text-xs text-accent-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
+            >
+              voir →
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+</Base>
