@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import StatusBadge from '../../components/StatusBadge.astro';
@@ -63,6 +64,30 @@ const meta = [
     </div>
     <StatusBadge status={d.status} />
   </header>
+
+  {
+    d.cover && (
+      <div class="mt-8 overflow-hidden rounded-xl border border-line">
+        {d.cover.format === 'svg' ? (
+          <img
+            src={d.cover.src}
+            width={d.cover.width}
+            height={d.cover.height}
+            alt={`Couverture — ${d.title}`}
+            class="aspect-[21/9] w-full object-cover"
+          />
+        ) : (
+          <Image
+            src={d.cover}
+            alt={`Couverture — ${d.title}`}
+            widths={[800, 1200]}
+            sizes="(min-width: 1024px) 1152px, 100vw"
+            class="aspect-[21/9] w-full object-cover"
+          />
+        )}
+      </div>
+    )
+  }
 
   <div class="mt-10 grid gap-10 lg:grid-cols-[1fr_280px]">
     <article class="prose max-w-none prose-code:before:content-none prose-code:after:content-none">

@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { DOMAINS } from '../content.config';
 import StatusBadge from './StatusBadge.astro';
@@ -11,10 +12,11 @@ const { projet } = Astro.props;
 const d = projet.data;
 const domain = DOMAINS[d.domain];
 const num = String(d.number).padStart(2, '0');
+const href = `/projets/${projet.id}/`;
 ---
 
 <article
-  class="group flex h-full flex-col gap-2.5 rounded-xl border border-line bg-surface p-5 transition-colors duration-200 hover:border-(--dom)/60"
+  class="group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-surface transition-colors duration-200 hover:border-(--dom)/60"
   style={`--dom: var(--${domain.color})`}
   data-domain={d.domain}
   data-status={d.status}
@@ -22,27 +24,59 @@ const num = String(d.number).padStart(2, '0');
   data-updated={d.updated?.getTime() ?? 0}
   data-search={`${d.title} ${d.stack.join(' ')} ${d.skills.join(' ')}`.toLowerCase()}
 >
-  <div class="flex items-center justify-between gap-2 font-mono text-[11px] text-ink-3">
-    <span class="flex items-center gap-2">
-      <span class="h-1.5 w-1.5 rounded-[2px] bg-(--dom)" aria-hidden="true"></span>
-      {domain.short} · {num}
-    </span>
-    <StatusBadge status={d.status} />
+  {
+    d.cover && (
+      <a
+        href={href}
+        class="block aspect-[16/9] overflow-hidden border-b border-line"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        {d.cover.format === 'svg' ? (
+          <img
+            src={d.cover.src}
+            width={d.cover.width}
+            height={d.cover.height}
+            alt=""
+            loading="lazy"
+            class="h-full w-full object-cover transition-transform duration-300 ease-(--ease-out-expo) group-hover:scale-[1.02]"
+          />
+        ) : (
+          <Image
+            src={d.cover}
+            alt=""
+            widths={[400, 800]}
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            loading="lazy"
+            class="h-full w-full object-cover transition-transform duration-300 ease-(--ease-out-expo) group-hover:scale-[1.02]"
+          />
+        )}
+      </a>
+    )
+  }
+  <div class="flex flex-1 flex-col gap-2.5 p-5">
+    <div class="flex items-center justify-between gap-2 font-mono text-[11px] text-ink-3">
+      <span class="flex items-center gap-2">
+        <span class="h-1.5 w-1.5 rounded-[2px] bg-(--dom)" aria-hidden="true"></span>
+        {domain.short} · {num}
+      </span>
+      <StatusBadge status={d.status} />
+    </div>
+    <h3 class="font-semibold leading-snug tracking-tight">
+      <a href={href} class="underline-offset-4 hover:underline hover:decoration-(--dom)">
+        {d.title}
+      </a>
+    </h3>
+    <p class="text-sm leading-relaxed text-ink-2 line-clamp-3">{d.summary}</p>
+    <ul class="mt-auto flex flex-wrap gap-1 pt-2" aria-label="Technologies">
+      {d.stack.slice(0, 5).map((s) => (
+        <li class="rounded bg-surface-2 px-2 py-0.5 font-mono text-[11px] text-ink-2">{s}</li>
+      ))}
+      {d.stack.length > 5 && (
+        <li class="rounded bg-surface-2 px-2 py-0.5 font-mono text-[11px] text-ink-3">
+          +{d.stack.length - 5}
+        </li>
+      )}
+    </ul>
   </div>
-  <h3 class="font-semibold leading-snug tracking-tight">
-    <a href={`/projets/${projet.id}/`} class="underline-offset-4 hover:underline hover:decoration-(--dom)">
-      {d.title}
-    </a>
-  </h3>
-  <p class="text-sm leading-relaxed text-ink-2 line-clamp-3">{d.summary}</p>
-  <ul class="mt-auto flex flex-wrap gap-1 pt-2" aria-label="Technologies">
-    {d.stack.slice(0, 5).map((s) => (
-      <li class="rounded bg-surface-2 px-2 py-0.5 font-mono text-[11px] text-ink-2">{s}</li>
-    ))}
-    {d.stack.length > 5 && (
-      <li class="rounded bg-surface-2 px-2 py-0.5 font-mono text-[11px] text-ink-3">
-        +{d.stack.length - 5}
-      </li>
-    )}
-  </ul>
 </article>
