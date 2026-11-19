@@ -39,7 +39,11 @@ const meta = [
 ].filter(Boolean) as { term: string; value: string }[];
 ---
 
-<Base title={d.title} description={d.summary}>
+<Base
+  title={d.title}
+  description={d.summary}
+  ogImage={d.cover && d.cover.format !== 'svg' ? d.cover.src : undefined}
+>
   <nav aria-label="Fil d'Ariane" class="flex items-center gap-2 font-mono text-xs text-ink-3">
     <a href="/projets/" class="transition-colors hover:text-ink">projets</a>
     <span aria-hidden="true">/</span>
