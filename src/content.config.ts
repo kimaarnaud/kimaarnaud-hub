@@ -1,4 +1,4 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
@@ -62,4 +62,15 @@ const projets = defineCollection({
     }),
 });
 
-export const collections = { projets };
+const retex = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/retex' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    summary: z.string().max(300),
+    tags: z.array(z.string()).default([]),
+    projets: z.array(reference('projets')).default([]),
+  }),
+});
+
+export const collections = { projets, retex };
