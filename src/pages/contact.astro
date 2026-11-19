@@ -1,30 +1,33 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const channels = [
+  { label: 'e-mail', value: 'contact@kimaarnaud.com', href: 'mailto:contact@kimaarnaud.com' },
+  { label: 'github', value: 'github.com/kimaarnaud', href: 'https://github.com/kimaarnaud' },
+  { label: 'linkedin', value: 'linkedin.com/in/kimaarnaud', href: 'https://www.linkedin.com/in/kimaarnaud' },
+];
 ---
 
 <Base title="Contact">
-  <h1 class="text-3xl font-bold tracking-tight">Contact</h1>
-  <p class="mt-2 text-slate-600 max-w-3xl">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent-ink">Contact</p>
+  <h1 class="mt-3 text-4xl font-bold tracking-tight">Discutons</h1>
+  <p class="mt-3 max-w-[62ch] text-ink-2">
     Pour échanger sur un projet, une collaboration ou une opportunité.
   </p>
-  <ul class="mt-6 space-y-2">
-    <li>
-      E-mail :{' '}
-      <a href="mailto:contact@kimaarnaud.com" class="underline underline-offset-4">
-        contact@kimaarnaud.com
-      </a>
-    </li>
-    <li>
-      GitHub :{' '}
-      <a href="https://github.com/kimaarnaud" class="underline underline-offset-4">
-        github.com/kimaarnaud
-      </a>
-    </li>
-    <li>
-      LinkedIn :{' '}
-      <a href="https://www.linkedin.com/in/kimaarnaud" class="underline underline-offset-4">
-        linkedin.com/in/kimaarnaud
-      </a>
-    </li>
-  </ul>
+
+  <dl class="mt-10 max-w-lg divide-y divide-line border-y border-line">
+    {channels.map((c) => (
+      <div class="flex items-baseline justify-between gap-6 py-4">
+        <dt class="font-mono text-[11px] uppercase tracking-wider text-ink-3">{c.label}</dt>
+        <dd>
+          <a
+            href={c.href}
+            class="font-mono text-sm text-accent-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
+          >
+            {c.value} ↗
+          </a>
+        </dd>
+      </div>
+    ))}
+  </dl>
 </Base>
