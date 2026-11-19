@@ -14,27 +14,35 @@ const num = String(d.number).padStart(2, '0');
 ---
 
 <article
-  class="rounded-lg border border-slate-200 p-4 flex flex-col gap-2 hover:border-slate-400 transition-colors"
+  class="group flex h-full flex-col gap-2.5 rounded-xl border border-line bg-surface p-5 transition-colors duration-200 hover:border-(--dom)/60"
+  style={`--dom: var(--${domain.color})`}
   data-domain={d.domain}
   data-status={d.status}
   data-level={d.level}
+  data-updated={d.updated?.getTime() ?? 0}
   data-search={`${d.title} ${d.stack.join(' ')} ${d.skills.join(' ')}`.toLowerCase()}
 >
-  <div class="flex items-center justify-between text-xs text-slate-500">
-    <span>
+  <div class="flex items-center justify-between gap-2 font-mono text-[11px] text-ink-3">
+    <span class="flex items-center gap-2">
+      <span class="h-1.5 w-1.5 rounded-[2px] bg-(--dom)" aria-hidden="true"></span>
       {domain.short} · {num}
     </span>
     <StatusBadge status={d.status} />
   </div>
-  <h3 class="font-semibold leading-snug">
-    <a href={`/projets/${projet.id}/`} class="hover:underline underline-offset-4">
+  <h3 class="font-semibold leading-snug tracking-tight">
+    <a href={`/projets/${projet.id}/`} class="underline-offset-4 hover:underline hover:decoration-(--dom)">
       {d.title}
     </a>
   </h3>
-  <p class="text-sm text-slate-600 line-clamp-3">{d.summary}</p>
+  <p class="text-sm leading-relaxed text-ink-2 line-clamp-3">{d.summary}</p>
   <ul class="mt-auto flex flex-wrap gap-1 pt-2" aria-label="Technologies">
     {d.stack.slice(0, 5).map((s) => (
-      <li class="text-xs rounded bg-slate-100 px-2 py-0.5">{s}</li>
+      <li class="rounded bg-surface-2 px-2 py-0.5 font-mono text-[11px] text-ink-2">{s}</li>
     ))}
+    {d.stack.length > 5 && (
+      <li class="rounded bg-surface-2 px-2 py-0.5 font-mono text-[11px] text-ink-3">
+        +{d.stack.length - 5}
+      </li>
+    )}
   </ul>
 </article>

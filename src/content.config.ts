@@ -3,14 +3,34 @@ import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
 export const DOMAINS = {
-  logiciel: { label: 'Développement logiciel', short: 'Logiciel', platform: null },
+  logiciel: {
+    label: 'Développement logiciel',
+    short: 'Logiciel',
+    desc: 'Applications web, mobile et systèmes : du SaaS à la fintech, du code au déploiement.',
+    platform: null,
+    color: 'dom-logiciel',
+  },
   reseaux: {
     label: 'Réseaux, systèmes et sécurité',
     short: 'Réseaux & sécurité',
+    desc: 'Du home-lab au SOC : topologies, durcissement, détection, réponse à incident.',
     platform: 'https://labhub.kimaarnaud.com',
+    color: 'dom-reseaux',
   },
-  telecoms: { label: 'Télécommunications', short: 'Télécoms', platform: 'https://telco.kimaarnaud.com' },
-  ia: { label: 'Intelligence artificielle', short: 'IA', platform: 'https://ai.kimaarnaud.com' },
+  telecoms: {
+    label: 'Télécommunications',
+    short: 'Télécoms',
+    desc: 'Signal, transport IP, VoIP, FTTH, 4G/5G, LPWAN : mesures et protocoles.',
+    platform: 'https://telco.kimaarnaud.com',
+    color: 'dom-telecoms',
+  },
+  ia: {
+    label: 'Intelligence artificielle',
+    short: 'IA',
+    desc: 'Du ML écrit à la main au produit IA gouverné : expériences, évaluation, MLOps.',
+    platform: 'https://ai.kimaarnaud.com',
+    color: 'dom-ia',
+  },
 } as const;
 
 export type Domain = keyof typeof DOMAINS;
@@ -30,11 +50,11 @@ const projets = defineCollection({
       duration: z.string().optional(),
       links: z
         .object({
-          demo: z.string().url().optional(),
-          platform: z.string().url().optional(),
-          repo: z.string().url().optional(),
+          demo: z.url().optional(),
+          platform: z.url().optional(),
+          repo: z.url().optional(),
           report: z.string().optional(),
-          video: z.string().url().optional(),
+          video: z.url().optional(),
         })
         .default({}),
       cover: image().optional(),
