@@ -1,0 +1,200 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { DOMAINS, domainLabel, type Domain } from '../../content.config';
+
+const lang = 'en';
+const projets = await getCollection('projets');
+const domains = Object.keys(DOMAINS) as Domain[];
+const byDomain = (d: Domain) => projets.filter((p) => p.data.domain === d);
+const count = (d: Domain, status?: string) =>
+  byDomain(d).filter((p) => !status || p.data.status === status).length;
+
+const recents = projets
+  .filter((p) => p.data.status !== 'planifie')
+  .sort((a, b) => (b.data.updated?.getTime() ?? 0) - (a.data.updated?.getTime() ?? 0))
+  .slice(0, 6);
+
+const spec = [
+  ['content', `${projets.length} files · 4 fields · 3 platforms`],
+  ['proof', 'reports · measurements · code · demos'],
+  ['hosting', 'OVH VPS · Traefik · wildcard TLS'],
+  ['deployment', 'GitHub Actions → GHCR → Docker'],
+];
+---
+
+<Base
+  title="Home"
+  lang="en"
+  description="Technical portfolio of Kima Yves Arnaud: 80 documented projects in software, networks & security, telecoms and AI."
+>
+  <section class="grid gap-10 lg:grid-cols-[1fr_300px] lg:items-end">
+    <div>
+      <p class="reveal font-mono text-xs uppercase tracking-[0.2em] text-accent-ink">
+        Technical portfolio — {domains.length} fields · {projets.length} projects
+      </p>
+      <h1 class="reveal mt-5 text-5xl font-bold tracking-tight sm:text-6xl" style="--i:1">
+        Kima Yves Arnaud
+      </h1>
+      <p class="reveal mt-6 max-w-[62ch] text-lg leading-relaxed text-ink-2" style="--i:2">
+        Engineer in continuous training. I complete {projets.length} documented projects,
+        from theory to production, and I publish the proof: reports, measurements, code
+        and demos. This site is the index; each field has its own platform.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap items-center gap-3" style="--i:3">
+        <a
+          href="/en/projets/"
+          class="group inline-flex items-center gap-2 rounded-full bg-ink py-2.5 pl-5 pr-2 text-sm font-medium text-bg transition-transform duration-150 ease-(--ease-out-expo) hover:opacity-90 active:scale-[0.98]"
+        >
+          Browse the projects
+          <span
+            class="flex h-7 w-7 items-center justify-center rounded-full bg-bg/15 transition-transform duration-200 ease-(--ease-out-expo) group-hover:translate-x-0.5"
+          >
+            <svg class="h-3.5 w-3.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M2 7h10M8 3l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </a>
+        <a
+          href="/en/competences/"
+          class="inline-flex items-center rounded-full border border-line px-5 py-2.5 text-sm font-medium transition-colors duration-200 hover:border-ink-3 active:scale-[0.98]"
+        >
+          Skills matrix
+        </a>
+      </div>
+    </div>
+    <dl class="reveal space-y-2.5 border-t border-line pt-5 font-mono text-xs lg:pb-1" style="--i:2">
+      {
+        spec.map(([k, v]) => (
+          <div class="flex gap-4">
+            <dt class="w-24 shrink-0 uppercase tracking-wider text-ink-3">{k}</dt>
+            <dd class="text-ink-2">{v}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section class="reveal mt-20" aria-labelledby="domaines" style="--i:1">
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 id="domaines" class="text-xl font-semibold tracking-tight">Field index</h2>
+      <a href="/en/projets/" class="font-mono text-xs text-ink-3 transition-colors hover:text-ink">
+        view all →
+      </a>
+    </div>
+    <div class="mt-4 border-t border-line">
+      {
+        domains.map((d, i) => {
+          const total = count(d);
+          const done = count(d, 'termine');
+          const pct = total ? Math.round((done / total) * 100) : 0;
+          const dl = domainLabel(d, lang);
+          return (
+            <a
+              href={`/en/projets/?domain=${d}`}
+              class="group grid grid-cols-[auto_1fr_auto] items-center gap-x-4 border-b border-line py-5 transition-colors duration-200 hover:bg-surface sm:grid-cols-[auto_1fr_auto_auto] sm:gap-x-6 sm:px-3"
+              style={`--dom: var(--${DOMAINS[d].color})`}
+            >
+              <span class="flex items-center gap-3 font-mono text-xs text-ink-3">
+                {String(i + 1).padStart(2, '0')}
+                <span class="h-2 w-2 rounded-xs bg-(--dom)" aria-hidden="true" />
+              </span>
+              <span class="min-w-0">
+                <span class="block font-medium tracking-tight underline-offset-4 group-hover:underline">
+                  {dl.label}
+                </span>
+                <span class="mt-0.5 block truncate text-sm text-ink-2">{dl.desc}</span>
+              </span>
+              <span class="hidden w-40 sm:block" aria-hidden="true">
+                <span class="block h-1 overflow-hidden rounded-full bg-surface-2">
+                  <span class="block h-full rounded-full bg-(--dom)" style={`width: ${pct}%`} />
+                </span>
+              </span>
+              <span class="text-right font-mono text-xs whitespace-nowrap tabular-nums text-ink-2">
+                {done}<span class="text-ink-3">/{total} done</span>
+                <span class="mt-0.5 block text-ink-3">{count(d, 'en-cours')} in progress</span>
+              </span>
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <section class="mt-20" aria-labelledby="plateformes">
+    <h2 id="plateformes" class="reveal text-xl font-semibold tracking-tight">The platforms</h2>
+    <div class="mt-4 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-3">
+      <a
+        href="https://labhub.kimaarnaud.com"
+        class="reveal group bg-surface p-6 transition-colors duration-200 hover:bg-surface-2/50"
+        style="--i:0; --dom: var(--dom-reseaux)"
+      >
+        <span class="flex items-center justify-between">
+          <span class="font-semibold tracking-tight">LabHub</span>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-(--dom)">net · sec</span>
+        </span>
+        <span class="mt-2 block text-sm leading-relaxed text-ink-2">
+          Topologies, configurations, audit reports, dashboards.
+        </span>
+        <span class="mt-4 block font-mono text-xs text-ink-3 transition-colors group-hover:text-(--dom)">
+          labhub.kimaarnaud.com ↗
+        </span>
+      </a>
+      <a
+        href="https://telco.kimaarnaud.com"
+        class="reveal group bg-surface p-6 transition-colors duration-200 hover:bg-surface-2/50"
+        style="--i:1; --dom: var(--dom-telecoms)"
+      >
+        <span class="flex items-center justify-between">
+          <span class="font-semibold tracking-tight">TelcoLab Hub</span>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-(--dom)">telecom</span>
+        </span>
+        <span class="mt-2 block text-sm leading-relaxed text-ink-2">
+          Radio measurements, protocol captures, coverage maps, replayable notebooks.
+        </span>
+        <span class="mt-4 block font-mono text-xs text-ink-3 transition-colors group-hover:text-(--dom)">
+          telco.kimaarnaud.com ↗
+        </span>
+      </a>
+      <a
+        href="https://ai.kimaarnaud.com"
+        class="reveal group bg-surface p-6 transition-colors duration-200 hover:bg-surface-2/50"
+        style="--i:2; --dom: var(--dom-ia)"
+      >
+        <span class="flex items-center justify-between">
+          <span class="font-semibold tracking-tight">AI Lab Hub</span>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-(--dom)">ai</span>
+        </span>
+        <span class="mt-2 block text-sm leading-relaxed text-ink-2">
+          MLflow experiments, model cards, demos, production metrics.
+        </span>
+        <span class="mt-4 block font-mono text-xs text-ink-3 transition-colors group-hover:text-(--dom)">
+          ai.kimaarnaud.com ↗
+        </span>
+      </a>
+    </div>
+  </section>
+
+  {
+    recents.length > 0 && (
+      <section class="mt-20" aria-labelledby="recents">
+        <div class="reveal flex items-baseline justify-between gap-4">
+          <h2 id="recents" class="text-xl font-semibold tracking-tight">
+            In progress & completed
+          </h2>
+          <a href="/en/projets/?status=en-cours" class="font-mono text-xs text-ink-3 transition-colors hover:text-ink">
+            filter →
+          </a>
+        </div>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {recents.map((p, i) => (
+            <div class="reveal" style={`--i:${i % 3}`}>
+              <ProjectCard projet={p} lang="en" />
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
+</Base>

@@ -7,6 +7,9 @@ export const DOMAINS = {
     label: 'Développement logiciel',
     short: 'Logiciel',
     desc: 'Applications web, mobile et systèmes : du SaaS à la fintech, du code au déploiement.',
+    labelEn: 'Software development',
+    shortEn: 'Software',
+    descEn: 'Web, mobile and system applications: from SaaS to fintech, code to deployment.',
     platform: null,
     color: 'dom-logiciel',
   },
@@ -14,6 +17,9 @@ export const DOMAINS = {
     label: 'Réseaux, systèmes et sécurité',
     short: 'Réseaux & sécurité',
     desc: 'Du home-lab au SOC : topologies, durcissement, détection, réponse à incident.',
+    labelEn: 'Networks, systems & security',
+    shortEn: 'Net & security',
+    descEn: 'From home-lab to SOC: topologies, hardening, detection, incident response.',
     platform: 'https://labhub.kimaarnaud.com',
     color: 'dom-reseaux',
   },
@@ -21,6 +27,9 @@ export const DOMAINS = {
     label: 'Télécommunications',
     short: 'Télécoms',
     desc: 'Signal, transport IP, VoIP, FTTH, 4G/5G, LPWAN : mesures et protocoles.',
+    labelEn: 'Telecommunications',
+    shortEn: 'Telecom',
+    descEn: 'Signal, IP transport, VoIP, FTTH, 4G/5G, LPWAN: measurements and protocols.',
     platform: 'https://telco.kimaarnaud.com',
     color: 'dom-telecoms',
   },
@@ -28,12 +37,22 @@ export const DOMAINS = {
     label: 'Intelligence artificielle',
     short: 'IA',
     desc: 'Du ML écrit à la main au produit IA gouverné : expériences, évaluation, MLOps.',
+    labelEn: 'Artificial intelligence',
+    shortEn: 'AI',
+    descEn: 'From hand-written ML to governed AI products: experiments, evaluation, MLOps.',
     platform: 'https://ai.kimaarnaud.com',
     color: 'dom-ia',
   },
 } as const;
 
 export type Domain = keyof typeof DOMAINS;
+
+export function domainLabel(d: Domain, lang: 'fr' | 'en' = 'fr') {
+  const dom = DOMAINS[d];
+  return lang === 'en'
+    ? { label: dom.labelEn, short: dom.shortEn, desc: dom.descEn }
+    : { label: dom.label, short: dom.short, desc: dom.desc };
+}
 
 const projets = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projets' }),

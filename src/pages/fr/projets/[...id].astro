@@ -1,9 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import StatusBadge from '../../components/StatusBadge.astro';
-import { DOMAINS } from '../../content.config';
+import Base from '../../../layouts/Base.astro';
+import StatusBadge from '../../../components/StatusBadge.astro';
+import { DOMAINS } from '../../../content.config';
 
 export async function getStaticPaths() {
   const projets = await getCollection('projets');
@@ -43,9 +43,10 @@ const meta = [
   title={d.title}
   description={d.summary}
   ogImage={d.cover && d.cover.format !== 'svg' ? d.cover.src : undefined}
+  hasAlternate={false}
 >
   <nav aria-label="Fil d'Ariane" class="flex items-center gap-2 font-mono text-xs text-ink-3">
-    <a href="/projets/" class="transition-colors hover:text-ink">projets</a>
+    <a href="/fr/projets/" class="transition-colors hover:text-ink">projets</a>
     <span aria-hidden="true">/</span>
     <a href={`/projets/?domain=${d.domain}`} class="transition-colors hover:text-ink">
       {d.domain}
@@ -60,7 +61,7 @@ const meta = [
   >
     <div class="max-w-3xl">
       <p class="flex items-center gap-2 font-mono text-xs text-ink-3">
-        <span class="h-2 w-2 rounded-[2px] bg-(--dom)" aria-hidden="true"></span>
+        <span class="h-2 w-2 rounded-xs bg-(--dom)" aria-hidden="true"></span>
         {domain.short} · fiche {num}
       </p>
       <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">{d.title}</h1>

@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Base from '../../layouts/Base.astro';
+import Base from '../../../layouts/Base.astro';
 
 const articles = (await getCollection('retex')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
@@ -11,6 +11,7 @@ const fmt = (d: Date) =>
 
 <Base
   title="Journal"
+  hasAlternate={false}
   description="Retours d'expérience sur les projets du portfolio : ce qui a marché, ce qui a échoué, ce que j'ai appris."
 >
   <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent-ink">journal</p>

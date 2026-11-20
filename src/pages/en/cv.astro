@@ -1,9 +1,9 @@
 ---
 import { existsSync } from 'node:fs';
 import { getCollection } from 'astro:content';
-import Base from '../layouts/Base.astro';
-import { DOMAINS } from '../content.config';
-import { accroche, parcours, formation } from '../data/cv';
+import Base from '../../layouts/Base.astro';
+import { DOMAINS, domainLabel } from '../../content.config';
+import { accrocheEn, parcoursEn, formationEn } from '../../data/cv';
 
 const projets = await getCollection('projets');
 const hasPdf = existsSync('public/cv.pdf');
@@ -14,16 +14,16 @@ for (const p of projets) {
   for (const s of p.data.skills) skills.set(s, (skills.get(s) ?? 0) + 1);
 }
 const topSkills = [...skills.entries()]
-  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'fr'))
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'en'))
   .slice(0, 15);
 ---
 
-<Base title="CV" description={accroche}>
+<Base title="Resume" lang="en" description={accrocheEn}>
   <div class="flex flex-wrap items-end justify-between gap-6">
     <div class="max-w-2xl">
-      <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent-ink">curriculum vitae</p>
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent-ink">resume</p>
       <h1 class="mt-3 text-4xl font-bold tracking-tight">Kima Yves Arnaud</h1>
-      <p class="mt-3 leading-relaxed text-ink-2">{accroche}</p>
+      <p class="mt-3 leading-relaxed text-ink-2">{accrocheEn}</p>
     </div>
     <div class="flex items-center gap-3">
       {hasPdf ? (
@@ -31,18 +31,18 @@ const topSkills = [...skills.entries()]
           href="/cv.pdf"
           class="inline-flex items-center rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-bg transition-transform duration-150 ease-(--ease-out-expo) hover:opacity-90 active:scale-[0.98]"
         >
-          Télécharger le PDF ↓
+          Download PDF ↓
         </a>
       ) : (
         <span class="rounded-full border border-dashed border-line px-5 py-2.5 font-mono text-xs text-ink-3">
-          cv.pdf à déposer dans public/
+          cv.pdf to be added in public/
         </span>
       )}
       <a
-        href="/contact/"
+        href="/en/contact/"
         class="inline-flex items-center rounded-full border border-line px-5 py-2.5 text-sm font-medium transition-colors duration-200 hover:border-ink-3 active:scale-[0.98]"
       >
-        Me contacter
+        Contact me
       </a>
     </div>
   </div>
@@ -50,10 +50,10 @@ const topSkills = [...skills.entries()]
   <div class="mt-14 grid gap-14 lg:grid-cols-2">
     <section aria-labelledby="parcours">
       <h2 id="parcours" class="font-mono text-[11px] uppercase tracking-wider text-ink-3">
-        Parcours
+        Experience
       </h2>
       <dl class="mt-4 divide-y divide-line border-y border-line">
-        {parcours.map((e) => (
+        {parcoursEn.map((e) => (
           <div class="grid gap-1 py-4 sm:grid-cols-[7.5rem_1fr] sm:gap-4">
             <dt class="font-mono text-xs text-ink-3 tabular-nums">{e.period}</dt>
             <dd>
@@ -68,10 +68,10 @@ const topSkills = [...skills.entries()]
 
     <section aria-labelledby="formation">
       <h2 id="formation" class="font-mono text-[11px] uppercase tracking-wider text-ink-3">
-        Formation
+        Education
       </h2>
       <dl class="mt-4 divide-y divide-line border-y border-line">
-        {formation.map((e) => (
+        {formationEn.map((e) => (
           <div class="grid gap-1 py-4 sm:grid-cols-[7.5rem_1fr] sm:gap-4">
             <dt class="font-mono text-xs text-ink-3 tabular-nums">{e.period}</dt>
             <dd>
@@ -88,10 +88,10 @@ const topSkills = [...skills.entries()]
   <section class="mt-14" aria-labelledby="competences">
     <div class="flex items-baseline justify-between gap-4">
       <h2 id="competences" class="font-mono text-[11px] uppercase tracking-wider text-ink-3">
-        Compétences démontrées
+        Demonstrated skills
       </h2>
-      <a href="/competences/" class="font-mono text-xs text-ink-3 transition-colors hover:text-ink">
-        matrice complète →
+      <a href="/en/competences/" class="font-mono text-xs text-ink-3 transition-colors hover:text-ink">
+        full matrix →
       </a>
     </div>
     {topSkills.length > 0 ? (
@@ -105,15 +105,15 @@ const topSkills = [...skills.entries()]
       </ul>
     ) : (
       <p class="mt-4 border-y border-line py-4 text-sm text-ink-2">
-        Les compétences s'afficheront ici dès que des fiches projets passeront en
-        « en cours » ou « terminé » — elles sont extraites automatiquement des fiches.
+        Skills will appear here as project files move to "in progress" or "completed" —
+        they are extracted automatically from the files.
       </p>
     )}
   </section>
 
   <section class="mt-14" aria-labelledby="domaines">
     <h2 id="domaines" class="font-mono text-[11px] uppercase tracking-wider text-ink-3">
-      Domaines couverts
+      Fields covered
     </h2>
     <ul class="mt-4 divide-y divide-line border-y border-line">
       {(Object.keys(DOMAINS) as (keyof typeof DOMAINS)[]).map((d) => {
@@ -121,19 +121,19 @@ const topSkills = [...skills.entries()]
         return (
           <li class="flex items-center gap-3 py-3">
             <span
-              class="h-1.5 w-1.5 rounded-[2px]"
+              class="h-1.5 w-1.5 rounded-xs"
               style={`background: var(--${DOMAINS[d].color})`}
               aria-hidden="true"
             />
-            <span class="font-medium tracking-tight">{DOMAINS[d].label}</span>
+            <span class="font-medium tracking-tight">{domainLabel(d, 'en').label}</span>
             <span class="ml-auto font-mono text-xs tabular-nums text-ink-3">
-              {total} projets
+              {total} projects
             </span>
             <a
-              href={`/projets/?domain=${d}`}
+              href={`/en/projets/?domain=${d}`}
               class="font-mono text-xs text-accent-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
             >
-              voir →
+              view →
             </a>
           </li>
         );
