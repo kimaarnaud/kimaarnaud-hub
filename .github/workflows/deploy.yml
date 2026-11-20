@@ -19,6 +19,9 @@ jobs:
         with:
           context: .
           push: true
+          build-args: |
+            STATUS_PAGE_URL=${{ vars.STATUS_PAGE_URL }}
+            STATUS_PAGE_SLUG=${{ vars.STATUS_PAGE_SLUG }}
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ github.sha }}

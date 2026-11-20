@@ -1,0 +1,104 @@
+---
+import { PLATFORMS } from '../data/platforms';
+import { fetchPlatformStatuses, STATUS_PAGE_URL, type PlatformStatus } from '../lib/status';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'fr' } = Astro.props;
+
+const { configured, status, uptime24h } = await fetchPlatformStatuses(
+  Object.fromEntries(PLATFORMS.map((p) => [p.id, p.monitorHint])),
+);
+
+const i18n = {
+  fr: {
+    title: 'Les plateformes',
+    status: 'status.kimaarnaud.com ↗',
+    labels: {
+      up: 'opérationnel',
+      down: 'hors ligne',
+      maintenance: 'maintenance',
+      pending: 'en attente',
+      unknown: 'état inconnu',
+    } as Record<PlatformStatus, string>,
+  },
+  en: {
+    title: 'The platforms',
+    status: 'status.kimaarnaud.com ↗',
+    labels: {
+      up: 'operational',
+      down: 'down',
+      maintenance: 'maintenance',
+      pending: 'pending',
+      unknown: 'unknown',
+    } as Record<PlatformStatus, string>,
+  },
+}[lang];
+
+const dot: Record<PlatformStatus, string> = {
+  up: 'bg-emerald-500',
+  down: 'bg-red-500',
+  maintenance: 'bg-amber-500',
+  pending: 'bg-amber-400',
+  unknown: 'bg-ink-3/50',
+};
+
+const fmtUptime = (v: number) => `${(v * 100).toFixed(1).replace(/\.0$/, '')} %`;
+---
+
+<section class="mt-20" aria-labelledby="plateformes">
+  <div class="reveal flex items-baseline justify-between gap-4">
+    <h2 id="plateformes" class="text-xl font-semibold tracking-tight">
+      {i18n.title}
+    </h2>
+    {
+      STATUS_PAGE_URL && (
+        <a
+          href={STATUS_PAGE_URL}
+          class="font-mono text-xs text-ink-3 transition-colors hover:text-ink"
+        >
+          {i18n.status}
+        </a>
+      )
+    }
+  </div>
+  <div class="mt-4 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-3">
+    {
+      PLATFORMS.map((p, i) => {
+        const s = status[p.id];
+        const up = uptime24h[p.id];
+        return (
+          <a
+            href={p.url}
+            class="reveal group bg-surface p-6 transition-colors duration-200 hover:bg-surface-2/50"
+            style={`--i:${i}; --dom: var(--dom-${p.dom})`}
+          >
+            <span class="flex items-center justify-between">
+              <span class="font-semibold tracking-tight">{p.name}</span>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-(--dom)">
+                {p.tag[lang]}
+              </span>
+            </span>
+            <span class="mt-2 block text-sm leading-relaxed text-ink-2">
+              {p.desc[lang]}
+            </span>
+            <span class="mt-4 flex items-center justify-between gap-2 font-mono text-xs text-ink-3">
+              <span class="transition-colors group-hover:text-(--dom)">
+                {p.url.replace('https://', '')} ↗
+              </span>
+              {configured && (
+                <span class="flex items-center gap-1.5 text-[10px] uppercase tracking-widest">
+                  <span class={`inline-block h-1.5 w-1.5 rounded-full ${dot[s]}`} aria-hidden="true" />
+                  {i18n.labels[s]}
+                  {s === 'up' && up !== undefined && <span class="normal-case">· {fmtUptime(up)}</span>}
+                </span>
+              )}
+            </span>
+          </a>
+        );
+      })
+    }
+  </div>
+</section>
