@@ -4,6 +4,10 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
+# État des plateformes (Uptime Kuma) lu au build ; vide = statut non affiché
+ARG STATUS_PAGE_URL=""
+ARG STATUS_PAGE_SLUG="default"
+ENV STATUS_PAGE_URL=$STATUS_PAGE_URL STATUS_PAGE_SLUG=$STATUS_PAGE_SLUG
 RUN npm run build
 
 # Étape 2 : serveur nginx minimal
