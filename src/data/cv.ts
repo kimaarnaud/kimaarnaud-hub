@@ -32,3 +32,25 @@ export const formation: CvEntry[] = [
   // Exemple à adapter :
   // { period: '2019 — 2022', title: 'Licence Réseaux & Télécoms', org: 'Université / école' },
 ];
+
+// — Versions anglaises pour /en/cv/ —
+export const accrocheEn =
+  'Engineer in continuous training: 80 documented projects, from theory to production, across software, networks & security, telecoms and AI.';
+
+export const parcoursEn: CvEntry[] = [
+  {
+    period: 'ongoing',
+    title: 'Self-directed program of 80 technical projects',
+    org: 'kimaarnaud.com',
+    note: 'End-to-end design, build and documentation of projects; VPS administration, CI/CD, reverse proxy and TLS in production.',
+  },
+];
+
+export const formationEn: CvEntry[] = [
+  {
+    period: 'ongoing',
+    title: 'Continuous engineering training',
+    org: 'structured self-training (project catalogs)',
+    note: 'Learning by doing: every concept is validated by a documented project.',
+  },
+];

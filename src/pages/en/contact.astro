@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const channels = [
+  { label: 'e-mail', value: 'contact@kimaarnaud.com', href: 'mailto:contact@kimaarnaud.com' },
+  { label: 'github', value: 'github.com/kimaarnaud', href: 'https://github.com/kimaarnaud' },
+  { label: 'linkedin', value: 'linkedin.com/in/kimaarnaud', href: 'https://www.linkedin.com/in/kimaarnaud' },
+];
+---
+
+<Base title="Contact" lang="en">
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent-ink">contact</p>
+  <h1 class="mt-3 text-4xl font-bold tracking-tight">Let's talk</h1>
+  <p class="mt-3 max-w-[62ch] text-ink-2">
+    To discuss a project, a collaboration or an opportunity.
+  </p>
+
+  <dl class="mt-10 max-w-lg divide-y divide-line border-y border-line">
+    {channels.map((c) => (
+      <div class="flex items-baseline justify-between gap-6 py-4">
+        <dt class="font-mono text-[11px] uppercase tracking-wider text-ink-3">{c.label}</dt>
+        <dd>
+          <a
+            href={c.href}
+            class="font-mono text-sm text-accent-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
+          >
+            {c.value} ↗
+          </a>
+        </dd>
+      </div>
+    ))}
+  </dl>
+</Base>

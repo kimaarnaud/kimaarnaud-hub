@@ -1,44 +1,45 @@
 ---
-import Base from '../layouts/Base.astro';
+import Base from '../../layouts/Base.astro';
 
 const catalogues = [
   {
     slug: '20-projets-logiciels',
-    title: '20 projets de développement logiciel',
-    desc: 'Applications web et mobile, stack justifiée, fonctionnalités, phases et documentation.',
+    title: '20 software development projects',
+    desc: 'Web and mobile applications, justified stacks, features, phases and documentation.',
     color: 'var(--dom-logiciel)',
   },
   {
     slug: '20-projets-reseaux-systemes-securite',
-    title: '20 projets réseaux, systèmes et sécurité',
-    desc: 'Du lab virtuel au SOC : notions, outils, étapes, preuves et plateforme LabHub.',
+    title: '20 network, systems & security projects',
+    desc: 'From virtual lab to SOC: concepts, tools, steps, proof and the LabHub platform.',
     color: 'var(--dom-reseaux)',
   },
   {
     slug: '20-projets-telecoms',
-    title: '20 projets télécoms',
-    desc: 'Signal, IP/MPLS, VoIP, FTTH, 4G/5G, LoRaWAN, satellite, NFV : mesures et TelcoLab Hub.',
+    title: '20 telecom projects',
+    desc: 'Signal, IP/MPLS, VoIP, FTTH, 4G/5G, LoRaWAN, satellite, NFV: measurements and TelcoLab Hub.',
     color: 'var(--dom-telecoms)',
   },
   {
     slug: '20-projets-ia',
-    title: "20 projets d'intelligence artificielle",
-    desc: 'Du ML écrit à la main au produit IA gouverné : expériences, évaluation, MLOps et AI Lab Hub.',
+    title: '20 artificial intelligence projects',
+    desc: 'From hand-written ML to governed AI products: experiments, evaluation, MLOps and AI Lab Hub.',
     color: 'var(--dom-ia)',
   },
 ];
 ---
 
 <Base
-  title="Catalogues"
-  description="Les quatre catalogues de projets qui structurent ce portfolio, consultables en ligne ou en PDF."
+  title="Catalogs"
+  lang="en"
+  description="The four project catalogs structuring this portfolio, readable online or as PDF (in French)."
 >
-  <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent-ink">Feuilles de route</p>
-  <h1 class="mt-3 text-4xl font-bold tracking-tight">Catalogues de projets</h1>
+  <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent-ink">Roadmaps</p>
+  <h1 class="mt-3 text-4xl font-bold tracking-tight">Project catalogs</h1>
   <p class="mt-3 max-w-[62ch] text-ink-2">
-    Chaque catalogue décrit 20 projets progressifs : objectif, notions à apprendre, outils,
-    ressources, étapes, documentation et mise en valeur. Ce sont les sources des fiches
-    que vous voyez sur ce site.
+    Each catalog describes 20 progressive projects: goal, concepts to learn, tools,
+    resources, steps, documentation and showcasing. They are the sources behind every
+    file on this site — currently written in French.
   </p>
 
   <ul class="mt-10 grid gap-4 sm:grid-cols-2">
@@ -48,8 +49,8 @@ const catalogues = [
         style={`--i:${i}`}
       >
         <div class="flex items-center gap-2 font-mono text-[11px] text-ink-3">
-          <span class="h-1.5 w-1.5 rounded-[2px]" style={`background: ${c.color}`} aria-hidden="true" />
-          catalogue {String(i + 1).padStart(2, '0')}
+          <span class="h-1.5 w-1.5 rounded-xs" style={`background: ${c.color}`} aria-hidden="true" />
+          catalog {String(i + 1).padStart(2, '0')}
         </div>
         <h2 class="font-semibold tracking-tight">{c.title}</h2>
         <p class="text-sm leading-relaxed text-ink-2">{c.desc}</p>
@@ -57,8 +58,9 @@ const catalogues = [
           <a
             href={`/docs/${c.slug}.html`}
             class="rounded-md border border-line px-3 py-1.5 transition-colors duration-200 hover:border-ink-3"
+            hreflang="fr"
           >
-            Version interactive
+            Interactive version (fr)
           </a>
           <a
             href={`/docs/${c.slug}.pdf`}

@@ -1,17 +1,21 @@
 ---
+import { useTranslations, type Lang } from '../i18n/ui';
+
 interface Props {
   status: 'planifie' | 'en-cours' | 'termine';
+  lang?: Lang;
 }
-const { status } = Astro.props;
+const { status, lang = 'fr' } = Astro.props;
+const t = useTranslations(lang);
 const map = {
-  planifie: { label: 'Planifié', cls: 'bg-surface-2 text-ink-2', symbol: '○' },
-  'en-cours': { label: 'En cours', cls: 'bg-amber-500/10 text-amber-700 dark:text-amber-300', symbol: '◐' },
-  termine: { label: 'Terminé', cls: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300', symbol: '●' },
+  planifie: { key: 'badge.planifie', cls: 'bg-surface-2 text-ink-2', symbol: '○' },
+  'en-cours': { key: 'badge.en-cours', cls: 'bg-amber-500/10 text-amber-700 dark:text-amber-300', symbol: '◐' },
+  termine: { key: 'badge.termine', cls: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300', symbol: '●' },
 } as const;
 const s = map[status];
 ---
 
 <span class={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 font-mono text-[11px] ${s.cls}`}>
   <span aria-hidden="true">{s.symbol}</span>
-  {s.label}
+  {t(s.key as Parameters<typeof t>[0])}
 </span>

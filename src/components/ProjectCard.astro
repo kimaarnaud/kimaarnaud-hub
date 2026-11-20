@@ -1,18 +1,21 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import { DOMAINS } from '../content.config';
+import { DOMAINS, domainLabel } from '../content.config';
+import { type Lang } from '../i18n/ui';
 import StatusBadge from './StatusBadge.astro';
 
 interface Props {
   projet: CollectionEntry<'projets'>;
+  lang?: Lang;
 }
 
-const { projet } = Astro.props;
+const { projet, lang = 'fr' } = Astro.props;
 const d = projet.data;
 const domain = DOMAINS[d.domain];
+const dLabel = domainLabel(d.domain, lang).short;
 const num = String(d.number).padStart(2, '0');
-const href = `/projets/${projet.id}/`;
+const href = `/fr/projets/${projet.id}/`;
 ---
 
 <article
@@ -57,10 +60,10 @@ const href = `/projets/${projet.id}/`;
   <div class="flex flex-1 flex-col gap-2.5 p-5">
     <div class="flex items-center justify-between gap-2 font-mono text-[11px] text-ink-3">
       <span class="flex items-center gap-2">
-        <span class="h-1.5 w-1.5 rounded-[2px] bg-(--dom)" aria-hidden="true"></span>
-        {domain.short} · {num}
+        <span class="h-1.5 w-1.5 rounded-xs bg-(--dom)" aria-hidden="true"></span>
+        {dLabel} · {num}
       </span>
-      <StatusBadge status={d.status} />
+      <StatusBadge status={d.status} lang={lang} />
     </div>
     <h3 class="font-semibold leading-snug tracking-tight">
       <a href={href} class="underline-offset-4 hover:underline hover:decoration-(--dom)">
